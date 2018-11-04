@@ -16,10 +16,40 @@ public class HUD : CanvasLayer
         
     }
 
-//    public override void _Process(float delta)
-//    {
-//        // Called every frame. Delta is time since last frame.
-//        // Update game logic here.
-//        
-//    }
+    public void ShowMessage(string text)
+    {
+        var messageTimer = (Timer)GetNode("MessageTimer");
+        var messageLabel = (Label)GetNode("MessageLabel");
+
+        messageLabel.Text = text;
+        messageLabel.Show();
+        messageTimer.Start();
+    }
+
+    public void UpdateScore(int score)
+    {
+        var scoreLabel = (Label)GetNode("ScoreLabel");
+        scoreLabel.Text = score.ToString();
+    }
+
+    public void OnStartButtonPressed()
+    {
+        var startButton = (Button)GetNode("StartButton");
+        startButton.Hide();
+
+        EmitSignal("StartGame");
+    }
+
+    public void OnMessageTimerTimeout()
+    {
+        var messageLabel = (Label)GetNode("MessageLabel");
+        messageLabel.Hide();
+    }
+
+    //    public override void _Process(float delta)
+    //    {
+    //        // Called every frame. Delta is time since last frame.
+    //        // Update game logic here.
+    //        
+    //    }
 }
