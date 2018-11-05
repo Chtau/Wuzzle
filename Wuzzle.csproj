@@ -49,9 +49,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GoalItem.cs" />
     <Compile Include="GoalManager.cs" />
     <Compile Include="Goals.cs" />
     <Compile Include="HUD.cs" />
+    <Compile Include="Models\Goal.cs" />
+    <Compile Include="Models\Hint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

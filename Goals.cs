@@ -3,6 +3,8 @@ using System;
 
 public class Goals : CanvasLayer
 {
+    [Export]
+    public PackedScene GoalItem;
 
     public override void _Ready()
     {
@@ -10,7 +12,12 @@ public class Goals : CanvasLayer
 
         foreach (var item in GoalManager.Instance.CurrentGoalList())
         {
-            var checkBox = new CheckBox()
+            //var gItem = new GoalItem();
+            var goalItem = (GoalItem)GoalItem.Instance();
+            goalItem.SetGoal(item);
+            container.AddChild(goalItem);
+
+            /*var checkBox = new CheckBox()
             {
                 ToggleMode = false,
                 //Disabled = true,
@@ -20,7 +27,7 @@ public class Goals : CanvasLayer
             };
             //button_down
             checkBox.Connect("button_down", this, nameof(OnGoalCheckboxPressed), new Godot.Array { item.Item1.ToString(), checkBox });
-            container.AddChild(checkBox);
+            container.AddChild(checkBox);*/
         }
     }
 

@@ -20,26 +20,36 @@ public sealed class GoalManager
     public static GoalManager Instance { get; } = new GoalManager();
     #endregion
 
-    public List<Tuple<Guid, bool, string>> CurrentGoalList()
+    public List<Wuzzle.Models.Goal> CurrentGoalList()
     {
-        return new List<Tuple<Guid, bool, string>>
+        return new List<Wuzzle.Models.Goal>
             {
-                new Tuple<Guid, bool, string>(Guid.NewGuid(),false, "???"),
-                new Tuple<Guid, bool, string>(Guid.NewGuid(),false, "???"),
-                new Tuple<Guid, bool, string>(Guid.NewGuid(),false, "???"),
-                new Tuple<Guid, bool, string>(Guid.NewGuid(),true, "???"),
-                new Tuple<Guid, bool, string>(Guid.NewGuid(),false, "???"),
-                new Tuple<Guid, bool, string>(Guid.NewGuid(),false, "???"),
-                new Tuple<Guid, bool, string>(Guid.NewGuid(),false, "???"),
+                new Wuzzle.Models.Goal(Guid.NewGuid(),false, "???"),
+                new Wuzzle.Models.Goal(Guid.NewGuid(),false, "???"),
+                new Wuzzle.Models.Goal(Guid.NewGuid(),false, "???"),
+                new Wuzzle.Models.Goal(Guid.NewGuid(),true, "???"),
+                new Wuzzle.Models.Goal(Guid.NewGuid(),false, "???"),
+                new Wuzzle.Models.Goal(Guid.NewGuid(),false, "???"),
+                new Wuzzle.Models.Goal(Guid.NewGuid(),false, "???"),
             };
     }
 
-    public List<string> GoalHints(Guid goalId)
+    public List<Wuzzle.Models.Hint> GoalHints(Guid goalId)
     {
-        return new List<string>
+        return new List<Wuzzle.Models.Hint>
             {
-                "Hint1",
-                "Hint2",
+                new Wuzzle.Models.Hint
+                {
+                    GoalId = goalId,
+                    Id = Guid.NewGuid(),
+                    Text = "Hint1"
+                },
+                new Wuzzle.Models.Hint
+                {
+                    GoalId = goalId,
+                    Id = Guid.NewGuid(),
+                    Text = "Hint2"
+                }
             };
     }
 
