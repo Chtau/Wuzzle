@@ -18,18 +18,31 @@ public class Main : Node
         };
         this.AddChild(GameTimer);
         GameTimer.Connect("timeout", this, nameof(OnGameTimerTimeout));
-        GameTimer.Start();
+
+        NewGame();
     }
 
     public void NewGame()
     {
         Score = 0;
         SecondsPlayed = 0;
+
+        OnStartGame();
     }
 
     public void GameOver()
     {
+        OnStopGame();
+    }
 
+    private void OnStartGame()
+    {
+        GameTimer.Start();
+    }
+
+    private void OnStopGame()
+    {
+        GameTimer.Stop();
     }
 
     private void OnGameTimerTimeout()
