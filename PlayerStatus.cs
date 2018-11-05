@@ -21,9 +21,24 @@ public class PlayerStatus : CanvasLayer
     {
         TimeSpan t = TimeSpan.FromSeconds(seconds);
 
-        TimeValueLabel.Text = string.Format("{0:D2}h:{1:D2}m:{2:D2}s",
+        string value = "";
+        if (t.TotalHours >= 1)
+        {
+            value = string.Format("{0:D2}h:{1:D2}m:{2:D2}s",
                         t.Hours,
                         t.Minutes,
                         t.Seconds);
+        } else if (t.TotalMinutes >= 1)
+        {
+            value = string.Format("{0:D2}m:{1:D2}s",
+                        t.Minutes,
+                        t.Seconds);
+        } else
+        {
+            value = string.Format("{0:D2}s",
+                        t.Seconds);
+        }
+
+        TimeValueLabel.Text = value;
     }
 }

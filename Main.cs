@@ -36,8 +36,6 @@ public class Main : Node
     {
         SecondsPlayed += 1;
         PlayerStatus.UpdatePlayed(SecondsPlayed);
-        //Score += 1;
-        //PlayerStatus.UpdateScore(Score);
     }
 
 }
