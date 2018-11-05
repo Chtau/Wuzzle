@@ -49,6 +49,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameBar.cs" />
     <Compile Include="GoalItem.cs" />
     <Compile Include="GoalManager.cs" />
     <Compile Include="Goals.cs" />

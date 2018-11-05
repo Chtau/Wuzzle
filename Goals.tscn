@@ -3,7 +3,7 @@
 [ext_resource path="res://Goals.cs" type="Script" id=1]
 [ext_resource path="res://GoalItem.tscn" type="PackedScene" id=2]
 
-[node name="Goals" type="CanvasLayer" index="0"]
+[node name="Goals" type="CanvasLayer"]
 
 layer = 1
 offset = Vector2( 0, 0 )
