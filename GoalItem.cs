@@ -3,6 +3,9 @@ using System;
 
 public class GoalItem : HBoxContainer
 {
+    public delegate void GoalHintDelegate(Wuzzle.Models.Goal goal);
+    public event GoalHintDelegate GoalHint;
+
     private Wuzzle.Models.Goal goal;
 
     public void SetGoal(Wuzzle.Models.Goal goal)
@@ -20,7 +23,7 @@ public class GoalItem : HBoxContainer
 
     public void OnHintButtonPressed()
     {
-        EmitSignal("GoalHint", goal);
+        GoalHint?.Invoke(goal);
     }
 
 }
