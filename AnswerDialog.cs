@@ -14,7 +14,7 @@ public class AnswerDialog : WindowDialog
         QuestionLbl = (Label)GetNode("VBoxContainer/GoalContainer/GoalQuestion");
         ResultRTXT = (RichTextLabel)GetNode("VBoxContainer/ResultContainer/ResultRTXT");
         AnswerInput = (LineEdit)GetNode("VBoxContainer/AnswerContainer/AnswerInput");
-        SubmitButton = (Button)GetNode("VBoxContainer/ButtonsContainer/CheckAnswer");
+        SubmitButton = (Button)GetNode("ButtonsContainer/CheckAnswer");
     }
 
     public void OnCheckAnswerPressed()
