@@ -3,8 +3,6 @@ using System;
 
 public class Main : Node
 {
-    private long SecondsPlayed = 0;
-    private int Score = 0;
     private Timer GameTimer;
     private PlayerStatus PlayerStatus;
 
@@ -19,13 +17,14 @@ public class Main : Node
         this.AddChild(GameTimer);
         GameTimer.Connect("timeout", this, nameof(OnGameTimerTimeout));
 
+        Wuzzle.Profil.ProfilManager.Instance.ScoreChanged += Profil_ScoreChanged;
+
         NewGame();
     }
 
     public void NewGame()
     {
-        Score = 0;
-        SecondsPlayed = 0;
+        Wuzzle.Profil.ProfilManager.Instance.Load();
 
         OnStartGame();
     }
@@ -47,8 +46,13 @@ public class Main : Node
 
     private void OnGameTimerTimeout()
     {
-        SecondsPlayed += 1;
-        PlayerStatus.UpdatePlayed(SecondsPlayed);
+        Wuzzle.Profil.ProfilManager.Instance.AddPlayedSeconds(1);
+        PlayerStatus.UpdatePlayed(Wuzzle.Profil.ProfilManager.Instance.PlayedSeconds);
+    }
+
+    private void Profil_ScoreChanged(object sender, int e)
+    {
+        PlayerStatus.UpdateScore(e);
     }
 
 }

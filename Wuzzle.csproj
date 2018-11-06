@@ -60,6 +60,8 @@
     <Compile Include="Models\Goal.cs" />
     <Compile Include="Models\Hint.cs" />
     <Compile Include="PlayerStatus.cs" />
+    <Compile Include="Profil\Models\Profil.cs" />
+    <Compile Include="Profil\ProfilManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
