@@ -15,8 +15,16 @@ public class Goals : CanvasLayer
             var goalItem = (GoalItem)GoalItem.Instance();
             goalItem.SetGoal(item);
             goalItem.GoalHint += OnGoalItemHint;
+            goalItem.GoalAnswer += GoalItem_GoalAnswer;
             container.AddChild(goalItem);
         }
+    }
+
+    private void GoalItem_GoalAnswer(object sender, Wuzzle.Models.Goal e)
+    {
+        var dialog = (AnswerDialog)GetNode("AnswerDialog");
+        dialog.Goal = e;
+        dialog.ShowModal(true);
     }
 
     public void OnGoalItemHint(Wuzzle.Models.Goal goal)

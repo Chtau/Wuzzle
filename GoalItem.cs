@@ -5,6 +5,7 @@ public class GoalItem : HBoxContainer
 {
     public delegate void GoalHintDelegate(Wuzzle.Models.Goal goal);
     public event GoalHintDelegate GoalHint;
+    public event EventHandler<Wuzzle.Models.Goal> GoalAnswer;
 
     private Wuzzle.Models.Goal goal;
 
@@ -24,6 +25,11 @@ public class GoalItem : HBoxContainer
     public void OnHintButtonPressed()
     {
         GoalHint?.Invoke(goal);
+    }
+
+    public void OnAnswerButtonPressed()
+    {
+        GoalAnswer?.Invoke(this, goal);
     }
 
 }

@@ -53,4 +53,11 @@ public sealed class GoalManager
             };
     }
 
+    public bool VerifyAnswer(string answer)
+    {
+        if (answer == "")
+            return false;
+        return true;
+    }
+
 }
