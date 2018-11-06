@@ -56,6 +56,8 @@
     <Compile Include="Goals.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Minigames\CreepDogde\GameDogde.cs" />
+    <Compile Include="Minigames\CreepDogde\Mob.cs" />
     <Compile Include="Minigames\CreepDogde\Player.cs" />
     <Compile Include="Models\AnswerResult.cs" />
     <Compile Include="Models\Goal.cs" />

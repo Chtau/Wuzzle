@@ -3,6 +3,9 @@ using System;
 
 public class Player : Area2D
 {
+    [Signal]
+    public delegate void Hit();
+
     [Export]
     public int Speed = 0;
 
@@ -65,5 +68,25 @@ public class Player : Area2D
             animatedSprite.Animation = "up";
             animatedSprite.FlipV = velocity.y > 0;
         }
+    }
+
+    public void OnPlayerBodyEntered(Godot.Object body)
+    {
+        Hide(); // Player disappears after being hit.
+        EmitSignal("Hit");
+
+        // For the sake of this example, but it's better to create a class var
+        // then assign the variable inside _Ready()
+        var collisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
+        collisionShape2D.Disabled = true;
+    }
+
+    public void Start(Vector2 pos)
+    {
+        Position = pos;
+        Show();
+
+        var collisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
+        collisionShape2D.Disabled = false;
     }
 }

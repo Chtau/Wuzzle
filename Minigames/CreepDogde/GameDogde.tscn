@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Minigames/CreepDogde/GameDogde.cs" type="Script" id=1]
+[ext_resource path="res://Minigames/CreepDogde/Mob.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Minigames/CreepDogde/Player.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1020, 0, 0, 0, 0, 0, 1020, 600, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="GameDogde" type="Node" index="0"]
+
+script = ExtResource( 1 )
+Mob = ExtResource( 2 )
+
+[node name="Player" parent="." index="0" instance=ExtResource( 3 )]
+
+[node name="MobTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = false
+autostart = false
+
+[node name="ScoreTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="StartTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = false
+
+[node name="StartPosition" type="Position2D" parent="." index="4"]
+
+position = Vector2( 240, 450 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="MobPath" type="Path2D" parent="." index="5"]
+
+self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+curve = SubResource( 1 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
+
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = true
+cubic_interp = true
+loop = true
+lookahead = 4.0
+
+[connection signal="Hit" from="Player" to="." method="GameOver"]
+
+[connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
+
+[connection signal="timeout" from="ScoreTimer" to="." method="OnScoreTimerTimeout"]
+
+[connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
+
+
