@@ -63,6 +63,7 @@ public sealed class GoalManager
                 Result = "Empty answer",
                 Status = false
             };
+        Wuzzle.Profil.ProfilManager.Instance.AddScore(100 * goal.DifficultyMultiplier);
         return new Wuzzle.Models.AnswerResult
         {
             GoalId = goal.Id,
