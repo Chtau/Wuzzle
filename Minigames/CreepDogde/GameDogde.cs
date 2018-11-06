@@ -8,13 +8,17 @@ public class GameDogde : Node
 
     public int Score = 0;
 
+    private AudioStreamPlayer Music;
+    private AudioStreamPlayer DeathSound;
+
     // Note: We're going to use this many times, so instantiating it
     // allows our numbers to consistently be random.
     private Random rand = new Random();
 
     public override void _Ready()
     {
-        
+        Music = (AudioStreamPlayer)GetNode("Music");
+        DeathSound = (AudioStreamPlayer)GetNode("DeathSound");
     }
 
     // We'll use this later because C# doesn't support GDScript's randi().
@@ -34,6 +38,9 @@ public class GameDogde : Node
 
         var hud = (HUD)GetNode("HUD");
         hud.ShowGameOver();
+
+        Music.Stop();
+        DeathSound.Play();
     }
 
     public void NewGame()
@@ -50,6 +57,8 @@ public class GameDogde : Node
         var hud = (HUD)GetNode("HUD");
         hud.UpdateScore(Score);
         hud.ShowMessage("Get Ready!");
+
+        Music.Play();
     }
 
     public void OnStartTimerTimeout()
