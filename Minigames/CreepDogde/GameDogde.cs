@@ -31,6 +31,9 @@ public class GameDogde : Node
 
         scoreTimer.Stop();
         mobTimer.Stop();
+
+        var hud = (HUD)GetNode("HUD");
+        hud.ShowGameOver();
     }
 
     public void NewGame()
@@ -43,6 +46,10 @@ public class GameDogde : Node
 
         player.Start(startPosition.Position);
         startTimer.Start();
+
+        var hud = (HUD)GetNode("HUD");
+        hud.UpdateScore(Score);
+        hud.ShowMessage("Get Ready!");
     }
 
     public void OnStartTimerTimeout()
@@ -58,6 +65,8 @@ public class GameDogde : Node
     public void OnScoreTimerTimeout()
     {
         Score += 1;
+        var hud = (HUD)GetNode("HUD");
+        hud.UpdateScore(Score);
     }
 
     public void OnMobTimerTimeout()
