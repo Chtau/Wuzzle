@@ -23,7 +23,7 @@ public class Goals : CanvasLayer
     private void GoalItem_GoalAnswer(object sender, Wuzzle.Models.Goal e)
     {
         var dialog = (AnswerDialog)GetNode("AnswerDialog");
-        dialog.Goal = e;
+        dialog.SetGoal(e);
         dialog.ShowModal(true);
     }
 

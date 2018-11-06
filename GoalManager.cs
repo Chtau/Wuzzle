@@ -53,11 +53,23 @@ public sealed class GoalManager
             };
     }
 
-    public bool VerifyAnswer(string answer)
+    public Wuzzle.Models.AnswerResult VerifyAnswer(Wuzzle.Models.Goal goal, string answer)
     {
         if (answer == "")
-            return false;
-        return true;
+            return new Wuzzle.Models.AnswerResult
+            {
+                GoalId = goal.Id,
+                Id = Guid.NewGuid(),
+                Result = "Empty answer",
+                Status = false
+            };
+        return new Wuzzle.Models.AnswerResult
+        {
+            GoalId = goal.Id,
+            Id = Guid.NewGuid(),
+            Result = "Congratz",
+            Status = true
+        };
     }
 
 }
