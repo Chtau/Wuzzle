@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Player : Area2D
+public class Player1 : Area2D
 {
     [Signal]
     public delegate void Hit();

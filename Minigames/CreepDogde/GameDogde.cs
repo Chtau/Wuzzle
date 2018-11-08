@@ -47,7 +47,7 @@ public class GameDogde : Node
     {
         Score = 0;
 
-        var player = (Player)GetNode("Player");
+        var player = (Player1)GetNode("Player");
         var startTimer = (Timer)GetNode("StartTimer");
         var startPosition = (Position2D)GetNode("StartPosition");
 
