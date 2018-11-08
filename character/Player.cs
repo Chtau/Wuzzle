@@ -17,8 +17,10 @@ public class Player : KinematicBody2D
     float onair_time = 0f;
     bool on_floor = false;
     float shoot_time = 99999; //time since last shot
+    string anim = "";
 
     Sprite Sprite;
+    AnimationPlayer AnimationPlayer;
 
     //const float gravity = 200.0f;
     //const int walk_speed = 200;
@@ -31,6 +33,7 @@ public class Player : KinematicBody2D
         // Called every time the node is added to the scene.
         // Initialization here
         Sprite = (Sprite)GetNode("Sprite");
+        AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
     }
 
     public override void _PhysicsProcess(float delta)
@@ -84,67 +87,38 @@ public class Player : KinematicBody2D
         shoot_time = 0*/
 
 
-        /*### ANIMATION ###
+        // ANIMATION
 
-        var new_anim = "idle"
+        string new_anim = "idle";
 
-
-    if on_floor:
-		if linear_vel.x < -SIDING_CHANGE_SPEED:
-			sprite.scale.x = -1
-
-            new_anim = "run"
-
-
-        if linear_vel.x > SIDING_CHANGE_SPEED:
-			sprite.scale.x = 1
-
-            new_anim = "run"
-	else:
-		# We want the character to immediately change facing side when the player
-		# tries to change direction, during air control.
-		# This allows for example the player to shoot quickly left then right.
-		if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-			sprite.scale.x = -1
-
-        if Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
-			sprite.scale.x = 1
-
-
-        if linear_vel.y < 0:
-			new_anim = "jumping"
-		else:
-			new_anim = "falling"
-
-
-    if shoot_time < SHOOT_TIME_SHOW_WEAPON:
-		new_anim += "_weapon"
-
-
-    if new_anim != anim:
-		anim = new_anim
-		$anim.play(anim)*/
-
-
-        /*velocity.y += delta * gravity;
-
-        if (Input.IsActionPressed("ui_left"))
+        if (on_floor)
         {
-            velocity.x = -WalkSpeed;
-        }
-        else if (Input.IsActionPressed("ui_right"))
+            if (linear_vel.x < -SidingChangeSpeed)
+            {
+                Sprite.Scale = new Vector2(-1, Sprite.Scale.y);
+                new_anim = "run";
+            } else if (linear_vel.x > SidingChangeSpeed)
+            {
+                Sprite.Scale = new Vector2(1, Sprite.Scale.y);
+                new_anim = "run";
+            }
+            
+        } else
         {
-            velocity.x = WalkSpeed;
-        }
-        else
-        {
-            velocity.x = 0;
+            if (Input.IsActionPressed("move_left") && !Input.IsActionPressed("move_right"))
+                Sprite.Scale = new Vector2(-1, Sprite.Scale.y);
+            if (Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_left"))
+                Sprite.Scale = new Vector2(1, Sprite.Scale.y);
+            if (linear_vel.y < 0)
+                new_anim = "jumping";
+            else
+                new_anim = "falling";
         }
 
-        // We don't need to multiply velocity by delta because MoveAndSlide already takes delta time into account.
-
-        // The second parameter of MoveAndSlide is the normal pointing up.
-        // In the case of a 2d platformer, in Godot upward is negative y, which translates to -1 as a normal.
-        MoveAndSlide(velocity, new Vector2(0, -1));*/
+        if (new_anim != anim)
+        {
+            anim = new_anim;
+            AnimationPlayer.Play(anim);
+        }
     }
 }
