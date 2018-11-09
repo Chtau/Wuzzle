@@ -9,10 +9,10 @@ public class coin : Area2D
     public override void _Ready()
     {
         AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
-        
+        AnimationPlayer.Play("spin");
     }
 
-    public void OnCoinBodyEnter()
+    public void OnCoinBodyEnter(object body)
     {
         if (!Taken)
         {
