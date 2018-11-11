@@ -24,6 +24,8 @@ public class Player : KinematicBody2D
     AnimationPlayer AnimationPlayer;
     Vector2 velocity;
 
+    const float BurstTimeout = 1f;
+    float burst_time = 0f;
     private int MoveBurstCount = 0;
 
     public override void _Ready()
@@ -38,6 +40,7 @@ public class Player : KinematicBody2D
     {
         onair_time += delta;
         shoot_time += delta;
+        burst_time += delta;
 
         // MOVEMENT
         // Apply Gravity
@@ -60,10 +63,12 @@ public class Player : KinematicBody2D
         if (Input.IsActionPressed("move_right"))
             target_speed += 1;
 
-        if (AllowBurstMove && Input.IsActionJustPressed("move_burst"))
+        if (target_speed != 0 && burst_time > BurstTimeout && AllowBurstMove && Input.IsActionJustPressed("move_burst"))
         {
+            GD.Print(burst_time);
             target_speed *= MoveBurstSpeed;
             OnBurstCountChange(-1);
+            burst_time = 0;
         }
 
         target_speed *= WalkSpeed;
