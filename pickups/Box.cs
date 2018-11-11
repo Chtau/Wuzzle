@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Box : Area2D
+public class Box : StaticBody2D
 {
     private bool Taken = false;
     private AnimationPlayer AnimationPlayer;

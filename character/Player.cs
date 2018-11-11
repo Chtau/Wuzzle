@@ -24,9 +24,9 @@ public class Player : KinematicBody2D
     AnimationPlayer AnimationPlayer;
     Vector2 velocity;
 
-    const float BurstTimeout = 1f;
-    float burst_time = 0f;
-    private int MoveBurstCount = 0;
+    const float DashTimeout = 1f;
+    float dash_time = 0f;
+    private int MoveDashCount = 0;
 
     public override void _Ready()
     {
@@ -40,7 +40,7 @@ public class Player : KinematicBody2D
     {
         onair_time += delta;
         shoot_time += delta;
-        burst_time += delta;
+        dash_time += delta;
 
         // MOVEMENT
         // Apply Gravity
@@ -63,12 +63,12 @@ public class Player : KinematicBody2D
         if (Input.IsActionPressed("move_right"))
             target_speed += 1;
 
-        if (target_speed != 0 && burst_time > BurstTimeout && AllowBurstMove && Input.IsActionJustPressed("move_burst"))
+        if (target_speed != 0 && dash_time > DashTimeout && AllowDashMove && Input.IsActionJustPressed("move_dash"))
         {
-            GD.Print(burst_time);
+            GD.Print(dash_time);
             target_speed *= MoveBurstSpeed;
-            OnBurstCountChange(-1);
-            burst_time = 0;
+            OnDashCountChange(-1);
+            dash_time = 0;
         }
 
         target_speed *= WalkSpeed;
@@ -131,22 +131,39 @@ public class Player : KinematicBody2D
         }
     }
 
-    public void AddBurst()
+    public void OnBodyEnter(object body)
     {
-        OnBurstCountChange(1);
+        if (body is Box box)
+        {
+            AddDash();
+        }
+        /*if (!Taken)
+        {
+            if (body is Player player)
+            {
+                player.AddBurst();
+                Taken = true;
+                AnimationPlayer.Play("taken");
+            }
+        }*/
     }
 
-    private void OnBurstCountChange(int changeValue)
+    public void AddDash()
     {
-        MoveBurstCount += changeValue;
-        GD.Print("Current Burst:" + MoveBurstCount);
+        OnDashCountChange(1);
     }
 
-    private bool AllowBurstMove
+    private void OnDashCountChange(int changeValue)
+    {
+        MoveDashCount += changeValue;
+        GD.Print("Current Burst:" + MoveDashCount);
+    }
+
+    private bool AllowDashMove
     {
         get
         {
-            if (MoveBurstCount > 0)
+            if (MoveDashCount > 0)
                 return true;
             return false;
         }
