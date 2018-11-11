@@ -135,17 +135,11 @@ public class Player : KinematicBody2D
     {
         if (body is Box box)
         {
-            AddDash();
-        }
-        /*if (!Taken)
-        {
-            if (body is Player player)
+            if (box.PlayerInteract())
             {
-                player.AddBurst();
-                Taken = true;
-                AnimationPlayer.Play("taken");
+                AddDash();
             }
-        }*/
+        }
     }
 
     public void AddDash()
