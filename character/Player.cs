@@ -22,12 +22,9 @@ public class Player : KinematicBody2D
 
     Sprite Sprite;
     AnimationPlayer AnimationPlayer;
-
-    //const float gravity = 200.0f;
-    //const int walk_speed = 200;
-
     Vector2 velocity;
 
+    private int MoveBurstCount = 0;
 
     public override void _Ready()
     {
@@ -66,6 +63,7 @@ public class Player : KinematicBody2D
         if (AllowBurstMove && Input.IsActionJustPressed("move_burst"))
         {
             target_speed *= MoveBurstSpeed;
+            OnBurstCountChange(-1);
         }
 
         target_speed *= WalkSpeed;
@@ -128,10 +126,23 @@ public class Player : KinematicBody2D
         }
     }
 
+    public void AddBurst()
+    {
+        OnBurstCountChange(1);
+    }
+
+    private void OnBurstCountChange(int changeValue)
+    {
+        MoveBurstCount += changeValue;
+        GD.Print("Current Burst:" + MoveBurstCount);
+    }
+
     private bool AllowBurstMove
     {
         get
         {
+            if (MoveBurstCount > 0)
+                return true;
             return false;
         }
     }

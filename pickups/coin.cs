@@ -16,8 +16,12 @@ public class coin : Area2D
     {
         if (!Taken)
         {
-            Taken = true;
-            AnimationPlayer.Play("taken");
+            if (body is Player player)
+            {
+                player.AddBurst();
+                Taken = true;
+                AnimationPlayer.Play("taken");
+            }
         }
     }
 }
