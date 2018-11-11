@@ -63,7 +63,7 @@ public class Player : KinematicBody2D
         if (Input.IsActionPressed("move_right"))
             target_speed += 1;
 
-        if (Input.IsActionJustPressed("move_burst"))
+        if (AllowBurstMove && Input.IsActionJustPressed("move_burst"))
         {
             target_speed *= MoveBurstSpeed;
         }
@@ -125,6 +125,14 @@ public class Player : KinematicBody2D
         {
             anim = new_anim;
             AnimationPlayer.Play(anim);
+        }
+    }
+
+    private bool AllowBurstMove
+    {
+        get
+        {
+            return false;
         }
     }
 }
