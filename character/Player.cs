@@ -9,6 +9,7 @@ public class Player : KinematicBody2D
     const float MinOnAirTime = 0.1f;
     const int WalkSpeed = 250; // pixels/sec
     const int JumpSpeed = 480;
+    const int MoveBurstSpeed = 250;
     const int SidingChangeSpeed = 10;
     const int BulletVelocity = 1000;
     const float ShootTimeShowWeapon = 0.2f;
@@ -61,6 +62,11 @@ public class Player : KinematicBody2D
 
         if (Input.IsActionPressed("move_right"))
             target_speed += 1;
+
+        if (Input.IsActionJustPressed("move_burst"))
+        {
+            target_speed *= MoveBurstSpeed;
+        }
 
         target_speed *= WalkSpeed;
 
