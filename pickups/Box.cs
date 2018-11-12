@@ -17,6 +17,7 @@ public class Box : StaticBody2D
         if (Taken)
             return false;
         Taken = true;
+        ((CollisionShape2D)GetNode("CollisionShape2D")).QueueFree();
         AnimationPlayer.Play("taken");
         return true;
     }

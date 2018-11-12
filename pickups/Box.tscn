@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://pickups/Box.cs" type="Script" id=1]
 [ext_resource path="res://pickups/art/burst_box.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 
 resource_name = "idle"
 length = 2.0
@@ -22,7 +22,26 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="Animation" id=2]
+
+resource_name = "taken"
+length = 1.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 14.7502, 15.5495 )
@@ -44,7 +63,7 @@ _sections_unfolded = [ "Collision" ]
 texture = ExtResource( 2 )
 hframes = 15
 frame = 2
-_sections_unfolded = [ "Animation", "Region", "Transform" ]
+_sections_unfolded = [ "Animation", "Material", "Region", "Transform", "Visibility" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
@@ -53,7 +72,8 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/idle = SubResource( 2 )
+anims/idle = SubResource( 1 )
+anims/taken = SubResource( 2 )
 blend_times = [  ]
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="." index="2"]
@@ -68,6 +88,6 @@ physics_process_parent = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 
