@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Player : KinematicBody2D
 {
@@ -138,7 +139,7 @@ public class Player : KinematicBody2D
 
         foreach (var item in DashTargets)
         {
-            CheckDashTargets(item);
+            CheckDashTargets(item.Value);
         }
     }
 
@@ -153,13 +154,13 @@ public class Player : KinematicBody2D
         }
     }
 
-    List<Box> DashTargets = new List<Box>();
+    System.Collections.Generic.Dictionary<Guid, Box> DashTargets = new System.Collections.Generic.Dictionary<Guid, Box>();
     public void OnDashTargetBodyEnter(object body)
     {
         if (body is Box box)
         {
             //CheckDashTargets(box);
-            DashTargets.Add(box);
+            DashTargets.Add(box.DashTargetId, box);
         }
     }
 
@@ -168,7 +169,8 @@ public class Player : KinematicBody2D
         if (body is Box box)
         {
             //CheckDashTargets(box);
-            DashTargets.Remove(box);
+            DashTargets.Remove(box.DashTargetId);
+            RemoveDebugLine(box.DashTargetId);
         }
     }
 
@@ -186,22 +188,23 @@ public class Player : KinematicBody2D
         DashRayCast2D.CastTo = trans;
         DashRayCast2D.Enabled = true;
 
-        var line = (Line2D)GetNode("Line2D");
+        /*var line = (Line2D)GetNode("Line2D");
         for (int i = 0; i < line.Points.Length; i++)
         {
             line.RemovePoint(i);
         }
         line.AddPoint(DashRayCast2D.Position);
-        line.AddPoint(DashRayCast2D.CastTo);
+        line.AddPoint(DashRayCast2D.CastTo);*/
 
         if (DashRayCast2D.IsColliding())
         {
             //GD.Print("Raycast is colliding");
             var coll = DashRayCast2D.GetCollider();
             //GD.Print("Enter:" + box.GetParent().GetInstanceId() + " Collider:" + coll.GetType());
-            if (coll is Box boxCollider)
+            if (coll is Box boxCollider && box.DashTargetId == boxCollider.DashTargetId)
             {
                 GD.Print("Can collide with Box");
+                AddDebugLine(box.DashTargetId, DashRayCast2D.Position, DashRayCast2D.CastTo);
             }
             else
             {
@@ -212,6 +215,43 @@ public class Player : KinematicBody2D
         {
             //GD.Print("Raycast is not colliding");
         }
+    }
+
+    System.Collections.Generic.Dictionary<Guid, Line2D> DebugLines = new System.Collections.Generic.Dictionary<Guid, Line2D>();
+    private void AddDebugLine(Guid id, Vector2 pos, Vector2 tar)
+    {
+        if (DebugLines.ContainsKey(id))
+        {
+            for (int i = 0; i < DebugLines[id].Points.Length; i++)
+            {
+                DebugLines[id].RemovePoint(i);
+            }
+            DebugLines[id].AddPoint(pos);
+            DebugLines[id].AddPoint(tar);
+        }
+        else
+        {
+            var line = new Line2D
+            {
+                DefaultColor = new Color(255, 0, 119.53f, 255),
+                Width = 10
+            };
+            line.AddPoint(pos);
+            line.AddPoint(tar);
+            this.AddChild(line);
+            DebugLines.Add(id, line);
+        }
+    }
+
+    private void RemoveDebugLine(Guid id)
+    {
+        /*var lines = this.GetChildren().FirstOrDefault(x => x is Line2D line && line == DebugLines[id]);
+        if (lines != null)
+        {
+            this.RemoveChild(lines);
+        }*/
+        this.RemoveChild(DebugLines[id]);
+        DebugLines.Remove(id);
     }
 
     private void OnDashCountChange(int changeValue)

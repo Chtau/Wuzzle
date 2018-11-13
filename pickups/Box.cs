@@ -1,11 +1,18 @@
 using Godot;
 using System;
 
-public class Box : StaticBody2D
+public class Box : StaticBody2D, Wuzzle.Pickups.Interfaces.IDashTarget
 {
     private bool Taken = false;
     private AnimationPlayer AnimationPlayer;
     private CollisionShape2D CollisionShape2D;
+
+    public Guid DashTargetId { get; }
+
+    public Box()
+    {
+        DashTargetId = Guid.NewGuid();
+    }
 
     public override void _Ready()
     {

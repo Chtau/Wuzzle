@@ -65,6 +65,7 @@
     <Compile Include="Models\Hint.cs" />
     <Compile Include="pickups\Box.cs" />
     <Compile Include="pickups\coin.cs" />
+    <Compile Include="pickups\Interfaces\IDashTarget.cs" />
     <Compile Include="PlayerStatus.cs" />
     <Compile Include="Profil\Models\Profil.cs" />
     <Compile Include="Profil\ProfilManager.cs" />
