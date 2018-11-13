@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://character/Player.cs" type="Script" id=1]
 [ext_resource path="res://character/art/robot_demo.png" type="Texture" id=2]
@@ -83,7 +83,12 @@ tracks/0/keys = {
 custom_solver_bias = 0.0
 radius = 38.8188
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[sub_resource type="RectangleShape2D" id=6]
+
+custom_solver_bias = 0.0
+extents = Vector2( 236.434, 266.794 )
+
+[node name="Player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -158,64 +163,38 @@ audio_bus_name = "Master"
 
 shape = SubResource( 5 )
 
-[node name="RayCasts" type="Node" parent="." index="5"]
+[node name="DashArea2D" type="Area2D" parent="." index="5"]
 
-[node name="RayCastRight" type="RayCast2D" parent="RayCasts" index="0"]
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 
-enabled = false
-exclude_parent = true
-cast_to = Vector2( 250, 0 )
-collision_mask = 1
-
-[node name="RayCastLeft" type="RayCast2D" parent="RayCasts" index="1"]
-
-enabled = false
-exclude_parent = true
-cast_to = Vector2( -250, 0 )
-collision_mask = 1
-
-[node name="RayCastLeftTopCorner" type="RayCast2D" parent="RayCasts" index="2"]
+[node name="DashRayCast2D" type="RayCast2D" parent="DashArea2D" index="0"]
 
 enabled = false
 exclude_parent = true
-cast_to = Vector2( -250, -250 )
-collision_mask = 1
+cast_to = Vector2( 0, 50 )
+collision_mask = 16
 
-[node name="RayCastLeftBottomCorner" type="RayCast2D" parent="RayCasts" index="3"]
+[node name="DashCollisionShape2D" type="CollisionShape2D" parent="DashArea2D" index="1"]
 
-enabled = false
-exclude_parent = true
-cast_to = Vector2( -250, 250 )
-collision_mask = 1
+position = Vector2( 236.841, -0.663422 )
+shape = SubResource( 6 )
 
-[node name="RayCastRightTopCorner" type="RayCast2D" parent="RayCasts" index="4"]
+[node name="Line2D" type="Line2D" parent="." index="6"]
 
-enabled = false
-exclude_parent = true
-cast_to = Vector2( 250, -250 )
-collision_mask = 1
-
-[node name="RayCastRightBottomCorner" type="RayCast2D" parent="RayCasts" index="5"]
-
-enabled = false
-exclude_parent = true
-cast_to = Vector2( 250, 250 )
-collision_mask = 1
-
-[node name="RayCastTop" type="RayCast2D" parent="RayCasts" index="6"]
-
-enabled = false
-exclude_parent = true
-cast_to = Vector2( 0, -250 )
-collision_mask = 1
-
-[node name="RayCastBottom" type="RayCast2D" parent="RayCasts" index="7"]
-
-enabled = false
-exclude_parent = true
-cast_to = Vector2( 0, 250 )
-collision_mask = 1
+points = PoolVector2Array( 3.57336, 1.22742 )
+width = 10.0
+default_color = Color( 1, 0, 0.46875, 1 )
+sharp_limit = 2.0
+round_precision = 8
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEnter"]
+
+[connection signal="body_entered" from="DashArea2D" to="." method="OnDashTargetBodyEnter"]
 
 

@@ -27,6 +27,7 @@ public class Player : KinematicBody2D
     const float DashTimeout = 1f;
     float dash_time = 0f;
     private int MoveDashCount = 0;
+    RayCast2D DashRayCast2D;
 
     public override void _Ready()
     {
@@ -34,6 +35,10 @@ public class Player : KinematicBody2D
         // Initialization here
         Sprite = (Sprite)GetNode("Sprite");
         AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
+        DashRayCast2D = (RayCast2D)GetNode("DashArea2D/DashRayCast2D");
+        DashRayCast2D.AddException(this);
+        //DashRayCast2D.SetCollisionMask(3);
+        //DashRayCast2D.SetCollisionMask(2);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -138,6 +143,51 @@ public class Player : KinematicBody2D
             if (box.PlayerInteract())
             {
                 AddDash();
+            }
+        }
+    }
+
+    public void OnDashTargetBodyEnter(object body)
+    {
+        if (body is Box box)
+        {
+            GD.Print("RayCast Mask:" + DashRayCast2D.GetCollisionMask() + " ,Dash target Box entered. Mask:" + box.GetCollisionMask());
+            DashRayCast2D.CastTo = box.GlobalPosition;//.Position;
+            DashRayCast2D.Enabled = true;
+
+            var line = (Line2D)GetNode("Line2D");
+            for (int i = 0; i < line.Points.Length; i++)
+            {
+                line.RemovePoint(i);
+            }
+            line.AddPoint(DashRayCast2D.Position);
+            line.AddPoint(box.GlobalPosition);
+            /*if (line.Points.Length != 2)
+            {
+                line.AddPoint(this.GlobalPosition);
+                line.AddPoint(box.GlobalPosition);
+            } else
+            {
+                line.SetPointPosition(0, this.GlobalPosition);
+                line.SetPointPosition(1, box.GlobalPosition);
+            }*/
+            
+
+            if (DashRayCast2D.IsColliding())
+            {
+                GD.Print("Raycast is colliding");
+                var coll = DashRayCast2D.GetCollider();
+                GD.Print("Enter:" + box.GetParent().GetInstanceId() + " Collider:" + coll.GetType());
+                if (false)
+                {
+                    GD.Print("Can collide with Box");
+                } else
+                {
+                    GD.Print("Not the Box we checked to collide with");
+                }
+            } else
+            {
+                GD.Print("Raycast is not colliding");
             }
         }
     }
