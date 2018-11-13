@@ -39,8 +39,6 @@ public class Player : KinematicBody2D
         AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
         DashRayCast2D = (RayCast2D)GetNode("DashArea2D/DashRayCast2D");
         DashRayCast2D.AddException(this);
-        //DashRayCast2D.SetCollisionMask(3);
-        //DashRayCast2D.SetCollisionMask(2);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -188,22 +186,12 @@ public class Player : KinematicBody2D
         DashRayCast2D.CastTo = trans;
         DashRayCast2D.Enabled = true;
 
-        /*var line = (Line2D)GetNode("Line2D");
-        for (int i = 0; i < line.Points.Length; i++)
-        {
-            line.RemovePoint(i);
-        }
-        line.AddPoint(DashRayCast2D.Position);
-        line.AddPoint(DashRayCast2D.CastTo);*/
-
         if (DashRayCast2D.IsColliding())
         {
-            //GD.Print("Raycast is colliding");
             var coll = DashRayCast2D.GetCollider();
-            //GD.Print("Enter:" + box.GetParent().GetInstanceId() + " Collider:" + coll.GetType());
             if (coll is Box boxCollider && box.DashTargetId == boxCollider.DashTargetId)
             {
-                GD.Print("Can collide with Box");
+                //GD.Print("Can collide with Box");
                 AddDebugLine(box.DashTargetId, DashRayCast2D.Position, DashRayCast2D.CastTo);
             }
             else
@@ -245,11 +233,6 @@ public class Player : KinematicBody2D
 
     private void RemoveDebugLine(Guid id)
     {
-        /*var lines = this.GetChildren().FirstOrDefault(x => x is Line2D line && line == DebugLines[id]);
-        if (lines != null)
-        {
-            this.RemoveChild(lines);
-        }*/
         this.RemoveChild(DebugLines[id]);
         DebugLines.Remove(id);
     }
