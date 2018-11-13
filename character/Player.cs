@@ -152,7 +152,10 @@ public class Player : KinematicBody2D
         if (body is Box box)
         {
             GD.Print("RayCast Mask:" + DashRayCast2D.GetCollisionMask() + " ,Dash target Box entered. Mask:" + box.GetCollisionMask());
-            DashRayCast2D.CastTo = box.GlobalPosition;//.Position;
+
+            var trans = new Vector2(box.GlobalPosition.x - this.GlobalPosition.x, box.GlobalPosition.y - this.GlobalPosition.y);
+
+            DashRayCast2D.CastTo = trans;// box.GlobalPosition;//.Position;
             DashRayCast2D.Enabled = true;
 
             var line = (Line2D)GetNode("Line2D");
@@ -161,7 +164,11 @@ public class Player : KinematicBody2D
                 line.RemovePoint(i);
             }
             line.AddPoint(DashRayCast2D.Position);
-            line.AddPoint(box.GlobalPosition);
+            //line.AddPoint(this.GlobalPosition);
+            line.AddPoint(DashRayCast2D.CastTo);
+            GD.Print("Player Pos:" + DashRayCast2D.Position + " Target Pos:" + DashRayCast2D.CastTo);
+
+            //GetWorld2d().GetDirectSpaceState().IntersectRay
             /*if (line.Points.Length != 2)
             {
                 line.AddPoint(this.GlobalPosition);
@@ -171,7 +178,7 @@ public class Player : KinematicBody2D
                 line.SetPointPosition(0, this.GlobalPosition);
                 line.SetPointPosition(1, box.GlobalPosition);
             }*/
-            
+
 
             if (DashRayCast2D.IsColliding())
             {
