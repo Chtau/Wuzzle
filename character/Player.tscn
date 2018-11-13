@@ -178,7 +178,7 @@ audio_bus_name = "Master"
 enabled = false
 exclude_parent = true
 cast_to = Vector2( 0, 50 )
-collision_mask = 16
+collision_mask = 17
 
 [node name="DashCollisionShape2D" type="CollisionShape2D" parent="DashArea2D" index="1"]
 
@@ -196,5 +196,7 @@ round_precision = 8
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEnter"]
 
 [connection signal="body_entered" from="DashArea2D" to="." method="OnDashTargetBodyEnter"]
+
+[connection signal="body_exited" from="DashArea2D" to="." method="OnDashTargetBodyExited"]
 
 

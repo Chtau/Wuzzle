@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class Player : KinematicBody2D
 {
@@ -134,6 +135,11 @@ public class Player : KinematicBody2D
             anim = new_anim;
             AnimationPlayer.Play(anim);
         }
+
+        foreach (var item in DashTargets)
+        {
+            CheckDashTargets(item);
+        }
     }
 
     public void OnBodyEnter(object body)
@@ -147,61 +153,65 @@ public class Player : KinematicBody2D
         }
     }
 
+    List<Box> DashTargets = new List<Box>();
     public void OnDashTargetBodyEnter(object body)
     {
         if (body is Box box)
         {
-            GD.Print("RayCast Mask:" + DashRayCast2D.GetCollisionMask() + " ,Dash target Box entered. Mask:" + box.GetCollisionMask());
+            //CheckDashTargets(box);
+            DashTargets.Add(box);
+        }
+    }
 
-            var trans = new Vector2(box.GlobalPosition.x - this.GlobalPosition.x, box.GlobalPosition.y - this.GlobalPosition.y);
-
-            DashRayCast2D.CastTo = trans;// box.GlobalPosition;//.Position;
-            DashRayCast2D.Enabled = true;
-
-            var line = (Line2D)GetNode("Line2D");
-            for (int i = 0; i < line.Points.Length; i++)
-            {
-                line.RemovePoint(i);
-            }
-            line.AddPoint(DashRayCast2D.Position);
-            //line.AddPoint(this.GlobalPosition);
-            line.AddPoint(DashRayCast2D.CastTo);
-            GD.Print("Player Pos:" + DashRayCast2D.Position + " Target Pos:" + DashRayCast2D.CastTo);
-
-            //GetWorld2d().GetDirectSpaceState().IntersectRay
-            /*if (line.Points.Length != 2)
-            {
-                line.AddPoint(this.GlobalPosition);
-                line.AddPoint(box.GlobalPosition);
-            } else
-            {
-                line.SetPointPosition(0, this.GlobalPosition);
-                line.SetPointPosition(1, box.GlobalPosition);
-            }*/
-
-
-            if (DashRayCast2D.IsColliding())
-            {
-                GD.Print("Raycast is colliding");
-                var coll = DashRayCast2D.GetCollider();
-                GD.Print("Enter:" + box.GetParent().GetInstanceId() + " Collider:" + coll.GetType());
-                if (false)
-                {
-                    GD.Print("Can collide with Box");
-                } else
-                {
-                    GD.Print("Not the Box we checked to collide with");
-                }
-            } else
-            {
-                GD.Print("Raycast is not colliding");
-            }
+    public void OnDashTargetBodyExited(object body)
+    {
+        if (body is Box box)
+        {
+            //CheckDashTargets(box);
+            DashTargets.Remove(box);
         }
     }
 
     public void AddDash()
     {
         OnDashCountChange(1);
+    }
+
+    private void CheckDashTargets(Box box)
+    {
+        //GD.Print("RayCast Mask:" + DashRayCast2D.GetCollisionMask() + " ,Dash target Box entered. Mask:" + box.GetCollisionMask());
+
+        var trans = new Vector2(box.GlobalPosition.x - this.GlobalPosition.x, box.GlobalPosition.y - this.GlobalPosition.y);
+
+        DashRayCast2D.CastTo = trans;
+        DashRayCast2D.Enabled = true;
+
+        var line = (Line2D)GetNode("Line2D");
+        for (int i = 0; i < line.Points.Length; i++)
+        {
+            line.RemovePoint(i);
+        }
+        line.AddPoint(DashRayCast2D.Position);
+        line.AddPoint(DashRayCast2D.CastTo);
+
+        if (DashRayCast2D.IsColliding())
+        {
+            //GD.Print("Raycast is colliding");
+            var coll = DashRayCast2D.GetCollider();
+            //GD.Print("Enter:" + box.GetParent().GetInstanceId() + " Collider:" + coll.GetType());
+            if (coll is Box boxCollider)
+            {
+                GD.Print("Can collide with Box");
+            }
+            else
+            {
+                //GD.Print("Not the Box we checked to collide with");
+            }
+        }
+        else
+        {
+            //GD.Print("Raycast is not colliding");
+        }
     }
 
     private void OnDashCountChange(int changeValue)
