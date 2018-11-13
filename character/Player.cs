@@ -179,11 +179,7 @@ public class Player : KinematicBody2D
 
     private void CheckDashTargets(Box box)
     {
-        //GD.Print("RayCast Mask:" + DashRayCast2D.GetCollisionMask() + " ,Dash target Box entered. Mask:" + box.GetCollisionMask());
-
-        var trans = new Vector2(box.GlobalPosition.x - this.GlobalPosition.x, box.GlobalPosition.y - this.GlobalPosition.y);
-
-        DashRayCast2D.CastTo = trans;
+        DashRayCast2D.CastTo = box.GlobalPosition - this.GlobalPosition;
         DashRayCast2D.Enabled = true;
 
         if (DashRayCast2D.IsColliding())
@@ -194,14 +190,6 @@ public class Player : KinematicBody2D
                 //GD.Print("Can collide with Box");
                 AddDebugLine(box.DashTargetId, DashRayCast2D.Position, DashRayCast2D.CastTo);
             }
-            else
-            {
-                //GD.Print("Not the Box we checked to collide with");
-            }
-        }
-        else
-        {
-            //GD.Print("Raycast is not colliding");
         }
     }
 
