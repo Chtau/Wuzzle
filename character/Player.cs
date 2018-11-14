@@ -15,13 +15,10 @@ public class Player : KinematicBody2D
     const int JumpSpeed = 480;
     const int MoveBurstSpeed = 250;
     const int SidingChangeSpeed = 10;
-    const int BulletVelocity = 1000;
-    const float ShootTimeShowWeapon = 0.2f;
 
     Vector2 linear_vel = new Vector2();
     float onair_time = 0f;
     bool on_floor = false;
-    float shoot_time = 99999; //time since last shot
     string anim = "";
 
     Sprite Sprite;
@@ -31,24 +28,18 @@ public class Player : KinematicBody2D
     const float DashTimeout = 1f;
     float dash_time = 0f;
     private int MoveDashCount = 0;
-    //RayCast2D DashRayCast2D;
     Area2D DashArea2D;
 
     public override void _Ready()
     {
-        // Called every time the node is added to the scene.
-        // Initialization here
         Sprite = (Sprite)GetNode("Sprite");
         AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
         DashArea2D = (Area2D)GetNode("DashArea2D");
-        //DashRayCast2D = (RayCast2D)GetNode("DashArea2D/DashRayCast2D");
-        //DashRayCast2D.AddException(this);
     }
 
     public override void _PhysicsProcess(float delta)
     {
         onair_time += delta;
-        shoot_time += delta;
         dash_time += delta;
 
         // MOVEMENT
@@ -90,20 +81,6 @@ public class Player : KinematicBody2D
             linear_vel.y = -JumpSpeed;
 		    //$sound_jump.play()
         }
-
-        // Shooting
-        /*if Input.is_action_just_pressed("shoot"):
-		var bullet = preload("res://bullet.tscn").instance()
-
-        bullet.position = $sprite / bullet_shoot.global_position #use node for shoot position
-		bullet.linear_velocity = Vector2(sprite.scale.x * BULLET_VELOCITY, 0)
-
-        bullet.add_collision_exception_with(self) # don't want player to collide with bullet
-		get_parent().add_child(bullet) #don't want bullet to move with me, so add it as child of parent
-		$sound_shoot.play()
-
-        shoot_time = 0*/
-
 
         // ANIMATION
 
