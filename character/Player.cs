@@ -42,6 +42,11 @@ public class Player : KinematicBody2D
         onair_time += delta;
         dash_time += delta;
 
+        foreach (var item in DashTargets)
+        {
+            CheckDashTargets(item.Value);
+        }
+
         // MOVEMENT
         // Apply Gravity
         linear_vel += delta * GravityVector;
@@ -56,15 +61,30 @@ public class Player : KinematicBody2D
         // CONTROL
         // Horizontal Movement
         var target_speed = 0;
-
+        bool moveLeft = false, moveRight = false, moveDown = false, moveUp = false;
         if (Input.IsActionPressed("move_left"))
+        {
             target_speed += -1;
-
+            moveLeft = true;
+        }
         if (Input.IsActionPressed("move_right"))
+        {
             target_speed += 1;
+            moveRight = true;
+        }
+        if (Input.IsActionPressed("move_down"))
+        {
+            moveDown = true;
+        }
+        if (Input.IsActionPressed("move_up"))
+        {
+            moveUp = true;
+        }
 
+        // Dash
         if (target_speed != 0 && dash_time > DashTimeout && AllowDashMove && Input.IsActionJustPressed("move_dash"))
         {
+            var target = OnGetDashTarget(moveLeft, moveRight, moveUp, moveDown);
             GD.Print(dash_time);
             target_speed *= MoveBurstSpeed;
             OnDashCountChange(-1);
@@ -115,11 +135,6 @@ public class Player : KinematicBody2D
             anim = new_anim;
             AnimationPlayer.Play(anim);
         }
-
-        foreach (var item in DashTargets)
-        {
-            CheckDashTargets(item.Value);
-        }
     }
 
     public void OnMeleeBodyEnter(object body)
@@ -153,6 +168,12 @@ public class Player : KinematicBody2D
     public void AddDash()
     {
         OnDashCountChange(1);
+    }
+
+    private DashTargetItem OnGetDashTarget(bool left, bool right, bool up, bool down)
+    {
+
+        return null;
     }
 
     private void OnAddDashTarget(IDashTarget target)
