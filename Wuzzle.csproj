@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnswerDialog.cs" />
+    <Compile Include="character\DashTargetItem.cs" />
     <Compile Include="character\Player.cs" />
     <Compile Include="GameBar.cs" />
     <Compile Include="GoalItem.cs" />

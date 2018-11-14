@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wuzzle.character;
 using Wuzzle.Pickups.Interfaces;
 
 public class Player : KinematicBody2D
@@ -140,7 +141,7 @@ public class Player : KinematicBody2D
 
         foreach (var item in DashTargets)
         {
-            CheckDashTargets(item.Value.Item1, item.Value.Item2);
+            CheckDashTargets(item.Value);
         }
     }
 
@@ -155,7 +156,7 @@ public class Player : KinematicBody2D
         }
     }
 
-    System.Collections.Generic.Dictionary<Guid, Tuple<IDashTarget, RayCast2D>> DashTargets = new System.Collections.Generic.Dictionary<Guid, Tuple<IDashTarget, RayCast2D>>();
+    System.Collections.Generic.Dictionary<Guid, DashTargetItem> DashTargets = new System.Collections.Generic.Dictionary<Guid, DashTargetItem>();
     public void OnDashTargetBodyEnter(object body)
     {
         if (body is IDashTarget target)
@@ -179,15 +180,20 @@ public class Player : KinematicBody2D
 
     private void OnAddDashTarget(IDashTarget target)
     {
-        DashTargets.Add(target.DashTargetId, new Tuple<IDashTarget, RayCast2D>(target, GetDashRayCast2D(target)));
+        DashTargets.Add(target.DashTargetId, new DashTargetItem
+        {
+            DashTarget = target,
+            RayCast2D = GetDashRayCast2D(target),
+            Angle = null
+        });
     }
 
     private void OnRemoveDashTarget(IDashTarget target)
     {
         if (DashTargets.ContainsKey(target.DashTargetId))
         {
-            DashArea2D.RemoveChild(DashTargets[target.DashTargetId].Item2);
-            DashTargets[target.DashTargetId].Item2.QueueFree();
+            DashArea2D.RemoveChild(DashTargets[target.DashTargetId].RayCast2D);
+            DashTargets[target.DashTargetId].RayCast2D.QueueFree();
             DashTargets.Remove(target.DashTargetId);
         }
         RemoveDebugLine(target.DashTargetId);
@@ -206,18 +212,23 @@ public class Player : KinematicBody2D
         return ray;
     }
 
-    private void CheckDashTargets(IDashTarget target, RayCast2D ray)
+    private void CheckDashTargets(DashTargetItem item)
     {
-        ray.CastTo = target.Instance.GlobalPosition - this.GlobalPosition;
-        if (ray.IsColliding())
+        item.RayCast2D.CastTo = item.DashTarget.Instance.GlobalPosition - this.GlobalPosition;
+        if (item.RayCast2D.IsColliding())
         {
-            var coll = ray.GetCollider();
-            if (coll is IDashTarget targetCollider && target.DashTargetId == targetCollider.DashTargetId)
+            var coll = item.RayCast2D.GetCollider();
+            if (coll is IDashTarget targetCollider && item.DashTarget.DashTargetId == targetCollider.DashTargetId)
             {
-                AddDebugLine(target.DashTargetId, ray.Position, ray.CastTo);
+                item.Angle = item.RayCast2D.Position.AngleToPoint(item.RayCast2D.CastTo); //item.RayCast2D.GetAngleTo(item.RayCast2D.CastTo);
+                
+                if (item.DashTargetDirection == DashTargetDirection.None)
+                    GD.Print("Collide angle:" + item.Angle + " Dir:" + item.DashTargetDirection);
+                //GD.Print("Collide angle:" + item.Angle + " Dir:" + item.DashTargetDirection);
+                AddDebugLine(item.DashTarget.DashTargetId, item.RayCast2D.Position, item.RayCast2D.CastTo);
             } else
             {
-                RemoveDebugLine(target.DashTargetId);
+                RemoveDebugLine(item.DashTarget.DashTargetId);
             }
         }
     }
