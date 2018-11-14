@@ -188,7 +188,7 @@ scale = Vector2( 1.77884, 1 )
 shape = SubResource( 6 )
 _sections_unfolded = [ "Transform" ]
 
-[connection signal="body_entered" from="Area2D" to="." method="OnBodyEnter"]
+[connection signal="body_entered" from="Area2D" to="." method="OnMeleeBodyEnter"]
 
 [connection signal="body_entered" from="DashArea2D" to="." method="OnDashTargetBodyEnter"]
 

@@ -144,7 +144,7 @@ public class Player : KinematicBody2D
         }
     }
 
-    public void OnBodyEnter(object body)
+    public void OnMeleeBodyEnter(object body)
     {
         if (body is Box box)
         {
