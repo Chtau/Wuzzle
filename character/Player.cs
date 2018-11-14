@@ -30,7 +30,8 @@ public class Player : KinematicBody2D
     const float DashTimeout = 1f;
     float dash_time = 0f;
     private int MoveDashCount = 0;
-    RayCast2D DashRayCast2D;
+    //RayCast2D DashRayCast2D;
+    Area2D DashArea2D;
 
     public override void _Ready()
     {
@@ -38,8 +39,9 @@ public class Player : KinematicBody2D
         // Initialization here
         Sprite = (Sprite)GetNode("Sprite");
         AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
-        DashRayCast2D = (RayCast2D)GetNode("DashArea2D/DashRayCast2D");
-        DashRayCast2D.AddException(this);
+        DashArea2D = (Area2D)GetNode("DashArea2D");
+        //DashRayCast2D = (RayCast2D)GetNode("DashArea2D/DashRayCast2D");
+        //DashRayCast2D.AddException(this);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -138,7 +140,7 @@ public class Player : KinematicBody2D
 
         foreach (var item in DashTargets)
         {
-            CheckDashTargets(item.Value);
+            CheckDashTargets(item.Value.Item1, item.Value.Item2);
         }
     }
 
@@ -153,12 +155,13 @@ public class Player : KinematicBody2D
         }
     }
 
-    System.Collections.Generic.Dictionary<Guid, IDashTarget> DashTargets = new System.Collections.Generic.Dictionary<Guid, IDashTarget>();
+    System.Collections.Generic.Dictionary<Guid, Tuple<IDashTarget, RayCast2D>> DashTargets = new System.Collections.Generic.Dictionary<Guid, Tuple<IDashTarget, RayCast2D>>();
     public void OnDashTargetBodyEnter(object body)
     {
         if (body is IDashTarget target)
         {
-            DashTargets.Add(target.DashTargetId, target);
+            DashTargets.Add(target.DashTargetId, new Tuple<IDashTarget, RayCast2D>(target, GetDashRayCast2D(target)));
+            //GD.Print("Ray:" + DashTargets[target.DashTargetId].Item2.CollisionMask + " Target:" + ((Box)body).CollisionMask);
         }
     }
 
@@ -177,17 +180,28 @@ public class Player : KinematicBody2D
         OnDashCountChange(1);
     }
 
-    private void CheckDashTargets(IDashTarget target)
+    private RayCast2D GetDashRayCast2D(IDashTarget target)
     {
-        DashRayCast2D.CastTo = target.Instance.GlobalPosition - this.GlobalPosition;
-        DashRayCast2D.Enabled = true;
+        var ray = new RayCast2D();
+        ray.SetCollisionMaskBit(0, true);
+        //ray.SetCollisionMaskBit(4, true);
+        ray.AddException(this);
+        ray.ExcludeParent = true;
+        ray.Enabled = true;
 
-        if (DashRayCast2D.IsColliding())
+        DashArea2D.AddChild(ray);
+        return ray;
+    }
+
+    private void CheckDashTargets(IDashTarget target, RayCast2D ray)
+    {
+        ray.CastTo = target.Instance.GlobalPosition - this.GlobalPosition;
+        if (ray.IsColliding())
         {
-            var coll = DashRayCast2D.GetCollider();
+            var coll = ray.GetCollider();
             if (coll is IDashTarget targetCollider && target.DashTargetId == targetCollider.DashTargetId)
             {
-                AddDebugLine(target.DashTargetId, DashRayCast2D.Position, DashRayCast2D.CastTo);
+                AddDebugLine(target.DashTargetId, ray.Position, ray.CastTo);
             }
         }
     }
