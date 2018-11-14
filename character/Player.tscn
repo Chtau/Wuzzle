@@ -91,11 +91,11 @@ extents = Vector2( 236.434, 266.794 )
 [node name="Player" type="KinematicBody2D"]
 
 input_pickable = false
-collision_layer = 1
+collision_layer = 17
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -183,8 +183,10 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="DashCollisionShape2D" type="CollisionShape2D" parent="DashArea2D" index="1"]
 
-position = Vector2( 236.841, -0.663422 )
+position = Vector2( -0.407152, 0 )
+scale = Vector2( 1.77884, 1 )
 shape = SubResource( 6 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEnter"]
 
