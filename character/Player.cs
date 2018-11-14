@@ -183,8 +183,7 @@ public class Player : KinematicBody2D
         DashTargets.Add(target.DashTargetId, new DashTargetItem
         {
             DashTarget = target,
-            RayCast2D = GetDashRayCast2D(target),
-            Angle = null
+            RayCast2D = GetDashRayCast2D(target)
         });
     }
 
@@ -220,11 +219,11 @@ public class Player : KinematicBody2D
             var coll = item.RayCast2D.GetCollider();
             if (coll is IDashTarget targetCollider && item.DashTarget.DashTargetId == targetCollider.DashTargetId)
             {
-                item.Angle = item.RayCast2D.Position.AngleToPoint(item.RayCast2D.CastTo); //item.RayCast2D.GetAngleTo(item.RayCast2D.CastTo);
+                item.SetAngle(item.RayCast2D.Position.AngleToPoint(item.RayCast2D.CastTo));
                 
                 if (item.DashTargetDirection == DashTargetDirection.None)
                     GD.Print("Collide angle:" + item.Angle + " Dir:" + item.DashTargetDirection);
-                //GD.Print("Collide angle:" + item.Angle + " Dir:" + item.DashTargetDirection);
+                //GD.Print("Collide angle:" + item.Angle + " Dir:" + item.DashTargetDirection + " Diag:" + item.DashTargetDiagonalDirection);
                 AddDebugLine(item.DashTarget.DashTargetId, item.RayCast2D.Position, item.RayCast2D.CastTo);
             } else
             {

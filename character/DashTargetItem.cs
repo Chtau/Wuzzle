@@ -12,34 +12,65 @@ namespace Wuzzle.character
     {
         public IDashTarget DashTarget { get; set; }
         public RayCast2D RayCast2D { get; set; }
-        /// <summary>
-        /// Dot Product Angle (-1 = 180° & 0 = 0°)
-        /// </summary>
-        public float? Angle { get; set; }
-        public DashTargetDirection DashTargetDirection
-        {
-            get
-            {
-                if (Angle.HasValue)
-                {
-                    if (Angle.Value < 2 && Angle.Value > 1)
-                        return DashTargetDirection.Left;
-                    else if (Angle.Value > -2 && Angle.Value < -1)
-                        return DashTargetDirection.Right;
-                    else if (Angle.Value > -1 && Angle.Value < 1)
-                        return DashTargetDirection.Down;
-                    else if (Angle.Value > 2 || Angle.Value < -2)
-                        return DashTargetDirection.Down;
-                }
-                return DashTargetDirection.None;
-            }
-        }
+        public float? Angle { get; private set; }
+        public DashTargetDirection DashTargetDirection { get; private set; }
+        public DashTargetDirection DashTargetDiagonalDirection { get; private set; }
 
         public DashTargetItem()
         {
             DashTarget = null;
             RayCast2D = null;
-            Angle = null;
+            SetAngle(null);
+        }
+
+        public void SetAngle(float? angle)
+        {
+            Angle = angle;
+            OnSetAngle();
+        }
+
+        private void OnSetAngle()
+        {
+            if (Angle.HasValue)
+            {
+                if (Angle.Value < 2 && Angle.Value > 1)
+                {
+                    DashTargetDirection = DashTargetDirection.Left;
+                    if (Angle.Value < 1.5)
+                        DashTargetDiagonalDirection = DashTargetDirection.LeftUp;
+                    else
+                        DashTargetDiagonalDirection = DashTargetDirection.LeftDown;
+                }
+                else if (Angle.Value > -2 && Angle.Value < -1)
+                {
+                    DashTargetDirection = DashTargetDirection.Right;
+                    if (Angle.Value > 1.5 || Angle.Value > -1.5)
+                        DashTargetDiagonalDirection = DashTargetDirection.RightUp;
+                    else
+                        DashTargetDiagonalDirection = DashTargetDirection.RightDown;
+                }
+                else if (Angle.Value > -1 && Angle.Value < 1)
+                {
+                    DashTargetDirection = DashTargetDirection.Up;
+                    if (Angle.Value < 0)
+                        DashTargetDiagonalDirection = DashTargetDirection.UpRight;
+                    else
+                        DashTargetDiagonalDirection = DashTargetDirection.UpLeft;
+                }
+                else if (Angle.Value > 2 || Angle.Value < -2)
+                {
+                    DashTargetDirection = DashTargetDirection.Down;
+                    if (Angle.Value < -2)
+                        DashTargetDiagonalDirection = DashTargetDirection.DownRight;
+                    else
+                        DashTargetDiagonalDirection = DashTargetDirection.DownLeft;
+                }
+            }
+            else
+            {
+                DashTargetDiagonalDirection = DashTargetDirection.None;
+                DashTargetDirection = DashTargetDirection.None;
+            }
         }
     }
 
@@ -48,11 +79,15 @@ namespace Wuzzle.character
         None,
         Left,
         LeftUp,
+        LeftDown,
         Up,
         UpRight,
+        UpLeft,
         Right,
         RightDown,
+        RightUp,
         Down,
-        DownLeft
+        DownLeft,
+        DownRight,
     }
 }
