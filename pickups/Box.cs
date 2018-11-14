@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Box : StaticBody2D, Wuzzle.Pickups.Interfaces.IDashTarget
+public class Box : StaticBody2D, Wuzzle.character.Interfaces.IDashTarget
 {
     private bool Taken = false;
     private AnimationPlayer AnimationPlayer;

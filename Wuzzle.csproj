@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AnswerDialog.cs" />
     <Compile Include="character\DashTargetItem.cs" />
+    <Compile Include="character\Interfaces\IDashTarget.cs" />
     <Compile Include="character\Player.cs" />
     <Compile Include="GameBar.cs" />
     <Compile Include="GoalItem.cs" />
@@ -66,7 +67,6 @@
     <Compile Include="Models\Hint.cs" />
     <Compile Include="pickups\Box.cs" />
     <Compile Include="pickups\coin.cs" />
-    <Compile Include="pickups\Interfaces\IDashTarget.cs" />
     <Compile Include="PlayerStatus.cs" />
     <Compile Include="Profil\Models\Profil.cs" />
     <Compile Include="Profil\ProfilManager.cs" />

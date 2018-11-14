@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Wuzzle.character;
-using Wuzzle.Pickups.Interfaces;
+using Wuzzle.character.Interfaces;
 
 public class Player : KinematicBody2D
 {
