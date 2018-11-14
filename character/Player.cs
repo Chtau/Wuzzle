@@ -215,6 +215,9 @@ public class Player : KinematicBody2D
             if (coll is IDashTarget targetCollider && target.DashTargetId == targetCollider.DashTargetId)
             {
                 AddDebugLine(target.DashTargetId, ray.Position, ray.CastTo);
+            } else
+            {
+                RemoveDebugLine(target.DashTargetId);
             }
         }
     }
