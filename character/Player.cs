@@ -148,7 +148,6 @@ public class Player : KinematicBody2D
         }
     }
 
-    System.Collections.Generic.Dictionary<Guid, DashTargetItem> DashTargets = new System.Collections.Generic.Dictionary<Guid, DashTargetItem>();
     public void OnDashTargetBodyEnter(object body)
     {
         if (body is IDashTarget target)
@@ -176,7 +175,7 @@ public class Player : KinematicBody2D
         return null;
     }
 
-    private void OnAddDashTarget(IDashTarget target)
+    /*private void OnAddDashTarget(IDashTarget target)
     {
         DashTargets.Add(target.DashTargetId, new DashTargetItem
         {
@@ -194,9 +193,9 @@ public class Player : KinematicBody2D
             DashTargets.Remove(target.DashTargetId);
         }
         RemoveDebugLine(target.DashTargetId);
-    }
+    }*/
 
-    private RayCast2D GetDashRayCast2D(IDashTarget target)
+    /*private RayCast2D GetDashRayCast2D(IDashTarget target)
     {
         var ray = new RayCast2D();
         ray.SetCollisionMaskBit(0, true);
@@ -207,7 +206,7 @@ public class Player : KinematicBody2D
 
         DashArea2D.AddChild(ray);
         return ray;
-    }
+    }*/
 
     private void CheckDashTargets(DashTargetItem item)
     {
