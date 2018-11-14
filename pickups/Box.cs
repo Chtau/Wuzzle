@@ -8,6 +8,7 @@ public class Box : StaticBody2D, Wuzzle.Pickups.Interfaces.IDashTarget
     private CollisionShape2D CollisionShape2D;
 
     public Guid DashTargetId { get; }
+    public Node2D Instance { get => this; }
 
     public Box()
     {
