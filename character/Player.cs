@@ -160,8 +160,7 @@ public class Player : KinematicBody2D
     {
         if (body is IDashTarget target)
         {
-            DashTargets.Add(target.DashTargetId, new Tuple<IDashTarget, RayCast2D>(target, GetDashRayCast2D(target)));
-            //GD.Print("Ray:" + DashTargets[target.DashTargetId].Item2.CollisionMask + " Target:" + ((Box)body).CollisionMask);
+            OnAddDashTarget(target);
         }
     }
 
@@ -169,15 +168,29 @@ public class Player : KinematicBody2D
     {
         if (body is IDashTarget target)
         {
-            if (DashTargets.ContainsKey(target.DashTargetId))
-                DashTargets.Remove(target.DashTargetId);
-            RemoveDebugLine(target.DashTargetId);
+            OnRemoveDashTarget(target);
         }
     }
 
     public void AddDash()
     {
         OnDashCountChange(1);
+    }
+
+    private void OnAddDashTarget(IDashTarget target)
+    {
+        DashTargets.Add(target.DashTargetId, new Tuple<IDashTarget, RayCast2D>(target, GetDashRayCast2D(target)));
+    }
+
+    private void OnRemoveDashTarget(IDashTarget target)
+    {
+        if (DashTargets.ContainsKey(target.DashTargetId))
+        {
+            DashArea2D.RemoveChild(DashTargets[target.DashTargetId].Item2);
+            DashTargets[target.DashTargetId].Item2.QueueFree();
+            DashTargets.Remove(target.DashTargetId);
+        }
+        RemoveDebugLine(target.DashTargetId);
     }
 
     private RayCast2D GetDashRayCast2D(IDashTarget target)
@@ -237,6 +250,7 @@ public class Player : KinematicBody2D
         if (DebugLines.ContainsKey(id))
         {
             this.RemoveChild(DebugLines[id]);
+            DebugLines[id].QueueFree();
             DebugLines.Remove(id);
         }
     }
