@@ -7,6 +7,17 @@ using Wuzzle.character.Interfaces;
 
 public class Player : KinematicBody2D
 {
+    public enum PlayerPhysicsState
+    {
+        Idle,
+        Move,
+        Dash,
+        Jump,
+        Fall,
+    }
+
+    private PlayerPhysicsState State = PlayerPhysicsState.Idle;
+
     Vector2 GravityVector = new Vector2(0, 900);
     Vector2 FloorNormal = new Vector2(0, -1);
     const float SlopeSlideStop = 25.0f;
@@ -87,7 +98,7 @@ public class Player : KinematicBody2D
         {
             moveUp = true;
         }*/
-        Dash.ProcessPhysic(delta, ref linear_vel, ref target_speed);
+        State = Dash.ProcessPhysic(State, delta, ref linear_vel, ref target_speed);
         // Dash
         /*if (target_speed != 0 && dash_time > DashTimeout && AllowDashMove && Input.IsActionJustPressed("move_dash"))
         {
@@ -98,10 +109,9 @@ public class Player : KinematicBody2D
             dash_time = 0;
         }*/
 
-        target_speed *= WalkSpeed;
-
+        /*target_speed *= WalkSpeed;
         linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed, 0.1f);
-
+        */
         // Jumping
         if (on_floor && Input.IsActionJustPressed("jump"))
         {

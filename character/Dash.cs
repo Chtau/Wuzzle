@@ -17,7 +17,9 @@ namespace Wuzzle.character
         private const int moveDashSpeed = 250;
         private const float dashTimeout = 1f;
         private float dashTime = 0f;
-        private int moveDashCount = 0;
+        private int moveDashCount = 5;
+        
+        public DashTargetItem DashTarget { get; private set; }
 
         public Dash(Node parent, KinematicBody2D player)
         {
@@ -45,7 +47,7 @@ namespace Wuzzle.character
             RemoveDebugLine(target.DashTargetId);
         }
 
-        public void ProcessPhysic(float delta,ref Vector2 linear_vel, ref int target_speed)
+        public Player.PlayerPhysicsState ProcessPhysic(Player.PlayerPhysicsState previusState, float delta,ref Vector2 linear_vel, ref int target_speed)
         {
             dashTime += delta;
 
@@ -54,7 +56,6 @@ namespace Wuzzle.character
                 CheckDashTargets(item.Value);
             }
 
-            //var target_speed = 0;
             bool moveLeft = false, moveRight = false, moveDown = false, moveUp = false;
             if (Input.IsActionPressed("move_left"))
             {
@@ -75,12 +76,19 @@ namespace Wuzzle.character
 
             if (AllowDashMove && Input.IsActionJustPressed("move_dash"))
             {
-                var target = OnGetDashTarget(moveLeft, moveRight, moveUp, moveDown);
+                var target = OnDashTarget(moveLeft, moveRight, moveUp, moveDown);
+                if (target != null)
+                {
+                    DashTarget = target;
+                    GD.Print("Target:" + target.DashTarget.DashTargetId.ToString());
+                }
                 GD.Print(dashTime);
                 target_speed *= moveDashSpeed;
                 OnDashCountChange(-1);
                 dashTime = 0;
+                return Player.PlayerPhysicsState.Dash;
             }
+            return previusState;
         }
 
         public void AddDash()
@@ -88,9 +96,44 @@ namespace Wuzzle.character
             OnDashCountChange(1);
         }
 
-        private DashTargetItem OnGetDashTarget(bool left, bool right, bool up, bool down)
+        private DashTargetItem OnDashTarget(bool left, bool right, bool up, bool down)
         {
+            DashTargetItem target = null;
+            if (left)
+            {
+                dashTargets.Where(x => x.Value.DashTargetDirection == DashTargetDirection.Left);
+                GD.Print("NO");
+                return null;
+            } else if (right)
+            {
+                if (down)
+                {
+                    target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.RightDown);
+                    if (target != null)
+                        return target;
+                    // reverse check for down & right
+                    target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.DownRight);
+                    if (target != null)
+                        return target;
+                }
+                // for right, right and up or when no result from right and down
+                target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.RightUp);
+                if (target != null)
+                    return target;
 
+                target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.UpRight);
+                return target;
+            } else
+            {
+                return null;
+            }
+        }
+
+        private DashTargetItem OnDashTargetItemFromDirection(IEnumerable<KeyValuePair<Guid, DashTargetItem>> items, DashTargetDirection direction)
+        {
+            var target = items.FirstOrDefault(x => x.Value.DashTargetDiagonalDirection == direction);
+            if (target.Value != null)
+                return target.Value;
             return null;
         }
 
