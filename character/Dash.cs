@@ -45,7 +45,7 @@ namespace Wuzzle.character
             RemoveDebugLine(target.DashTargetId);
         }
 
-        public void ProcessPhysic(float delta)
+        public void ProcessPhysic(float delta,ref Vector2 linear_vel, ref int target_speed)
         {
             dashTime += delta;
 
@@ -54,7 +54,7 @@ namespace Wuzzle.character
                 CheckDashTargets(item.Value);
             }
 
-            var target_speed = 0;
+            //var target_speed = 0;
             bool moveLeft = false, moveRight = false, moveDown = false, moveUp = false;
             if (Input.IsActionPressed("move_left"))
             {

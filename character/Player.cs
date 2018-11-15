@@ -55,7 +55,9 @@ public class Player : KinematicBody2D
 
         on_floor = onair_time < MinOnAirTime;
 
-        Dash.ProcessPhysic(delta);
+        var target_speed = 0;
+
+        
         /*foreach (var item in DashTargets)
         {
             CheckDashTargets(item.Value);
@@ -65,7 +67,7 @@ public class Player : KinematicBody2D
 
         // CONTROL
         // Horizontal Movement
-        var target_speed = 0;
+        
         //bool moveLeft = false, moveRight = false, moveDown = false, moveUp = false;
         if (Input.IsActionPressed("move_left"))
         {
@@ -85,7 +87,7 @@ public class Player : KinematicBody2D
         {
             moveUp = true;
         }*/
-
+        Dash.ProcessPhysic(delta, ref linear_vel, ref target_speed);
         // Dash
         /*if (target_speed != 0 && dash_time > DashTimeout && AllowDashMove && Input.IsActionJustPressed("move_dash"))
         {
