@@ -13,7 +13,7 @@ public class Player : KinematicBody2D
     const float MinOnAirTime = 0.1f;
     const int WalkSpeed = 250; // pixels/sec
     const int JumpSpeed = 480;
-    const int MoveBurstSpeed = 250;
+    //const int MoveBurstSpeed = 250;
     const int SidingChangeSpeed = 10;
 
     Vector2 linear_vel = new Vector2();
@@ -25,9 +25,10 @@ public class Player : KinematicBody2D
     AnimationPlayer AnimationPlayer;
     Vector2 velocity;
 
-    const float DashTimeout = 1f;
+    private Dash Dash;
+    /*const float DashTimeout = 1f;
     float dash_time = 0f;
-    private int MoveDashCount = 0;
+    private int MoveDashCount = 0;*/
     Area2D DashArea2D;
 
     public override void _Ready()
@@ -35,61 +36,65 @@ public class Player : KinematicBody2D
         Sprite = (Sprite)GetNode("Sprite");
         AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
         DashArea2D = (Area2D)GetNode("DashArea2D");
+        Dash = new Dash(DashArea2D, this);
     }
 
     public override void _PhysicsProcess(float delta)
     {
         onair_time += delta;
-        dash_time += delta;
-
-        foreach (var item in DashTargets)
-        {
-            CheckDashTargets(item.Value);
-        }
+        //dash_time += delta;
 
         // MOVEMENT
         // Apply Gravity
         linear_vel += delta * GravityVector;
         // Move and Slide
         linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
-	    // Detect Floor
-	    if (IsOnFloor())
+        // Detect Floor
+        if (IsOnFloor())
             onair_time = 0;
 
         on_floor = onair_time < MinOnAirTime;
 
+        Dash.ProcessPhysic(delta);
+        /*foreach (var item in DashTargets)
+        {
+            CheckDashTargets(item.Value);
+        }*/
+
+        
+
         // CONTROL
         // Horizontal Movement
         var target_speed = 0;
-        bool moveLeft = false, moveRight = false, moveDown = false, moveUp = false;
+        //bool moveLeft = false, moveRight = false, moveDown = false, moveUp = false;
         if (Input.IsActionPressed("move_left"))
         {
             target_speed += -1;
-            moveLeft = true;
+            //moveLeft = true;
         }
         if (Input.IsActionPressed("move_right"))
         {
             target_speed += 1;
-            moveRight = true;
+            //moveRight = true;
         }
-        if (Input.IsActionPressed("move_down"))
+        /*if (Input.IsActionPressed("move_down"))
         {
             moveDown = true;
         }
         if (Input.IsActionPressed("move_up"))
         {
             moveUp = true;
-        }
+        }*/
 
         // Dash
-        if (target_speed != 0 && dash_time > DashTimeout && AllowDashMove && Input.IsActionJustPressed("move_dash"))
+        /*if (target_speed != 0 && dash_time > DashTimeout && AllowDashMove && Input.IsActionJustPressed("move_dash"))
         {
             var target = OnGetDashTarget(moveLeft, moveRight, moveUp, moveDown);
             GD.Print(dash_time);
             target_speed *= MoveBurstSpeed;
             OnDashCountChange(-1);
             dash_time = 0;
-        }
+        }*/
 
         target_speed *= WalkSpeed;
 
@@ -143,7 +148,7 @@ public class Player : KinematicBody2D
         {
             if (box.PlayerInteract())
             {
-                AddDash();
+                Dash.AddDash();
             }
         }
     }
@@ -152,7 +157,8 @@ public class Player : KinematicBody2D
     {
         if (body is IDashTarget target)
         {
-            OnAddDashTarget(target);
+            Dash.AddDashTarget(target);
+            //OnAddDashTarget(target);
         }
     }
 
@@ -160,20 +166,21 @@ public class Player : KinematicBody2D
     {
         if (body is IDashTarget target)
         {
-            OnRemoveDashTarget(target);
+            Dash.RemoveDashTarget(target);
+            //OnRemoveDashTarget(target);
         }
     }
 
-    public void AddDash()
+    /*public void AddDash()
     {
         OnDashCountChange(1);
-    }
+    }*/
 
-    private DashTargetItem OnGetDashTarget(bool left, bool right, bool up, bool down)
+    /*private DashTargetItem OnGetDashTarget(bool left, bool right, bool up, bool down)
     {
 
         return null;
-    }
+    }*/
 
     /*private void OnAddDashTarget(IDashTarget target)
     {
@@ -208,7 +215,7 @@ public class Player : KinematicBody2D
         return ray;
     }*/
 
-    private void CheckDashTargets(DashTargetItem item)
+    /*private void CheckDashTargets(DashTargetItem item)
     {
         item.RayCast2D.CastTo = item.DashTarget.Instance.GlobalPosition - this.GlobalPosition;
         if (item.RayCast2D.IsColliding())
@@ -227,9 +234,9 @@ public class Player : KinematicBody2D
                 RemoveDebugLine(item.DashTarget.DashTargetId);
             }
         }
-    }
+    }*/
 
-    System.Collections.Generic.Dictionary<Guid, Line2D> DebugLines = new System.Collections.Generic.Dictionary<Guid, Line2D>();
+    /*System.Collections.Generic.Dictionary<Guid, Line2D> DebugLines = new System.Collections.Generic.Dictionary<Guid, Line2D>();
     private void AddDebugLine(Guid id, Vector2 pos, Vector2 tar)
     {
         if (DebugLines.ContainsKey(id))
@@ -263,9 +270,9 @@ public class Player : KinematicBody2D
             DebugLines[id].QueueFree();
             DebugLines.Remove(id);
         }
-    }
+    }*/
 
-    private void OnDashCountChange(int changeValue)
+    /*private void OnDashCountChange(int changeValue)
     {
         MoveDashCount += changeValue;
         GD.Print("Current Burst:" + MoveDashCount);
@@ -279,5 +286,5 @@ public class Player : KinematicBody2D
                 return true;
             return false;
         }
-    }
+    }*/
 }
