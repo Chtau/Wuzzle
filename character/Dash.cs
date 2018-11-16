@@ -14,7 +14,7 @@ namespace Wuzzle.character
         private readonly Node _parent;
         private readonly KinematicBody2D _player;
 
-        private const int moveDashSpeed = 250;
+        private const int moveDashSpeed = 25000;
         private const float dashTimeout = 1f;
         private float dashTime = 0f;
         private int moveDashCount = 5;
@@ -47,7 +47,7 @@ namespace Wuzzle.character
             RemoveDebugLine(target.DashTargetId);
         }
 
-        public Player.PlayerPhysicsState ProcessPhysic(Player.PlayerPhysicsState previusState, float delta,ref Vector2 linear_vel, ref int target_speed)
+        public Player.PlayerPhysicsState ProcessPhysic(Player.PlayerPhysicsState previusState, float delta, ref Vector2 linear_vel)
         {
             dashTime += delta;
 
@@ -76,16 +76,41 @@ namespace Wuzzle.character
 
             if (AllowDashMove && Input.IsActionJustPressed("move_dash"))
             {
-                var target = OnDashTarget(moveLeft, moveRight, moveUp, moveDown);
-                if (target != null)
+                if (DashTarget == null)
                 {
-                    DashTarget = target;
-                    GD.Print("Target:" + target.DashTarget.DashTargetId.ToString());
+                    // perform a new Dash action
+                    var target = OnDashTarget(moveLeft, moveRight, moveUp, moveDown);
+                    if (target != null)
+                    {
+                        DashTarget = target;
+                        GD.Print("Target:" + target.DashTarget.DashTargetId.ToString());
+                    }
+                    GD.Print(dashTime);
+                    OnDashCountChange(-1);
+                    dashTime = 0;
+
+                    var target_speed_x = 0;
+                    if (moveRight)
+                        target_speed_x += 1;
+                    else if (moveLeft)
+                        target_speed_x += -1;
+                    target_speed_x *= moveDashSpeed;
+                    linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed_x, 0.1f);
+
+                } else
+                {
+                    // check if we have our target reached 
+                    // if so we return the previous state or idle if the previous was Dash
+                    var difVector = DashTarget.RayCast2D.CastTo - linear_vel;
+                    if (difVector.y < 10 && difVector.x < 10)
+                    {
+                        GD.Print("Target reached at:" + difVector);
+                        if (previusState == Player.PlayerPhysicsState.Dash)
+                            return Player.PlayerPhysicsState.Idle;
+                        return previusState;
+                    }
+                    //linear_vel = DashTarget.RayCast2D.CastTo;
                 }
-                GD.Print(dashTime);
-                target_speed *= moveDashSpeed;
-                OnDashCountChange(-1);
-                dashTime = 0;
                 return Player.PlayerPhysicsState.Dash;
             }
             return previusState;
