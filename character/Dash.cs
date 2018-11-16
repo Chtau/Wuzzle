@@ -18,6 +18,7 @@ namespace Wuzzle.character
         private const float dashTimeout = 1f;
         private float dashTime = 0f;
         private int moveDashCount = 5;
+        private Guid currentDashTargetId = Guid.Empty;
         
         public DashTargetItem DashTarget { get; private set; }
 
@@ -74,7 +75,7 @@ namespace Wuzzle.character
                 moveUp = true;
             }
 
-            if (DashTarget != null)
+            if (currentDashTargetId != Guid.Empty)
             {
                 // check if we have our target reached 
                 // if so we return the previous state or idle if the previous was Dash
@@ -83,18 +84,20 @@ namespace Wuzzle.character
                 GD.Print("Player vector:" + linear_vel);
                 var difVector = DashTarget.RayCast2D.CastTo + linear_vel;
                 GD.Print("Difference vector:" + difVector);*/
-
-                if (DashTarget.RayCast2D.CastTo.x < 1)
+                GD.Print("Target Id to check:" + currentDashTargetId);
+                GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
+                if (DashTarget.RayCast2D.CastTo.x < 45)
                 {
+                    // reset
+                    currentDashTargetId = Guid.Empty;
+                    DashTarget.RayCast2D.Enabled = false;
+
                     GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
                     GD.Print("Player vector:" + linear_vel);
                     var difVector = DashTarget.RayCast2D.CastTo + linear_vel;
                     GD.Print("Difference vector:" + difVector);
                     GD.Print("Target reached at!!!");
                     linear_vel.x = 0;
-
-                    // reset
-                    DashTarget = null;
 
                     if (previusState == Player.PlayerPhysicsState.Dash)
                         return Player.PlayerPhysicsState.Idle;
@@ -104,7 +107,7 @@ namespace Wuzzle.character
 
             if (AllowDashMove && Input.IsActionJustPressed("move_dash"))
             {
-                if (DashTarget == null)
+                if (currentDashTargetId == Guid.Empty)
                 {
                     // perform a new Dash action
                     var target = OnDashTarget(moveLeft, moveRight, moveUp, moveDown);
@@ -116,6 +119,7 @@ namespace Wuzzle.character
                         return previusState;
                     }
                     DashTarget = target;
+                    currentDashTargetId = target.DashTarget.DashTargetId;
                     GD.Print("Target:" + target.DashTarget.DashTargetId.ToString());
                     GD.Print(dashTime);
                     OnDashCountChange(-1);
