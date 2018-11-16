@@ -57,11 +57,11 @@ position = Vector2( -153, 237 )
 
 [node name="Box5" parent="Boxes" index="1" instance=ExtResource( 4 )]
 
-position = Vector2( 138, 114 )
+position = Vector2( 917, -130 )
 
 [node name="Box2" parent="Boxes" index="2" instance=ExtResource( 4 )]
 
-position = Vector2( 309, 237 )
+position = Vector2( 199, 192 )
 
 [node name="Box3" parent="Boxes" index="3" instance=ExtResource( 4 )]
 

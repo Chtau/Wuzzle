@@ -74,17 +74,49 @@ namespace Wuzzle.character
                 moveUp = true;
             }
 
+            if (DashTarget != null)
+            {
+                // check if we have our target reached 
+                // if so we return the previous state or idle if the previous was Dash
+
+                /*GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
+                GD.Print("Player vector:" + linear_vel);
+                var difVector = DashTarget.RayCast2D.CastTo + linear_vel;
+                GD.Print("Difference vector:" + difVector);*/
+
+                if (DashTarget.RayCast2D.CastTo.x < 1)
+                {
+                    GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
+                    GD.Print("Player vector:" + linear_vel);
+                    var difVector = DashTarget.RayCast2D.CastTo + linear_vel;
+                    GD.Print("Difference vector:" + difVector);
+                    GD.Print("Target reached at!!!");
+                    linear_vel.x = 0;
+
+                    // reset
+                    DashTarget = null;
+
+                    if (previusState == Player.PlayerPhysicsState.Dash)
+                        return Player.PlayerPhysicsState.Idle;
+                    return previusState;
+                }
+            }
+
             if (AllowDashMove && Input.IsActionJustPressed("move_dash"))
             {
                 if (DashTarget == null)
                 {
                     // perform a new Dash action
                     var target = OnDashTarget(moveLeft, moveRight, moveUp, moveDown);
-                    if (target != null)
+                    if (target == null)
                     {
-                        DashTarget = target;
-                        GD.Print("Target:" + target.DashTarget.DashTargetId.ToString());
+                        GD.Print("NO TARGET IN RANGE");
+                        if (previusState == Player.PlayerPhysicsState.Dash)
+                            return Player.PlayerPhysicsState.Idle;
+                        return previusState;
                     }
+                    DashTarget = target;
+                    GD.Print("Target:" + target.DashTarget.DashTargetId.ToString());
                     GD.Print(dashTime);
                     OnDashCountChange(-1);
                     dashTime = 0;
@@ -95,18 +127,18 @@ namespace Wuzzle.character
                     else if (moveLeft)
                         target_speed_x += -1;
                     target_speed_x *= moveDashSpeed;
+                    linear_vel.x = DashTarget.DashTarget.Instance.GlobalPosition.x;
                     //linear_vel.x = Mathf.Lerp(linear_vel.x, 250, .1f);
-                    linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed_x, 0.1f);
+                    //linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed_x, 0.1f);
                     //linear_vel = linear_vel + DashTarget.RayCast2D.CastTo;
-                    GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
+                    /*GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
                     GD.Print("Player vector:" + linear_vel);
                     var difVector = DashTarget.RayCast2D.CastTo - linear_vel;
-                    GD.Print("Difference vector:" + difVector);
+                    GD.Print("Difference vector:" + difVector);*/
 
                 } else
                 {
-                    // check if we have our target reached 
-                    // if so we return the previous state or idle if the previous was Dash
+                    
 
                     GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
                     GD.Print("Player vector:" + linear_vel);
