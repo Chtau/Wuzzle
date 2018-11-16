@@ -95,13 +95,24 @@ namespace Wuzzle.character
                     else if (moveLeft)
                         target_speed_x += -1;
                     target_speed_x *= moveDashSpeed;
+                    //linear_vel.x = Mathf.Lerp(linear_vel.x, 250, .1f);
                     linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed_x, 0.1f);
+                    //linear_vel = linear_vel + DashTarget.RayCast2D.CastTo;
+                    GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
+                    GD.Print("Player vector:" + linear_vel);
+                    var difVector = DashTarget.RayCast2D.CastTo - linear_vel;
+                    GD.Print("Difference vector:" + difVector);
 
                 } else
                 {
                     // check if we have our target reached 
                     // if so we return the previous state or idle if the previous was Dash
+
+                    GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
+                    GD.Print("Player vector:" + linear_vel);
                     var difVector = DashTarget.RayCast2D.CastTo - linear_vel;
+                    GD.Print("Difference vector:" + difVector);
+                    
                     if (difVector.y < 10 && difVector.x < 10)
                     {
                         GD.Print("Target reached at:" + difVector);
