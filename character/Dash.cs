@@ -134,8 +134,8 @@ namespace Wuzzle.character
                     linear_vel = linear_vel.Rotated(rotation);
                     DashTarget.RayCast2D.Enabled = false;
                     var cap = (CapsuleShape2D)playerCollision.Shape;
-                    cap.Height = 5f;
-                    cap.Radius = 5f;
+                    cap.Height = 1f;
+                    cap.Radius = 1f;
                 }
                 return Player.PlayerPhysicsState.Dash;
             }
