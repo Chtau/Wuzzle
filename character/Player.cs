@@ -46,25 +46,77 @@ public class Player : KinematicBody2D
         Dash = new Dash(DashArea2D, this);
     }
 
+    Vector2 vect = new Vector2();
+
     public override void _PhysicsProcess(float delta)
     {
         onair_time += delta;
 
+        State = Dash.ProcessPhysic(State, delta, ref linear_vel, IsOnWall(), IsOnFloor());
+
         // MOVEMENT
         // Apply Gravity
-        linear_vel += delta * GravityVector;
+        /*if (State != PlayerPhysicsState.Dash)
+        {
+            linear_vel += delta * GravityVector;
+        }*/
+        if (State != PlayerPhysicsState.Dash)
+        {
+            linear_vel += delta * GravityVector;
+            linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
+        } else
+        {
+            linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
+
+            /*linear_vel.x = Mathf.Lerp(0, linear_vel.x, 1f);
+            linear_vel.y = Mathf.Lerp(0, -80, 1f);
+            MoveLocalX(linear_vel.x * delta);
+            MoveLocalY(linear_vel.y * delta);*/
+            /*vect = new Vector2(500, 0).Rotated(GetGlobalMousePosition().Angle());
+            GD.Print("Move to: " + vect);
+            var collision = MoveAndCollide(vect * delta);
+            if (collision != null)
+            {
+                GD.Print("Collision");
+                vect.Slide(collision.Normal);
+                //linear_vel = linear_vel.Bounce(collision.Normal);
+            }*/
+        }
         // Move and Slide
-        linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
+        //linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
+        //MoveAndCollide(linear_vel);
+        
         // Detect Floor
         if (IsOnFloor())
-            onair_time = 0;
+        {
+            if (State != PlayerPhysicsState.Dash)
+                onair_time = 0;
+            else
+            {
+                GD.Print("Hit Floor");
+                linear_vel.x = 0;
+                linear_vel.y = 0;
+            }
+        }
+
+        if (IsOnWall())
+        {
+            if (State == PlayerPhysicsState.Dash)
+            {
+                GD.Print("Hit Wall");
+                linear_vel.x = 0;
+                linear_vel.y = 0;
+            }
+        }
+
+        State = Dash.ProcessPhysic(State, delta, ref linear_vel, IsOnWall(), IsOnFloor());
 
         on_floor = onair_time < MinOnAirTime;
 
         var target_speed = 0;
 
 
-        State = Dash.ProcessPhysic(State, delta, ref linear_vel);
+        //State = Dash.ProcessPhysic(State, delta, ref linear_vel);
         if (State != PlayerPhysicsState.Dash && false)
         {
             // CONTROL

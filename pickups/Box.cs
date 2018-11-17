@@ -28,8 +28,13 @@ public class Box : StaticBody2D, Wuzzle.character.Interfaces.IDashTarget
             return false;
         Taken = true;
         CollisionShape2D.Disabled = true;
-        CollisionShape2D.QueueFree();
+        //CollisionShape2D.QueueFree();
         AnimationPlayer.Play("taken");
         return true;
+    }
+
+    public void BeforeDashTo()
+    {
+        CollisionShape2D.Disabled = true;
     }
 }
