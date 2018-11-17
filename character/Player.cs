@@ -34,16 +34,18 @@ public class Player : KinematicBody2D
     Sprite Sprite;
     AnimationPlayer AnimationPlayer;
     Vector2 velocity;
+    CollisionShape2D CollisionShape2D;
 
     private Dash Dash;
     Area2D DashArea2D;
 
     public override void _Ready()
     {
+        CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
         Sprite = (Sprite)GetNode("Sprite");
         AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
         DashArea2D = (Area2D)GetNode("DashArea2D");
-        Dash = new Dash(DashArea2D, this);
+        Dash = new Dash(DashArea2D, this, CollisionShape2D);
     }
 
     Vector2 vect = new Vector2();

@@ -13,6 +13,7 @@ namespace Wuzzle.character
         private System.Collections.Generic.Dictionary<Guid, DashTargetItem> dashTargets = new System.Collections.Generic.Dictionary<Guid, DashTargetItem>();
         private readonly Node _parent;
         private readonly KinematicBody2D _player;
+        private CollisionShape2D playerCollision;
 
         private const int moveDashSpeed = 25000;
         private const float dashTimeout = 1f;
@@ -23,10 +24,11 @@ namespace Wuzzle.character
         
         public DashTargetItem DashTarget { get; private set; }
 
-        public Dash(Node parent, KinematicBody2D player)
+        public Dash(Node parent, KinematicBody2D player, CollisionShape2D playerCollision)
         {
             _parent = parent;
             _player = player;
+            this.playerCollision = playerCollision;
         }
 
         public void AddDashTarget(IDashTarget target)
@@ -78,45 +80,18 @@ namespace Wuzzle.character
 
             if (currentDashTargetId != Guid.Empty)
             {
-                // check if we have our target reached 
-                // if so we return the previous state or idle if the previous was Dash
-
-                /*GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
-                GD.Print("Player vector:" + linear_vel);
-                var difVector = DashTarget.RayCast2D.CastTo + linear_vel;
-                GD.Print("Difference vector:" + difVector);*/
-                //GD.Print("Target Id to check:" + currentDashTargetId);
-                //GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
-
-                //GD.Print("Target GlobalPosition vector:" + DashTarget.DashTarget.Instance.GlobalPosition);
-                //GD.Print("Target GlobalPosition vector:" + DashTarget.DashTarget.Instance.Position);
-
-                //GD.Print("Distance: " + (DashTarget.DashTarget.Instance.GlobalPosition.x - linear_vel.x));
-                //GD.Print("Distance: " + (DashTarget.DashTarget.Instance.GlobalPosition.x - linear_vel.x));
-                //if ((DashTarget.DashTarget.Instance.GlobalPosition.x - linear_vel.x) < 10)
-                //if (DashTarget.RayCast2D.CastTo.x < 45)
-
-
-                /*GD.Print("linear_vel vector:" + linear_vel);
-                var difVector = DashTarget.RayCast2D.CastTo + linear_vel;
-                GD.Print("Difference vector:" + difVector);*/
-
-                //if (DashTarget.RayCast2D.CastTo.x < 1)
                 var dif = ToTarget - _player.GlobalPosition;
-                //GD.Print("Difference vector:" + dif);
-                if (dif.x < 1 || hitFloor || hitWall)
+                if (dif.x < 5 || hitFloor || hitWall)
                 {
                     // reset
                     currentDashTargetId = Guid.Empty;
-                    //DashTarget.RayCast2D.Enabled = false;
-
-                    //GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
-                    //GD.Print("Player vector:" + linear_vel);
-                    //var difVector = DashTarget.RayCast2D.CastTo + linear_vel;
-                    //GD.Print("Difference vector:" + difVector);
                     GD.Print("Target reached at!!!");
                     linear_vel.x = 0;
                     linear_vel.y = 0;
+
+                    var cap = (CapsuleShape2D)playerCollision.Shape;
+                    cap.Height = 44.4f;
+                    cap.Radius = 10f;
 
                     if (previusState == Player.PlayerPhysicsState.Dash)
                         return Player.PlayerPhysicsState.Idle;
@@ -150,50 +125,17 @@ namespace Wuzzle.character
                     else if (moveLeft)
                         target_speed_x += -1;
                     target_speed_x *= moveDashSpeed;
-                    //linear_vel.x = DashTarget.DashTarget.Instance.GlobalPosition.x;
-                    //linear_vel.x = DashTarget.DashTarget.Instance.GlobalPosition.x;
-                    //linear_vel.y = -1 * DashTarget.DashTarget.Instance.GlobalPosition.y;
-                    //linear_vel.y += -1100;// Mathf.Lerp(linear_vel.y, -70, 1f);
-                    
-                    //linear_vel.y -= 50;
 
-                    //linear_vel.x = Mathf.Lerp(linear_vel.x, 250, .1f);
                     linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed_x, 0.1f);
-                    //linear_vel = linear_vel.Rotated(DashTarget.Angle.Value);
-                    
 
-                    //linear_vel = linear_vel + DashTarget.RayCast2D.CastTo;
-                    /*GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
-                    GD.Print("Player vector:" + linear_vel);
-                    var difVector = DashTarget.RayCast2D.CastTo - linear_vel;
-                    GD.Print("Difference vector:" + difVector);*/
-
-                    GD.Print("linear_vel vector:" + linear_vel);
                     ToTarget = DashTarget.RayCast2D.CastTo - _player.GlobalPosition;
+                    
+                    float rotation = DashTarget.RayCast2D.CastTo.Angle();
+                    linear_vel = linear_vel.Rotated(rotation);
                     DashTarget.RayCast2D.Enabled = false;
-                    //DashTarget.DashTarget.BeforeDashTo();
-                    GD.Print("Difference vector:" + ToTarget);
-
-                    linear_vel = linear_vel.Rotated(DashTarget.RayCast2D.CastTo.Angle());
-                    //linear_vel = ToTarget;
-
-                } else
-                {
-                    
-
-                    GD.Print("Target vector:" + DashTarget.RayCast2D.CastTo);
-                    GD.Print("Player vector:" + linear_vel);
-                    var difVector = DashTarget.RayCast2D.CastTo - linear_vel;
-                    GD.Print("Difference vector:" + difVector);
-                    
-                    if (difVector.y < 10 && difVector.x < 10)
-                    {
-                        GD.Print("Target reached at:" + difVector);
-                        if (previusState == Player.PlayerPhysicsState.Dash)
-                            return Player.PlayerPhysicsState.Idle;
-                        return previusState;
-                    }
-                    //linear_vel = DashTarget.RayCast2D.CastTo;
+                    var cap = (CapsuleShape2D)playerCollision.Shape;
+                    cap.Height = 5f;
+                    cap.Radius = 5f;
                 }
                 return Player.PlayerPhysicsState.Dash;
             }
