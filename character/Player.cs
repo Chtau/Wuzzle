@@ -58,10 +58,7 @@ public class Player : KinematicBody2D
 
         // MOVEMENT
         // Apply Gravity
-        /*if (State != PlayerPhysicsState.Dash)
-        {
-            linear_vel += delta * GravityVector;
-        }*/
+        // Move and Slide
         if (State != PlayerPhysicsState.Dash)
         {
             linear_vel += delta * GravityVector;
@@ -69,24 +66,7 @@ public class Player : KinematicBody2D
         } else
         {
             linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
-
-            /*linear_vel.x = Mathf.Lerp(0, linear_vel.x, 1f);
-            linear_vel.y = Mathf.Lerp(0, -80, 1f);
-            MoveLocalX(linear_vel.x * delta);
-            MoveLocalY(linear_vel.y * delta);*/
-            /*vect = new Vector2(500, 0).Rotated(GetGlobalMousePosition().Angle());
-            GD.Print("Move to: " + vect);
-            var collision = MoveAndCollide(vect * delta);
-            if (collision != null)
-            {
-                GD.Print("Collision");
-                vect.Slide(collision.Normal);
-                //linear_vel = linear_vel.Bounce(collision.Normal);
-            }*/
         }
-        // Move and Slide
-        //linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
-        //MoveAndCollide(linear_vel);
         
         // Detect Floor
         if (IsOnFloor())
@@ -119,7 +99,7 @@ public class Player : KinematicBody2D
 
 
         //State = Dash.ProcessPhysic(State, delta, ref linear_vel);
-        if (State != PlayerPhysicsState.Dash && false)
+        if (State != PlayerPhysicsState.Dash)
         {
             // CONTROL
             // Horizontal Movement
