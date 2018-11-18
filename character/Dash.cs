@@ -81,7 +81,7 @@ namespace Wuzzle.character
             if (currentDashTargetId != Guid.Empty)
             {
                 var dif = ToTarget - _player.GlobalPosition;
-                if (dif.x < 5 || hitFloor || hitWall)
+                if ((dif.x < 5 && dif.y < 5)|| hitFloor || hitWall)
                 {
                     // reset
                     currentDashTargetId = Guid.Empty;
@@ -152,32 +152,77 @@ namespace Wuzzle.character
             DashTargetItem target = null;
             if (left)
             {
-                dashTargets.Where(x => x.Value.DashTargetDirection == DashTargetDirection.Left);
-                GD.Print("NO");
-                return null;
-            } else if (right)
+                if (down)
+                {
+                    target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.LeftDown);
+                    if (target != null)
+                        return target;
+                    target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.DownLeft);
+                    if (target != null)
+                        return target;
+                }
+                target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.LeftUp);
+                if (target != null)
+                    return target;
+
+                target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.UpLeft);
+                return target;
+            }
+            if (right)
             {
                 if (down)
                 {
                     target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.RightDown);
                     if (target != null)
                         return target;
-                    // reverse check for down & right
                     target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.DownRight);
                     if (target != null)
                         return target;
                 }
-                // for right, right and up or when no result from right and down
                 target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.RightUp);
                 if (target != null)
                     return target;
 
                 target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.UpRight);
                 return target;
-            } else
-            {
-                return null;
             }
+            if (up)
+            {
+                if (left)
+                {
+                    target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.UpLeft);
+                    if (target != null)
+                        return target;
+                    target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.LeftUp);
+                    if (target != null)
+                        return target;
+                }
+                target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.UpRight);
+                if (target != null)
+                    return target;
+
+                target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.RightUp);
+                return target;
+            }
+            if (down)
+            {
+                if (left)
+                {
+                    target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.DownLeft);
+                    if (target != null)
+                        return target;
+                    target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.LeftDown);
+                    if (target != null)
+                        return target;
+                }
+                target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.DownRight);
+                if (target != null)
+                    return target;
+
+                target = OnDashTargetItemFromDirection(dashTargets, DashTargetDirection.RightDown);
+                return target;
+            }
+            return null;
         }
 
         private DashTargetItem OnDashTargetItemFromDirection(IEnumerable<KeyValuePair<Guid, DashTargetItem>> items, DashTargetDirection direction)
