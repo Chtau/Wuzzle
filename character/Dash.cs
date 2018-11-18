@@ -20,7 +20,7 @@ namespace Wuzzle.character
         private float dashTime = 0f;
         private int moveDashCount = 1000;
         private Guid currentDashTargetId = Guid.Empty;
-        private Vector2 ToTarget = new Vector2();
+        //private Vector2 ToTarget = new Vector2();
         
         public DashTargetItem DashTarget { get; private set; }
 
@@ -51,7 +51,7 @@ namespace Wuzzle.character
             RemoveDebugLine(target.DashTargetId);
         }
 
-        public Player.PlayerPhysicsState ProcessPhysic(Player.PlayerPhysicsState previusState, float delta, ref Vector2 linear_vel, bool hitWall, bool hitFloor)
+        public Player.PlayerPhysicsState ProcessPhysic(Player.PlayerPhysicsState previusState, float delta, ref Vector2 linear_vel)
         {
             dashTime += delta;
 
@@ -80,11 +80,7 @@ namespace Wuzzle.character
 
             if (currentDashTargetId != Guid.Empty)
             {
-                var dif = ToTarget - _player.GlobalPosition;
-                GD.Print("Difference: " + dif);
-                
-                // (dif.x < 5 && dif.y < 5 && dif.x > -5 && dif.y > -5)
-                if ((dif.x < 5 && dif.x > -5) || DashTarget.DashTarget.Reached()) // || hitFloor || hitWall
+                if (DashTarget.DashTarget.Reached())
                 { 
                     // reset
                     currentDashTargetId = Guid.Empty;
@@ -131,8 +127,6 @@ namespace Wuzzle.character
 
                     linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed_x, 0.1f);
 
-                    ToTarget = DashTarget.RayCast2D.CastTo;// - _player.GlobalPosition;
-                    
                     float rotation = DashTarget.RayCast2D.CastTo.Angle();
                     linear_vel = linear_vel.Rotated(rotation);
                     DashTarget.RayCast2D.Enabled = false;

@@ -54,8 +54,7 @@ public class Player : KinematicBody2D
     {
         onair_time += delta;
 
-        State = Dash.ProcessPhysic(State, delta, ref linear_vel, false, false);
-        //State = Dash.ProcessPhysic(State, delta, ref linear_vel, IsOnWall(), IsOnFloor());
+        State = Dash.ProcessPhysic(State, delta, ref linear_vel);
 
         // MOVEMENT
         // Apply Gravity
@@ -66,21 +65,7 @@ public class Player : KinematicBody2D
             linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
         } else
         {
-            //linear_vel += delta * GravityVector;
             linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
-
-            /*linear_vel = linear_vel * delta;
-            var collsion = MoveAndCollide(linear_vel);
-            if (collsion != null)
-            {
-                GD.Print("Collision: " + collsion);
-                linear_vel = linear_vel.Slide(collsion.Normal);
-                if (collsion.Collider.HasMethod("Hit"))
-                {
-                    
-                    //collsion.Collider.Hit();
-                }
-            }*/
         }
         
         // Detect Floor
@@ -93,6 +78,7 @@ public class Player : KinematicBody2D
                 GD.Print("Hit Floor");
                 linear_vel.x = 0;
                 linear_vel.y = 0;
+                State = PlayerPhysicsState.Idle;
             }
         }
 
@@ -103,6 +89,7 @@ public class Player : KinematicBody2D
                 GD.Print("Hit Wall");
                 linear_vel.x = 0;
                 linear_vel.y = 0;
+                State = PlayerPhysicsState.Idle;
             }
         }
 
