@@ -101,17 +101,13 @@ public class Player : KinematicBody2D
         {
             // CONTROL
             // Horizontal Movement
-
-            //bool moveLeft = false, moveRight = false, moveDown = false, moveUp = false;
             if (Input.IsActionPressed("move_left"))
             {
                 target_speed += -1;
-                //moveLeft = true;
             }
             if (Input.IsActionPressed("move_right"))
             {
                 target_speed += 1;
-                //moveRight = true;
             }
 
             target_speed *= WalkSpeed;
