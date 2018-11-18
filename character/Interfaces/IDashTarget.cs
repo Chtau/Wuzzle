@@ -12,5 +12,6 @@ namespace Wuzzle.character.Interfaces
         Guid DashTargetId { get; }
         Node2D Instance { get; }
         void BeforeDashTo();
+        bool Reached();
     }
 }

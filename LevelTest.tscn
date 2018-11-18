@@ -65,10 +65,10 @@ position = Vector2( 223, 183 )
 
 [node name="Box3" parent="Boxes" index="3" instance=ExtResource( 4 )]
 
-position = Vector2( 1256, 188 )
+position = Vector2( 869, 130 )
 
 [node name="Box4" parent="Boxes" index="4" instance=ExtResource( 4 )]
 
-position = Vector2( 1175, 186 )
+position = Vector2( -164, 83 )
 
 

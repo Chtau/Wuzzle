@@ -37,4 +37,9 @@ public class Box : StaticBody2D, Wuzzle.character.Interfaces.IDashTarget
     {
         CollisionShape2D.Disabled = true;
     }
+
+    public bool Reached()
+    {
+        return Taken;
+    }
 }

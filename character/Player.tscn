@@ -81,7 +81,7 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=5]
 
 custom_solver_bias = 0.0
-radius = 38.8188
+radius = 6.3883
 
 [sub_resource type="RectangleShape2D" id=6]
 

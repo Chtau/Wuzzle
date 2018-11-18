@@ -81,8 +81,11 @@ namespace Wuzzle.character
             if (currentDashTargetId != Guid.Empty)
             {
                 var dif = ToTarget - _player.GlobalPosition;
-                if ((dif.x < 5 && dif.y < 5)|| hitFloor || hitWall)
-                {
+                GD.Print("Difference: " + dif);
+                
+                // (dif.x < 5 && dif.y < 5 && dif.x > -5 && dif.y > -5)
+                if ((dif.x < 5 && dif.x > -5) || DashTarget.DashTarget.Reached()) // || hitFloor || hitWall
+                { 
                     // reset
                     currentDashTargetId = Guid.Empty;
                     GD.Print("Target reached at!!!");
@@ -123,12 +126,12 @@ namespace Wuzzle.character
                     if (moveRight)
                         target_speed_x += 1;
                     else if (moveLeft)
-                        target_speed_x += -1;
+                        target_speed_x += 1;
                     target_speed_x *= moveDashSpeed;
 
                     linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed_x, 0.1f);
 
-                    ToTarget = DashTarget.RayCast2D.CastTo - _player.GlobalPosition;
+                    ToTarget = DashTarget.RayCast2D.CastTo;// - _player.GlobalPosition;
                     
                     float rotation = DashTarget.RayCast2D.CastTo.Angle();
                     linear_vel = linear_vel.Rotated(rotation);

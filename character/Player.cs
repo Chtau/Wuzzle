@@ -54,7 +54,8 @@ public class Player : KinematicBody2D
     {
         onair_time += delta;
 
-        State = Dash.ProcessPhysic(State, delta, ref linear_vel, IsOnWall(), IsOnFloor());
+        State = Dash.ProcessPhysic(State, delta, ref linear_vel, false, false);
+        //State = Dash.ProcessPhysic(State, delta, ref linear_vel, IsOnWall(), IsOnFloor());
 
         // MOVEMENT
         // Apply Gravity
@@ -65,7 +66,21 @@ public class Player : KinematicBody2D
             linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
         } else
         {
+            //linear_vel += delta * GravityVector;
             linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
+
+            /*linear_vel = linear_vel * delta;
+            var collsion = MoveAndCollide(linear_vel);
+            if (collsion != null)
+            {
+                GD.Print("Collision: " + collsion);
+                linear_vel = linear_vel.Slide(collsion.Normal);
+                if (collsion.Collider.HasMethod("Hit"))
+                {
+                    
+                    //collsion.Collider.Hit();
+                }
+            }*/
         }
         
         // Detect Floor
