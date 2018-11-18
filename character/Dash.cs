@@ -14,6 +14,7 @@ namespace Wuzzle.character
         private readonly Node _parent;
         private readonly KinematicBody2D _player;
         private CollisionShape2D playerCollision;
+        private CapsuleShape2D playerCollisionShape;
 
         private const int moveDashSpeed = 25000;
         private const float dashTimeout = 1f;
@@ -29,6 +30,7 @@ namespace Wuzzle.character
             _parent = parent;
             _player = player;
             this.playerCollision = playerCollision;
+            playerCollisionShape = (CapsuleShape2D)playerCollision.Shape;
         }
 
         public void AddDashTarget(IDashTarget target)
@@ -88,9 +90,8 @@ namespace Wuzzle.character
                     linear_vel.x = 0;
                     linear_vel.y = 0;
 
-                    var cap = (CapsuleShape2D)playerCollision.Shape;
-                    cap.Height = 44.4f;
-                    cap.Radius = 10f;
+                    playerCollisionShape.Height = 44.4f;
+                    playerCollisionShape.Radius = 10f;
 
                     if (previusState == Player.PlayerPhysicsState.Dash)
                         return Player.PlayerPhysicsState.Idle;
@@ -130,9 +131,8 @@ namespace Wuzzle.character
                     float rotation = DashTarget.RayCast2D.CastTo.Angle();
                     linear_vel = linear_vel.Rotated(rotation);
                     DashTarget.RayCast2D.Enabled = false;
-                    var cap = (CapsuleShape2D)playerCollision.Shape;
-                    cap.Height = 1f;
-                    cap.Radius = 1f;
+                    playerCollisionShape.Height = 1f;
+                    playerCollisionShape.Radius = 1f;
                 }
                 return Player.PlayerPhysicsState.Dash;
             }

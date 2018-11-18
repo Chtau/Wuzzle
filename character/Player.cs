@@ -93,14 +93,10 @@ public class Player : KinematicBody2D
             }
         }
 
-        State = Dash.ProcessPhysic(State, delta, ref linear_vel, IsOnWall(), IsOnFloor());
-
         on_floor = onair_time < MinOnAirTime;
 
         var target_speed = 0;
 
-
-        //State = Dash.ProcessPhysic(State, delta, ref linear_vel);
         if (State != PlayerPhysicsState.Dash)
         {
             // CONTROL
