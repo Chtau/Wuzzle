@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://character/art/Wuzzel1/Ear2 Merged.PNG" type="Texture" id=1]
+[ext_resource path="res://character/art/Wuzzel1/Foot2 Merged.PNG" type="Texture" id=2]
+[ext_resource path="res://character/art/Wuzzel1/Body Merged.PNG" type="Texture" id=3]
+[ext_resource path="res://character/art/Wuzzel1/Hand1 Merged.PNG" type="Texture" id=4]
+[ext_resource path="res://character/art/Wuzzel1/Mouth Merged.PNG" type="Texture" id=5]
+[ext_resource path="res://character/art/Wuzzel1/Eye1/Layer 7.PNG" type="Texture" id=6]
+[ext_resource path="res://character/art/Wuzzel1/Eye1/Layer 9.PNG" type="Texture" id=7]
+[ext_resource path="res://character/art/Wuzzel1/Eye2/Layer 7.PNG" type="Texture" id=8]
+[ext_resource path="res://character/art/Wuzzel1/Eye2/Layer 9.PNG" type="Texture" id=9]
+[ext_resource path="res://character/art/Wuzzel1/Ear1 Merged.PNG" type="Texture" id=10]
+[ext_resource path="res://character/art/Wuzzel1/Foot1 Merged.PNG" type="Texture" id=11]
+
+[node name="Node" type="Node" index="0"]
+
+[node name="Ear2" type="Sprite" parent="." index="0"]
+
+position = Vector2( -20.7637, -89.7452 )
+rotation = -0.00445468
+texture = ExtResource( 1 )
+offset = Vector2( 1.53486, -12.6474 )
+
+[node name="Foot2" type="Sprite" parent="." index="1"]
+
+position = Vector2( 21.7466, 68.9201 )
+rotation = -0.00708468
+texture = ExtResource( 2 )
+offset = Vector2( -0.860563, 14.4264 )
+
+[node name="Body" type="Sprite" parent="." index="2"]
+
+position = Vector2( -1, 1 )
+texture = ExtResource( 3 )
+
+[node name="Hand" type="Sprite" parent="Body" index="0"]
+
+position = Vector2( -34.1334, -16.5018 )
+texture = ExtResource( 4 )
+offset = Vector2( 0.00537109, 27.8778 )
+
+[node name="Mouth" type="Sprite" parent="Body" index="1"]
+
+position = Vector2( 53.8864, 17.9621 )
+texture = ExtResource( 5 )
+
+[node name="Eye1" type="Sprite" parent="Body" index="2"]
+
+position = Vector2( 27.5419, -28.1406 )
+texture = ExtResource( 6 )
+
+[node name="Eye1Pub" type="Sprite" parent="Body/Eye1" index="0"]
+
+position = Vector2( -0.796204, -12.771 )
+texture = ExtResource( 7 )
+
+[node name="Eye2" type="Sprite" parent="Body" index="3"]
+
+position = Vector2( 67.6572, -28.1406 )
+texture = ExtResource( 8 )
+
+[node name="Eye2Pub" type="Sprite" parent="Body/Eye2" index="0"]
+
+position = Vector2( -1.19751, -11.376 )
+texture = ExtResource( 9 )
+
+[node name="Ear1" type="Sprite" parent="." index="3"]
+
+position = Vector2( -50.7005, -79.5667 )
+rotation = 0.00330752
+texture = ExtResource( 10 )
+offset = Vector2( -1.51718, -4.65724 )
+
+[node name="Foot1" type="Sprite" parent="." index="4"]
+
+position = Vector2( -11.7826, 66.5251 )
+rotation = -0.00792174
+texture = ExtResource( 11 )
+offset = Vector2( -11.5681, 16.6993 )
+
+
