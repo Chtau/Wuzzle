@@ -102,11 +102,11 @@ public class Player : KinematicBody2D
         {
             // CONTROL
             // Horizontal Movement
-            if (Input.IsActionPressed("move_left"))
+            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
             {
                 target_speed += -1;
             }
-            if (Input.IsActionPressed("move_right"))
+            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Right))
             {
                 target_speed += 1;
             }
@@ -115,7 +115,7 @@ public class Player : KinematicBody2D
             linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed, 0.1f);
 
             // Jumping
-            if (on_floor && Input.IsActionJustPressed("jump"))
+            if (on_floor && Input.IsActionJustPressed(GlobalValues.Keymap_Move_Jump))
             {
                 linear_vel.y = -JumpSpeed;
                 //$sound_jump.play()
@@ -139,9 +139,9 @@ public class Player : KinematicBody2D
             
         } else
         {
-            if (Input.IsActionPressed("move_left") && !Input.IsActionPressed("move_right"))
+            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left) && !Input.IsActionPressed(GlobalValues.Keymap_Move_Right))
                 characterSprite.Scale = new Vector2(-.25f, characterSprite.Scale.y);
-            if (Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_left"))
+            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Right) && !Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
                 characterSprite.Scale = new Vector2(.25f, characterSprite.Scale.y);
             if (linear_vel.y < 0)
                 new_anim = "jump";

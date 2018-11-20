@@ -8,6 +8,8 @@ public class Question : CanvasLayer
     private List<QuestionItem> questions;
     private List<Guid> alreadyAnswered;
 
+    private List<QuestionItem> questionQueue = new List<QuestionItem>();
+
     public override void _Ready()
     {
         InitQuestions();
@@ -19,6 +21,12 @@ public class Question : CanvasLayer
 //        // Update game logic here.
 //        
 //    }
+
+    public void ShowQuestion()
+    {
+        questionQueue.Add(QuestionItem());
+
+    }
 
     private void InitQuestions()
     {

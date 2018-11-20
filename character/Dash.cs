@@ -63,19 +63,19 @@ namespace Wuzzle.character
             }
 
             bool moveLeft = false, moveRight = false, moveDown = false, moveUp = false;
-            if (Input.IsActionPressed("move_left"))
+            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
             {
                 moveLeft = true;
             }
-            if (Input.IsActionPressed("move_right"))
+            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Right))
             {
                 moveRight = true;
             }
-            if (Input.IsActionPressed("move_down"))
+            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Down))
             {
                 moveDown = true;
             }
-            if (Input.IsActionPressed("move_up"))
+            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Up))
             {
                 moveUp = true;
             }
@@ -98,7 +98,7 @@ namespace Wuzzle.character
                 }
             }
 
-            if (AllowDashMove && Input.IsActionJustPressed("move_dash"))
+            if (AllowDashMove && Input.IsActionJustPressed(GlobalValues.Keymap_Move_Dash))
             {
                 if (currentDashTargetId == Guid.Empty)
                 {

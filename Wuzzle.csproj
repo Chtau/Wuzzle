@@ -55,6 +55,7 @@
     <Compile Include="character\Interfaces\IDashTarget.cs" />
     <Compile Include="character\Player.cs" />
     <Compile Include="GameBar.cs" />
+    <Compile Include="GlobalValues.cs" />
     <Compile Include="GoalItem.cs" />
     <Compile Include="GoalManager.cs" />
     <Compile Include="Goals.cs" />
