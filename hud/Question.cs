@@ -16,6 +16,7 @@ public class Question : CanvasLayer
     private Answer answer3;
     private Panel panel;
     private ProgressBar questionTimeout;
+    private Label questionTimeoutText;
 
     private System.Timers.Timer timer = new System.Timers.Timer();
     private TimeSpan questionTime = new TimeSpan();
@@ -30,6 +31,7 @@ public class Question : CanvasLayer
         answer2 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox2");
         answer3 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox3");
         questionTimeout = (ProgressBar)GetNode("Panel/VBoxContainer/HBoxContainer/ProgressBar");
+        questionTimeoutText = (Label)GetNode("Panel/VBoxContainer/HBoxContainer/Label");
 
         timer.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timer.Elapsed += Timer_Elapsed;
@@ -39,15 +41,17 @@ public class Question : CanvasLayer
 
     private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
     {
-        if (questionTime.TotalSeconds >= 29)
+        if (questionTime.TotalSeconds >= (questionQueue.First().Seconds - 1))
         {
             questionTimeout.Value = 0;
+            questionTimeoutText.Text = questionTimeout.Value + " seconds left";
             ResetQuestion();
             GD.Print("Question countdown run out");
         } else
         {
             questionTime = questionTime.Add(new TimeSpan(0, 0, 1));
             questionTimeout.Value -= 1;
+            questionTimeoutText.Text = questionTimeout.Value + " seconds left";
             GD.Print("Question countdown:" + questionTime.TotalSeconds);
         }
     }
@@ -81,8 +85,9 @@ public class Question : CanvasLayer
         answer2.SetAnswer(item.Answer[1].Item1, item.Answer[1].Item2);
         answer3.SetAnswer(item.Answer[2].Item1, item.Answer[2].Item2);
 
-        questionTimeout.MaxValue = 30;
-        questionTimeout.Value = 30;
+        questionTimeout.MaxValue = item.Seconds;
+        questionTimeout.Value = item.Seconds;
+        questionTimeoutText.Text = questionTimeout.Value + " seconds left";
 
         panel.Visible = true;
         timer.Start();
