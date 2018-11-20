@@ -34,8 +34,6 @@ public class Player : KinematicBody2D
     bool on_floor = false;
     string anim = "";
 
-    //Sprite Sprite;
-    //AnimationPlayer AnimationPlayer;
     Vector2 velocity;
     CollisionShape2D CollisionShape2D;
 
@@ -47,18 +45,8 @@ public class Player : KinematicBody2D
         characterSprite = (Sprite)GetNode("Sprite2");
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
-        //Sprite = (Sprite)GetNode("Sprite");
-        //AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
         DashArea2D = (Area2D)GetNode("DashArea2D");
         Dash = new Dash(DashArea2D, this, CollisionShape2D);
-
-        //var charNode = Character.Instance();
-        //AddChild(charNode);
-        //characterSprite = (Sprite)charNode.GetChild(0);
-        //characterSprite.Centered = true;
-
-        //characterAnimationPlayer = (AnimationPlayer)characterSprite.FindNode("AnimationPlayer");
-        
     }
 
     Vector2 vect = new Vector2();
@@ -142,26 +130,21 @@ public class Player : KinematicBody2D
             if (linear_vel.x < -SidingChangeSpeed)
             {
                 characterSprite.Scale = new Vector2(-0.25f, characterSprite.Scale.y);
-                //Sprite.Scale = new Vector2(-1, Sprite.Scale.y);
-                new_anim = "move";// "run";
+                new_anim = "move";
             } else if (linear_vel.x > SidingChangeSpeed)
             {
                 characterSprite.Scale = new Vector2(.25f, characterSprite.Scale.y);
-                //Sprite.Scale = new Vector2(1, Sprite.Scale.y);
-                new_anim = "move";// "run";
+                new_anim = "move";
             }
             
         } else
         {
             if (Input.IsActionPressed("move_left") && !Input.IsActionPressed("move_right"))
                 characterSprite.Scale = new Vector2(-.25f, characterSprite.Scale.y);
-            //Sprite.Scale = new Vector2(-1, Sprite.Scale.y);
             if (Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_left"))
                 characterSprite.Scale = new Vector2(.25f, characterSprite.Scale.y);
-            //Sprite.Scale = new Vector2(1, Sprite.Scale.y);
             if (linear_vel.y < 0)
                 new_anim = "jump";
-            //new_anim = "jumping";
             else
                 new_anim = "fall";
         }
