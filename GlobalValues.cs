@@ -12,4 +12,8 @@ public static class GlobalValues
     public const string Keymap_Move_Down = "move_up";
     public const string Keymap_Move_Dash = "move_dash";
     public const string Keymap_Move_Jump = "jump";
+
+    public const string Keymap_Answer_1 = "answer1";
+    public const string Keymap_Answer_2 = "answer2";
+    public const string Keymap_Answer_3 = "answer3";
 }
