@@ -1,17 +1,16 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Question : CanvasLayer
 {
-    // Member variables here, example:
-    // private int a = 2;
-    // private string b = "textvar";
+    private List<QuestionItem> questions;
+    private List<Guid> alreadyAnswered;
 
     public override void _Ready()
     {
-        // Called every time the node is added to the scene.
-        // Initialization here
-        
+        InitQuestions();
     }
 
 //    public override void _Process(float delta)
@@ -20,4 +19,31 @@ public class Question : CanvasLayer
 //        // Update game logic here.
 //        
 //    }
+
+    private void InitQuestions()
+    {
+        questions = new List<QuestionItem>();
+        alreadyAnswered = new List<Guid>();
+    }
+
+    private QuestionItem QuestionItem()
+    {
+        QuestionItem current = null;
+        var q = questions.Where(x => !alreadyAnswered.Contains(x.Id));
+        if (q.Count() == 0)
+        {
+            // reset the already answered questions
+            alreadyAnswered.Clear();
+        }
+        if (q.Count() == 1)
+        {
+            current = q.First();
+            
+        } else
+        {
+            current = q.ElementAt(SharedFunctions.Instance.RandRand(0, q.Count()));
+        }
+        alreadyAnswered.Add(current.Id);
+        return current;
+    }
 }

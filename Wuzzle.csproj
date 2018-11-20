@@ -67,12 +67,14 @@
     <Compile Include="Models\AnswerResult.cs" />
     <Compile Include="Models\Goal.cs" />
     <Compile Include="Models\Hint.cs" />
+    <Compile Include="Models\QuestionItem.cs" />
     <Compile Include="pickups\Box.cs" />
     <Compile Include="pickups\coin.cs" />
     <Compile Include="PlayerStatus.cs" />
     <Compile Include="Profil\Models\Profil.cs" />
     <Compile Include="Profil\ProfilManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SharedFunctions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
