@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://character/Player.cs" type="Script" id=1]
-[ext_resource path="res://character/WuzzelCharacter.tscn" type="PackedScene" id=2]
-[ext_resource path="res://character/CharacterSprite.tscn" type="PackedScene" id=3]
-[ext_resource path="res://character/art/robot_demo.png" type="Texture" id=4]
+[ext_resource path="res://character/CharacterSprite.tscn" type="PackedScene" id=2]
+[ext_resource path="res://character/art/robot_demo.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 
@@ -102,16 +101,15 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Material", "Pickable", "Transform", "Visibility", "Z Index", "collision" ]
-Character = ExtResource( 2 )
 
-[node name="Sprite2" parent="." index="0" instance=ExtResource( 3 )]
+[node name="Sprite2" parent="." index="0" instance=ExtResource( 2 )]
 
 scale = Vector2( 0.25, 0.25 )
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
 visible = false
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 vframes = 2
 hframes = 16
 frame = 21

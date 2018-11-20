@@ -163,7 +163,7 @@ public class Player : KinematicBody2D
                 new_anim = "jump";
             //new_anim = "jumping";
             else
-                new_anim = "falling";
+                new_anim = "fall";
         }
 
         if (new_anim != anim)
