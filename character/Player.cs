@@ -16,8 +16,6 @@ public class Player : KinematicBody2D
         Fall,
     }
 
-    [Export]
-    public PackedScene Character;
     private Sprite characterSprite;
     private AnimationPlayer characterAnimationPlayer;
 
