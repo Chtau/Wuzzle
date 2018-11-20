@@ -15,6 +15,7 @@ public class Question : CanvasLayer
     private Answer answer2;
     private Answer answer3;
     private Panel panel;
+    private ProgressBar questionTimeout;
 
     private System.Timers.Timer timer = new System.Timers.Timer();
     private TimeSpan questionTime = new TimeSpan();
@@ -28,6 +29,7 @@ public class Question : CanvasLayer
         answer1 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox");
         answer2 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox2");
         answer3 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox3");
+        questionTimeout = (ProgressBar)GetNode("Panel/VBoxContainer/HBoxContainer/ProgressBar");
 
         timer.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timer.Elapsed += Timer_Elapsed;
@@ -39,11 +41,13 @@ public class Question : CanvasLayer
     {
         if (questionTime.TotalSeconds >= 29)
         {
+            questionTimeout.Value = 0;
             ResetQuestion();
             GD.Print("Question countdown run out");
         } else
         {
             questionTime = questionTime.Add(new TimeSpan(0, 0, 1));
+            questionTimeout.Value -= 1;
             GD.Print("Question countdown:" + questionTime.TotalSeconds);
         }
     }
@@ -76,6 +80,9 @@ public class Question : CanvasLayer
         answer1.SetAnswer(item.Answer[0].Item1, item.Answer[0].Item2);
         answer2.SetAnswer(item.Answer[1].Item1, item.Answer[1].Item2);
         answer3.SetAnswer(item.Answer[2].Item1, item.Answer[2].Item2);
+
+        questionTimeout.MaxValue = 30;
+        questionTimeout.Value = 30;
 
         panel.Visible = true;
         timer.Start();
