@@ -16,15 +16,36 @@ public class Question : CanvasLayer
     private Answer answer3;
     private Panel panel;
 
+    private System.Timers.Timer timer = new System.Timers.Timer();
+    private TimeSpan questionTime = new TimeSpan();
+
     public override void _Ready()
     {
         panel = (Panel)GetNode("Panel");
         panel.Visible = false;
         InitQuestions();
-        question = (Label)GetNode("/Panel/VBoxContainer/QuestionBox/QuestionLabel");
-        answer1 = (Answer)GetNode("/Panel/VBoxContainer/AnswerBox");
-        answer2 = (Answer)GetNode("/Panel/VBoxContainer/AnswerBox2");
-        answer3 = (Answer)GetNode("/Panel/VBoxContainer/AnswerBox3");
+        question = (Label)GetNode("Panel/VBoxContainer/QuestionBox/QuestionLabel");
+        answer1 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox");
+        answer2 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox2");
+        answer3 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox3");
+
+        timer.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
+        timer.Elapsed += Timer_Elapsed;
+
+        ShowQuestion();
+    }
+
+    private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    {
+        if (questionTime.TotalSeconds >= 29)
+        {
+            ResetQuestion();
+            GD.Print("Question countdown run out");
+        } else
+        {
+            questionTime = questionTime.Add(new TimeSpan(0, 0, 1));
+            GD.Print("Question countdown:" + questionTime.TotalSeconds);
+        }
     }
 
     public override void _Process(float delta)
@@ -57,6 +78,7 @@ public class Question : CanvasLayer
         answer3.SetAnswer(item.Answer[2].Item1, item.Answer[2].Item2);
 
         panel.Visible = true;
+        timer.Start();
     }
 
     private void HandleAnswer(bool result)
@@ -68,12 +90,18 @@ public class Question : CanvasLayer
 
         if (questionQueue.Count > 0)
         {
-            // show the next question
+            // show the next question form the queue
             ShowQuestion();
         } else
         {
-            panel.Visible = false;
+            ResetQuestion();
         }
+    }
+
+    private void ResetQuestion()
+    {
+        panel.Visible = false;
+        timer.Stop();
     }
 
     private void InitQuestions()
