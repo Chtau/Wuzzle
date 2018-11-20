@@ -675,7 +675,7 @@ tracks/17/keys = {
 "values": [ 0.0 ]
 }
 
-[node name="Sprite" type="Sprite"]
+[node name="Sprite" type="Sprite" index="0"]
 
 _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
