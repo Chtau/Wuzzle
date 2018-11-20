@@ -16,6 +16,11 @@ public class Player : KinematicBody2D
         Fall,
     }
 
+    [Export]
+    public PackedScene Character;
+    private Sprite characterSprite;
+    private AnimationPlayer characterAnimationPlayer;
+
     private PlayerPhysicsState State = PlayerPhysicsState.Idle;
 
     Vector2 GravityVector = new Vector2(0, 900);
@@ -31,8 +36,8 @@ public class Player : KinematicBody2D
     bool on_floor = false;
     string anim = "";
 
-    Sprite Sprite;
-    AnimationPlayer AnimationPlayer;
+    //Sprite Sprite;
+    //AnimationPlayer AnimationPlayer;
     Vector2 velocity;
     CollisionShape2D CollisionShape2D;
 
@@ -41,11 +46,21 @@ public class Player : KinematicBody2D
 
     public override void _Ready()
     {
+        characterSprite = (Sprite)GetNode("Sprite2");
+        characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
-        Sprite = (Sprite)GetNode("Sprite");
-        AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
+        //Sprite = (Sprite)GetNode("Sprite");
+        //AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
         DashArea2D = (Area2D)GetNode("DashArea2D");
         Dash = new Dash(DashArea2D, this, CollisionShape2D);
+
+        //var charNode = Character.Instance();
+        //AddChild(charNode);
+        //characterSprite = (Sprite)charNode.GetChild(0);
+        //characterSprite.Centered = true;
+
+        //characterAnimationPlayer = (AnimationPlayer)characterSprite.FindNode("AnimationPlayer");
+        
     }
 
     Vector2 vect = new Vector2();
@@ -128,22 +143,27 @@ public class Player : KinematicBody2D
         {
             if (linear_vel.x < -SidingChangeSpeed)
             {
-                Sprite.Scale = new Vector2(-1, Sprite.Scale.y);
-                new_anim = "run";
+                characterSprite.Scale = new Vector2(-0.25f, characterSprite.Scale.y);
+                //Sprite.Scale = new Vector2(-1, Sprite.Scale.y);
+                new_anim = "move";// "run";
             } else if (linear_vel.x > SidingChangeSpeed)
             {
-                Sprite.Scale = new Vector2(1, Sprite.Scale.y);
-                new_anim = "run";
+                characterSprite.Scale = new Vector2(.25f, characterSprite.Scale.y);
+                //Sprite.Scale = new Vector2(1, Sprite.Scale.y);
+                new_anim = "move";// "run";
             }
             
         } else
         {
             if (Input.IsActionPressed("move_left") && !Input.IsActionPressed("move_right"))
-                Sprite.Scale = new Vector2(-1, Sprite.Scale.y);
+                characterSprite.Scale = new Vector2(-.25f, characterSprite.Scale.y);
+            //Sprite.Scale = new Vector2(-1, Sprite.Scale.y);
             if (Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_left"))
-                Sprite.Scale = new Vector2(1, Sprite.Scale.y);
+                characterSprite.Scale = new Vector2(.25f, characterSprite.Scale.y);
+            //Sprite.Scale = new Vector2(1, Sprite.Scale.y);
             if (linear_vel.y < 0)
-                new_anim = "jumping";
+                new_anim = "jump";
+            //new_anim = "jumping";
             else
                 new_anim = "falling";
         }
@@ -151,7 +171,7 @@ public class Player : KinematicBody2D
         if (new_anim != anim)
         {
             anim = new_anim;
-            AnimationPlayer.Play(anim);
+            characterAnimationPlayer.Play(anim);
         }
     }
 
