@@ -47,13 +47,39 @@ public class Enemy : KinematicBody2D
 
             linear_velocity = MoveAndSlide(linear_velocity, FloorNormal);
 
-            if (!(detectFloorLeft.IsColliding() && detectWallLeft.IsColliding()))
+            //object collider = null;
+            if (DetectCollide(detectWallLeft))
+            {
+                /*var collider = detectWallLeft.GetCollider() as Area2D;
+                //GD.Print(collider.GetType());
+                if (collider == null)// || typeof(Area2D) != collider.GetType()
+                {
+                    GD.Print("Collide" + detectWallLeft.GetCollider());
+                    direction = 1.0f;
+                }*/
+                GD.Print("Collide Left: " + detectWallLeft.GetCollider());
+                direction = 1.0f;
+            }
+            else if (DetectCollide(detectWallRight))
+            {
+                /*var collider = detectWallRight.GetCollider() as Area2D;
+                //GD.Print(collider.GetType());
+                if (collider == null)
+                {
+                    GD.Print("Collide" + detectWallRight.GetCollider());
+                    direction = -1.0f;
+                }*/
+                GD.Print("Collide Right: " + detectWallRight.GetCollider());
+                direction = -1.0f;
+            }
+
+            /*if (!(detectFloorLeft.IsColliding() && detectWallLeft.IsColliding()))
             {
                 direction = 1.0f;
             } else if (!(detectFloorRight.IsColliding() && detectWallRight.IsColliding()))
-                direction = -1.0f;
+                direction = -1.0f;*/
 
-            GD.Print("Walk:" + direction);
+            //GD.Print("Walk:" + direction);
 
             sprite.Scale = new Vector2(direction, 1.0f);
 
@@ -67,6 +93,23 @@ public class Enemy : KinematicBody2D
             anim = newAnim;
             animationPlayer.Play(anim);
         }
+    }
+
+    private bool DetectCollide(RayCast2D rayCast2D)
+    {
+        if (rayCast2D.IsColliding())
+        {
+            var collider = detectWallRight.GetCollider() as Area2D;
+            if (collider == null)
+                return true;
+            else
+            {
+                GD.Print("Type: " + collider.GetType().ToString());
+                return false;
+            }
+        }
+
+        return false;
     }
 
     public void Hit()
