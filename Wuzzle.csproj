@@ -60,6 +60,7 @@
     <Compile Include="character\DashTargetItem.cs" />
     <Compile Include="character\Interfaces\IDashTarget.cs" />
     <Compile Include="character\Player.cs" />
+    <Compile Include="enemy\Enemy.cs" />
     <Compile Include="FileHandler.cs" />
     <Compile Include="GameBar.cs" />
     <Compile Include="GlobalValues.cs" />
