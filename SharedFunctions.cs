@@ -14,6 +14,7 @@ public sealed class SharedFunctions
 
     private SharedFunctions()
     {
+        FileHandler = new FileHandler();
     }
 
     public static SharedFunctions Instance { get; } = new SharedFunctions();
@@ -30,4 +31,6 @@ public sealed class SharedFunctions
     {
         return (float)(rand.NextDouble() * (max - min) + min);
     }
+
+    public FileHandler FileHandler { get; set; }
 }
