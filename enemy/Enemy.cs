@@ -47,15 +47,17 @@ public class Enemy : KinematicBody2D
 
             linear_velocity = MoveAndSlide(linear_velocity, FloorNormal);
 
-            if (!detectFloorLeft.IsColliding() || detectWallLeft.IsColliding())
+            if (!(detectFloorLeft.IsColliding() && detectWallLeft.IsColliding()))
+            {
                 direction = 1.0f;
-
-            if (!detectFloorRight.IsColliding() || detectWallRight.IsColliding())
+            } else if (!(detectFloorRight.IsColliding() && detectWallRight.IsColliding()))
                 direction = -1.0f;
+
+            GD.Print("Walk:" + direction);
 
             sprite.Scale = new Vector2(direction, 1.0f);
 
-            newAnim = "walk";
+            newAnim = "move";
         }
         else
             newAnim = "explode";

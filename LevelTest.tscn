@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://hud/Question.tscn" type="PackedScene" id=1]
 [ext_resource path="res://map/map1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://character/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://pickups/coin.tscn" type="PackedScene" id=4]
 [ext_resource path="res://pickups/Box.tscn" type="PackedScene" id=5]
+[ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=6]
 
 [node name="LevelTest" type="Node" index="0"]
 
@@ -73,5 +74,11 @@ position = Vector2( 869, 130 )
 [node name="Box4" parent="Boxes" index="4" instance=ExtResource( 5 )]
 
 position = Vector2( -164, 83 )
+
+[node name="enemies" type="Node" parent="." index="5"]
+
+[node name="Enemy" parent="enemies" index="0" instance=ExtResource( 6 )]
+
+position = Vector2( 1281.53, 189.08 )
 
 
