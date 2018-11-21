@@ -42,15 +42,13 @@ public class Question : CanvasLayer
         if (questionTime.TotalSeconds >= (questionQueue.First().Seconds - 1))
         {
             questionTimeout.Value = 0;
-            questionTimeoutText.Text = questionTimeout.Value + " seconds left";
+            questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
             ResetQuestion();
-            //GD.Print("Question countdown run out");
         } else
         {
             questionTime = questionTime.Add(new TimeSpan(0, 0, 1));
             questionTimeout.Value -= 1;
-            questionTimeoutText.Text = questionTimeout.Value + " seconds left";
-            //GD.Print("Question countdown:" + questionTime.TotalSeconds);
+            questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
         }
     }
 
@@ -85,10 +83,15 @@ public class Question : CanvasLayer
 
         questionTimeout.MaxValue = item.Seconds;
         questionTimeout.Value = item.Seconds;
-        questionTimeoutText.Text = questionTimeout.Value + " seconds left";
+        questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
 
         panel.Visible = true;
         timer.Start();
+    }
+
+    private string QuestionTimeText(float time)
+    {
+        return time + " seconds left";
     }
 
     private void HandleAnswer(bool result)
