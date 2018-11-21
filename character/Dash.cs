@@ -13,7 +13,7 @@ namespace Wuzzle.character
         private System.Collections.Generic.Dictionary<Guid, DashTargetItem> dashTargets = new System.Collections.Generic.Dictionary<Guid, DashTargetItem>();
         private readonly Node _parent;
         private readonly KinematicBody2D _player;
-        private CollisionShape2D playerCollision;
+        private readonly CollisionShape2D playerCollision;
         private CircleShape2D playerCollisionShape;
 
         private const int moveDashSpeed = 25000;
@@ -22,7 +22,8 @@ namespace Wuzzle.character
         private int moveDashCount = 1000;
         private Guid currentDashTargetId = Guid.Empty;
         //private Vector2 ToTarget = new Vector2();
-        
+
+        public event EventHandler<IDashTarget> DashTargetReachedEvent;
         public DashTargetItem DashTarget { get; private set; }
 
         public Dash(Node parent, KinematicBody2D player, CollisionShape2D playerCollision)
@@ -83,7 +84,8 @@ namespace Wuzzle.character
             if (currentDashTargetId != Guid.Empty)
             {
                 if (DashTarget.DashTarget.Reached())
-                { 
+                {
+                    DashTargetReachedEvent?.Invoke(this, DashTarget.DashTarget);
                     // reset
                     currentDashTargetId = Guid.Empty;
                     GD.Print("Target reached at!!!");

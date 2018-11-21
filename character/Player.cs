@@ -47,6 +47,7 @@ public class Player : KinematicBody2D
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
         DashArea2D = (Area2D)GetNode("DashArea2D");
         Dash = new Dash(DashArea2D, this, CollisionShape2D);
+        Dash.DashTargetReachedEvent += Dash_DashTargetReachedEvent;
     }
 
     Vector2 vect = new Vector2();
@@ -181,5 +182,10 @@ public class Player : KinematicBody2D
         {
             Dash.RemoveDashTarget(target);
         }
+    }
+
+    private void Dash_DashTargetReachedEvent(object sender, IDashTarget e)
+    {
+        
     }
 }

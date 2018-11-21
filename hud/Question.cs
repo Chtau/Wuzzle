@@ -36,7 +36,7 @@ public class Question : CanvasLayer
         timer.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timer.Elapsed += Timer_Elapsed;
 
-        ShowQuestion();
+        //ShowQuestion();
     }
 
     private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -118,17 +118,19 @@ public class Question : CanvasLayer
 
     private void InitQuestions()
     {
-        questions = new List<QuestionItem>();
-        questions.Add(new QuestionItem
+        questions = new List<QuestionItem>
         {
-            Question = "Calculate the sum for '12 * 3 + 7'",
-            Answer = new List<Tuple<string, bool>>
+            new QuestionItem
+            {
+                Question = "Calculate the sum for '12 * 3 + 7'",
+                Answer = new List<Tuple<string, bool>>
             {
                 new Tuple<string, bool>("43", true),
                 new Tuple<string, bool>("67", false),
                 new Tuple<string, bool>("50", false)
             }
-        });
+            }
+        };
 
         /*SharedFunctions.Instance.FileHandler.Save(questions, "questions.dat");
 
