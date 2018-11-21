@@ -129,6 +129,11 @@ public class Question : CanvasLayer
                 new Tuple<string, bool>("50", false)
             }
         });
+
+        /*SharedFunctions.Instance.FileHandler.Save(questions, "questions.dat");
+
+        var qs = SharedFunctions.Instance.FileHandler.Load<List<QuestionItem>>("questions.dat");
+        GD.Print("Loaded questions:" + qs.Count);*/
         alreadyAnswered = new List<Guid>();
     }
 

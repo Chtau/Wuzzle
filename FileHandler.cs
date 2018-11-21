@@ -15,7 +15,9 @@ public class FileHandler
                 file.OpenEncryptedWithPass($"user://{path}", (int)File.ModeFlags.Write, pass);
             else
                 file.Open($"user://{path}", (int)File.ModeFlags.Write);
-            file.StoreString(JSON.Print(content));
+            
+            file.StoreString(Newtonsoft.Json.JsonConvert.SerializeObject(content));
+            GD.Print("Save Path:" + file.GetPathAbsolute());
             file.Close();
         }
     }
@@ -32,8 +34,8 @@ public class FileHandler
                 file.OpenEncryptedWithPass($"user://{path}", (int)File.ModeFlags.Read, pass);
             else
                 file.Open($"user://{path}", (int)File.ModeFlags.Read);
-            retVal = (T)JSON.Parse(file.GetAsText()).Result;
-
+            retVal = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(file.GetAsText());
+            GD.Print("Load Path:" + file.GetPathAbsolute());
             file.Close();
         }
         return retVal;
