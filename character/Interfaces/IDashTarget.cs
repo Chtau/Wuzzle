@@ -13,5 +13,6 @@ namespace Wuzzle.character.Interfaces
         Node2D Instance { get; }
         void BeforeDashTo();
         bool Reached();
+        Player.TargetTriggerType TargetTriggerType { get; }
     }
 }

@@ -16,6 +16,12 @@ public class Player : KinematicBody2D
         Fall,
     }
 
+    public enum TargetTriggerType
+    {
+        None,
+        Question
+    }
+
     private Sprite characterSprite;
     private AnimationPlayer characterAnimationPlayer;
 
@@ -39,6 +45,7 @@ public class Player : KinematicBody2D
 
     private Dash Dash;
     Area2D DashArea2D;
+    Question question;
 
     public override void _Ready()
     {
@@ -46,11 +53,12 @@ public class Player : KinematicBody2D
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
         DashArea2D = (Area2D)GetNode("DashArea2D");
+        question = (Question)GetNode("../Question");
         Dash = new Dash(DashArea2D, this, CollisionShape2D);
         Dash.DashTargetReachedEvent += Dash_DashTargetReachedEvent;
     }
 
-    Vector2 vect = new Vector2();
+    //Vector2 vect = new Vector2();
 
     public override void _PhysicsProcess(float delta)
     {
@@ -186,6 +194,9 @@ public class Player : KinematicBody2D
 
     private void Dash_DashTargetReachedEvent(object sender, IDashTarget e)
     {
-        
+        if (e.TargetTriggerType == TargetTriggerType.Question)
+        {
+            question.ShowQuestion();
+        }
     }
 }

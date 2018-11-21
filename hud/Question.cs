@@ -35,8 +35,6 @@ public class Question : CanvasLayer
 
         timer.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timer.Elapsed += Timer_Elapsed;
-
-        //ShowQuestion();
     }
 
     private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -46,13 +44,13 @@ public class Question : CanvasLayer
             questionTimeout.Value = 0;
             questionTimeoutText.Text = questionTimeout.Value + " seconds left";
             ResetQuestion();
-            GD.Print("Question countdown run out");
+            //GD.Print("Question countdown run out");
         } else
         {
             questionTime = questionTime.Add(new TimeSpan(0, 0, 1));
             questionTimeout.Value -= 1;
             questionTimeoutText.Text = questionTimeout.Value + " seconds left";
-            GD.Print("Question countdown:" + questionTime.TotalSeconds);
+            //GD.Print("Question countdown:" + questionTime.TotalSeconds);
         }
     }
 

@@ -10,6 +10,8 @@ public class Box : StaticBody2D, Wuzzle.character.Interfaces.IDashTarget
     public Guid DashTargetId { get; }
     public Node2D Instance { get => this; }
 
+    public Player.TargetTriggerType TargetTriggerType => Player.TargetTriggerType.Question;
+
     public Box()
     {
         DashTargetId = Guid.NewGuid();
