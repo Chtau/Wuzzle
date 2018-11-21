@@ -98,7 +98,6 @@ public class Question : CanvasLayer
     {
         GD.Print("Answer result:" + result);
         alreadyAnswered.Add(questionQueue.First().Id);
-        questions.RemoveAt(0);
         questionQueue.RemoveAt(0);
 
         if (questionQueue.Count > 0)
@@ -148,6 +147,7 @@ public class Question : CanvasLayer
         {
             // reset the already answered questions
             alreadyAnswered.Clear();
+            q = questions.Where(x => !alreadyAnswered.Contains(x.Id));
         }
         if (q.Count() == 1)
         {
