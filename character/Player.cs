@@ -129,6 +129,11 @@ public class Player : KinematicBody2D
                 linear_vel.y = -JumpSpeed;
                 //$sound_jump.play()
             }
+
+            if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
+            {
+
+            }
         }
 
         // ANIMATION

@@ -78,22 +78,22 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 0 ]
 }
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=5]
 
 custom_solver_bias = 0.0
 radius = 24.8093
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=6]
 
 custom_solver_bias = 0.0
 radius = 6.3883
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 
 custom_solver_bias = 0.0
 extents = Vector2( 236.434, 266.794 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 17
@@ -157,7 +157,7 @@ _sections_unfolded = [ "Limit", "Visibility" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
 
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="Area2D" type="Area2D" parent="." index="5"]
 
@@ -171,7 +171,7 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="DashArea2D" type="Area2D" parent="." index="6"]
 
@@ -195,7 +195,7 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 position = Vector2( -0.407152, 0 )
 scale = Vector2( 1.77884, 1 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 _sections_unfolded = [ "Transform" ]
 
 [connection signal="body_entered" from="Area2D" to="." method="OnMeleeBodyEnter"]

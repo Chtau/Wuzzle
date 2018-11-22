@@ -27,6 +27,12 @@ public class Enemy : KinematicBody2D
     private RayCast2D detectFloorRight;
     private AnimationPlayer animationPlayer;
 
+    public Guid DashTargetId => Guid.NewGuid();
+
+    public Node2D Instance => this;
+
+    public Player.TargetTriggerType TargetTriggerType => Player.TargetTriggerType.None;
+
     public override void _Ready()
     {
         sprite = (Sprite)GetNode("Sprite");
@@ -72,5 +78,4 @@ public class Enemy : KinematicBody2D
     {
         state = State.Killed;
     }
-
 }
