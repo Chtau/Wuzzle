@@ -58,8 +58,11 @@
     <Compile Include="AnswerDialog.cs" />
     <Compile Include="character\Dash.cs" />
     <Compile Include="character\DashTargetItem.cs" />
+    <Compile Include="character\Interfaces\IDamager.cs" />
+    <Compile Include="character\Interfaces\IDamageReceiver.cs" />
     <Compile Include="character\Interfaces\IDashTarget.cs" />
     <Compile Include="character\Player.cs" />
+    <Compile Include="character\Sword.cs" />
     <Compile Include="enemy\Enemy.cs" />
     <Compile Include="FileHandler.cs" />
     <Compile Include="GameBar.cs" />

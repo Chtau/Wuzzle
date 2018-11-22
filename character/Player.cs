@@ -137,7 +137,7 @@ public class Player : KinematicBody2D
             if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
             {
                 State = PlayerPhysicsState.Strike;
-                GD.Print("execute Strike");
+                //GD.Print("execute Strike");
             }
         }
 

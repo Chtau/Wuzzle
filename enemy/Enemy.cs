@@ -1,7 +1,8 @@
 using Godot;
 using System;
+using Wuzzle.character.Interfaces;
 
-public class Enemy : KinematicBody2D
+public class Enemy : KinematicBody2D, IDamageReceiver
 {
     enum State
     {
@@ -77,5 +78,10 @@ public class Enemy : KinematicBody2D
     public void Hit()
     {
         state = State.Killed;
+    }
+
+    public void ReceiveHit(float damage)
+    {
+        Hit();
     }
 }
