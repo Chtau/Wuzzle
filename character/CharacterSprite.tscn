@@ -832,7 +832,7 @@ tracks/3/keys = {
 "values": [ 60.3465, 45.0928, 64.0198, 90.2115, 107.985 ]
 }
 
-[node name="Sprite" type="Sprite" index="0"]
+[node name="Sprite" type="Sprite"]
 
 _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 

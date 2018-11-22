@@ -162,6 +162,8 @@ public class Player : KinematicBody2D
             else
                 new_anim = "fall";
         }
+        if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
+            new_anim = "strike";
 
         if (new_anim != anim)
         {
