@@ -780,9 +780,57 @@ tracks/18/keys = {
 [sub_resource type="Animation" id=6]
 
 resource_name = "strike"
-length = 1.0
-loop = false
-step = 0.1
+length = 1.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sword:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.40938, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hand:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -20.9659, -42.2752, -27.5802, -2.53963, 17.1689, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sword:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 44.2373, -10.3731 ), Vector2( 38.2498, -24.7429 ), Vector2( 43.0397, -3.18829 ), Vector2( 31.6637, 26.7486 ), Vector2( 8.31288, 48.9019 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sword:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 60.3465, 45.0928, 64.0198, 90.2115, 107.985 ]
+}
 
 [node name="Sprite" type="Sprite" index="0"]
 
@@ -836,8 +884,8 @@ texture = ExtResource( 8 )
 
 [node name="Sword" type="Sprite" parent="." index="6"]
 
-position = Vector2( 27.4726, 26.7486 )
-rotation = 1.27026
+position = Vector2( 19.7644, 30.007 )
+rotation = 1.61965
 scale = Vector2( 1, 1.62137 )
 texture = ExtResource( 9 )
 _sections_unfolded = [ "Visibility" ]
@@ -845,6 +893,7 @@ _sections_unfolded = [ "Visibility" ]
 [node name="Hand" type="Sprite" parent="." index="7"]
 
 position = Vector2( -34.1334, -16.5018 )
+rotation = 0.108615
 texture = ExtResource( 10 )
 offset = Vector2( 0.00537109, 27.8778 )
 
