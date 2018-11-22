@@ -13,9 +13,12 @@ public class Sword : Sprite, IDamager
 
     public void OnBodyEntered(Godot.Object body)
     {
-        if (body is IDamageReceiver damageReceiver)
+        if (IsVisible())
         {
-            damageReceiver.ReceiveHit(HitDamage);
+            if (body is IDamageReceiver damageReceiver)
+            {
+                damageReceiver.ReceiveHit(HitDamage);
+            }
         }
     }
 }

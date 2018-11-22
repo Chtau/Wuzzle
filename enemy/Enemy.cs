@@ -2,7 +2,7 @@ using Godot;
 using System;
 using Wuzzle.character.Interfaces;
 
-public class Enemy : KinematicBody2D, IDamageReceiver
+public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
 {
     enum State
     {
@@ -33,6 +33,8 @@ public class Enemy : KinematicBody2D, IDamageReceiver
     public Node2D Instance => this;
 
     public Player.TargetTriggerType TargetTriggerType => Player.TargetTriggerType.None;
+
+    public float HitDamage => state != State.Killed ? 1 : 0;
 
     public override void _Ready()
     {

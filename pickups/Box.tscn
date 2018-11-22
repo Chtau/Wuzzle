@@ -49,8 +49,8 @@ extents = Vector2( 14.7502, 15.5495 )
 [node name="Box" type="StaticBody2D"]
 
 input_pickable = false
-collision_layer = 3
-collision_mask = 17
+collision_layer = 16
+collision_mask = 16
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0

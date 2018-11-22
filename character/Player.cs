@@ -14,7 +14,8 @@ public class Player : KinematicBody2D
         Dash,
         Jump,
         Fall,
-        Strike
+        Strike,
+        GotHit,
     }
 
     public enum TargetTriggerType
@@ -41,8 +42,9 @@ public class Player : KinematicBody2D
     bool on_floor = false;
     string anim = "";
     float strikeTime = 0f;
+    float gotHitTime = 0f;
 
-    Vector2 velocity;
+    //Vector2 velocity;
     CollisionShape2D CollisionShape2D;
 
     private Dash Dash;
@@ -61,12 +63,48 @@ public class Player : KinematicBody2D
     }
 
     //Vector2 vect = new Vector2();
+    private float gotHitSpeed = 0f;
 
     public override void _PhysicsProcess(float delta)
     {
         onair_time += delta;
         if (State == PlayerPhysicsState.Strike)
             strikeTime += delta;
+
+        if (State == PlayerPhysicsState.GotHit)
+        {
+            if (gotHitTime > .5)
+            {
+                State = PlayerPhysicsState.Idle;
+                gotHitTime = 0f;
+                linear_vel.x = 0;
+                gotHitSpeed = 0f;
+            }
+            else
+            {
+                if (gotHitTime == 0)
+                {
+                    if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
+                    {
+                        gotHitSpeed += 1;
+                    }
+                    if (Input.IsActionPressed(GlobalValues.Keymap_Move_Right))
+                    {
+                        gotHitSpeed += -1;
+                    }
+                }
+                gotHitTime += delta;
+
+                
+
+                linear_vel.x = Mathf.Lerp(linear_vel.x, gotHitSpeed * WalkSpeed, 0.1f);
+                linear_vel += delta * GravityVector;
+
+                linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
+
+                return;
+            }
+        }
 
         State = Dash.ProcessPhysic(State, delta, ref linear_vel);
 
@@ -200,6 +238,21 @@ public class Player : KinematicBody2D
     }
 
     public void OnMeleeBodyEnter(object body)
+    {
+        if (body is IDamager damager)
+        {
+            if (damager.HitDamage > 0)
+            {
+                GD.Print("Player got hit! Dmg:" + damager.HitDamage);
+                State = PlayerPhysicsState.GotHit;
+            }
+        } else
+        {
+            //GD.Print("Melee Body Enter: " + body);
+        }
+    }
+
+    public void OnDashTargetReachBodyEnter(object body)
     {
         if (body is Box box)
         {

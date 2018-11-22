@@ -249,8 +249,8 @@ namespace Wuzzle.character
         private RayCast2D GetDashRayCast2D(IDashTarget target, Node parent, params Node[] ignoreNode)
         {
             var ray = new RayCast2D();
-            ray.SetCollisionMaskBit(0, true);
-            //ray.SetCollisionMaskBit(4, true);
+            //ray.SetCollisionMaskBit(0, true);
+            ray.SetCollisionMaskBit(4, true);
             foreach (var node in ignoreNode)
             {
                 ray.AddException(node);
