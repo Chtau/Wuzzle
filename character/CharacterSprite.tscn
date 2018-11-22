@@ -780,9 +780,9 @@ tracks/18/keys = {
 [sub_resource type="Animation" id=6]
 
 resource_name = "strike"
-length = 1.5
-loop = true
-step = 0.25
+length = 1.0
+loop = false
+step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sword:visible")
 tracks/0/interp = 1
@@ -790,7 +790,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.40938, 1.5 ),
+"times": PoolRealArray( 0, 0.95, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, true, false ]
@@ -802,10 +802,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, -20.9659, -42.2752, -27.5802, -2.53963, 17.1689, 0.0 ]
+"values": [ 0.0, -10.2736, -18.8178, -12.7438, -1.3711 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sword:position")
@@ -814,10 +814,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.25, 0.5, 0.75, 1, 1.25 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 44.2373, -10.3731 ), Vector2( 38.2498, -24.7429 ), Vector2( 43.0397, -3.18829 ), Vector2( 31.6637, 26.7486 ), Vector2( 8.31288, 48.9019 ) ]
+"values": [ Vector2( 12.3764, 52.214 ), Vector2( 28.9619, 42.9261 ), Vector2( 38.2498, 38.2821 ), Vector2( 30.2887, 45.5797 ), Vector2( 17.6837, 50.2237 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sword:rotation_degrees")
@@ -826,10 +826,22 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.25, 0.5, 0.75, 1, 1.25 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 60.3465, 45.0928, 64.0198, 90.2115, 107.985 ]
+"values": [ 102.71, 93.519, 90.2531, 99.5814, 105.85 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sword:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="Sprite" type="Sprite"]
@@ -884,8 +896,9 @@ texture = ExtResource( 8 )
 
 [node name="Sword" type="Sprite" parent="." index="6"]
 
-position = Vector2( 19.7644, 30.007 )
-rotation = 1.61965
+visible = false
+position = Vector2( 17.6837, 50.2237 )
+rotation = 1.84743
 scale = Vector2( 1, 1.62137 )
 texture = ExtResource( 9 )
 _sections_unfolded = [ "Visibility" ]
@@ -893,7 +906,7 @@ _sections_unfolded = [ "Visibility" ]
 [node name="Hand" type="Sprite" parent="." index="7"]
 
 position = Vector2( -34.1334, -16.5018 )
-rotation = 0.108615
+rotation = -0.0239303
 texture = ExtResource( 10 )
 offset = Vector2( 0.00537109, 27.8778 )
 
@@ -907,7 +920,7 @@ offset = Vector2( -1.51718, -4.65724 )
 [node name="Foot1" type="Sprite" parent="." index="9"]
 
 position = Vector2( -11.7826, 66.5251 )
-rotation = -0.00792174
+rotation = -0.00792175
 texture = ExtResource( 12 )
 offset = Vector2( -11.5681, 16.6993 )
 

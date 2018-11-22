@@ -14,6 +14,7 @@ public class Player : KinematicBody2D
         Dash,
         Jump,
         Fall,
+        Strike
     }
 
     public enum TargetTriggerType
@@ -39,6 +40,7 @@ public class Player : KinematicBody2D
     float onair_time = 0f;
     bool on_floor = false;
     string anim = "";
+    float strikeTime = 0f;
 
     Vector2 velocity;
     CollisionShape2D CollisionShape2D;
@@ -63,6 +65,8 @@ public class Player : KinematicBody2D
     public override void _PhysicsProcess(float delta)
     {
         onair_time += delta;
+        if (State == PlayerPhysicsState.Strike)
+            strikeTime += delta;
 
         State = Dash.ProcessPhysic(State, delta, ref linear_vel);
 
@@ -107,7 +111,7 @@ public class Player : KinematicBody2D
 
         var target_speed = 0;
 
-        if (State != PlayerPhysicsState.Dash)
+        if (State != PlayerPhysicsState.Dash) // && State != PlayerPhysicsState.Strike
         {
             // CONTROL
             // Horizontal Movement
@@ -132,7 +136,8 @@ public class Player : KinematicBody2D
 
             if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
             {
-
+                State = PlayerPhysicsState.Strike;
+                GD.Print("execute Strike");
             }
         }
 
@@ -165,10 +170,32 @@ public class Player : KinematicBody2D
         if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
             new_anim = "strike";
 
+        //GD.Print("State: " + Enum.GetName(typeof(PlayerPhysicsState), State));
+
         if (new_anim != anim)
         {
-            anim = new_anim;
-            characterAnimationPlayer.Play(anim);
+            if (State == PlayerPhysicsState.Strike)
+            {
+                if (strikeTime > .5)
+                {
+                    //GD.Print("Striketime: " + strikeTime);
+                    State = PlayerPhysicsState.Idle;
+                    strikeTime = 0f;
+                } else
+                {
+                    //GD.Print("Striketime: " + strikeTime);
+                    if (anim != "strike")
+                    {
+                        anim = "strike";
+                        characterAnimationPlayer.Play(anim, -1, 5);
+                    }
+                }
+            }
+            else
+            {
+                anim = new_anim;
+                characterAnimationPlayer.Play(anim);
+            }
         }
     }
 
