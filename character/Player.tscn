@@ -96,9 +96,9 @@ extents = Vector2( 236.434, 266.794 )
 [sub_resource type="CircleShape2D" id=8]
 
 custom_solver_bias = 0.0
-radius = 5.44643
+radius = 7.18457
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
