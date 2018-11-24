@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,4 +34,9 @@ public sealed class SharedFunctions
     }
 
     public FileHandler FileHandler { get; set; }
+
+    public void LoadScene(Node instance, string scenePath)
+    {
+        instance.GetTree().ChangeScene(scenePath);
+    }
 }

@@ -11,9 +11,15 @@ public class StartMenu : Node
     {
         // Called every time the node is added to the scene.
         // Initialization here
-        
+    }
+
+    private void _on_FadeIn_FadeInFinished(object foo, object bar)
+    {
+        // Replace with function body
     }
 }
+
+
 
 
 

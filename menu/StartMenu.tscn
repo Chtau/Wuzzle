@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://menu/StartMenu.cs" type="Script" id=1]
 [ext_resource path="res://menu/art/title.png" type="Texture" id=2]
 [ext_resource path="res://menu/items/MenuButton.tscn" type="PackedScene" id=3]
-[ext_resource path="res://LevelTest.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TestScene.tscn" type="PackedScene" id=4]
 [ext_resource path="res://menu/art/start_image.png" type="Texture" id=5]
+[ext_resource path="res://menu/FadeIn.tscn" type="PackedScene" id=6]
 
 [node name="StartMenu" type="Node" index="0"]
 
@@ -101,6 +102,8 @@ _sections_unfolded = [ "Size Flags", "custom_constants" ]
 
 [node name="NewGame" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="0" instance=ExtResource( 3 )]
 
+margin_top = 0.0
+margin_bottom = 47.0
 LabelText = "New Game"
 Scene = ExtResource( 4 )
 
@@ -109,18 +112,21 @@ Scene = ExtResource( 4 )
 margin_top = 67.0
 margin_bottom = 114.0
 LabelText = "Continue"
+Scene = ExtResource( 4 )
 
 [node name="Options" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="2" instance=ExtResource( 3 )]
 
 margin_top = 134.0
 margin_bottom = 181.0
 LabelText = "Options"
+Scene = ExtResource( 4 )
 
 [node name="Exit" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="3" instance=ExtResource( 3 )]
 
 margin_top = 201.0
 margin_bottom = 248.0
 LabelText = "Exit"
+Scene = ExtResource( 4 )
 
 [node name="Image" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1"]
 
@@ -140,5 +146,11 @@ size_flags_vertical = 1
 texture = ExtResource( 5 )
 stretch_mode = 0
 _sections_unfolded = [ "Anchor", "Rect" ]
+
+[node name="FadeIn" parent="." index="1" instance=ExtResource( 6 )]
+
+visible = false
+
+[connection signal="FadeInFinished" from="FadeIn" to="." method="_on_FadeIn_FadeInFinished"]
 
 

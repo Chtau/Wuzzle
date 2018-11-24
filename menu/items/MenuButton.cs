@@ -41,6 +41,7 @@ public class MenuButton : Button
         if (Scene != null)
         {
             GD.Print("Load Scene:" + Scene.ResourcePath);
+            GetTree().ChangeScene(Scene.ResourcePath);
         } else
         {
             GD.Print("No Scene is set for the Button");
