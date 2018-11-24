@@ -69,6 +69,8 @@
     <Compile Include="hud\Answer.cs" />
     <Compile Include="hud\Question.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="menu\items\MenuButton.cs" />
+    <Compile Include="menu\StartMenu.cs" />
     <Compile Include="Models\QuestionItem.cs" />
     <Compile Include="pickups\Box.cs" />
     <Compile Include="pickups\coin.cs" />
