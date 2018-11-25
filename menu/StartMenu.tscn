@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://menu/StartMenu.cs" type="Script" id=1]
 [ext_resource path="res://menu/art/title.png" type="Texture" id=2]
 [ext_resource path="res://menu/items/MenuButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestScene.tscn" type="PackedScene" id=4]
-[ext_resource path="res://menu/art/start_image.png" type="Texture" id=5]
-[ext_resource path="res://menu/FadeIn.tscn" type="PackedScene" id=6]
+[ext_resource path="res://menu/Options.tscn" type="PackedScene" id=5]
+[ext_resource path="res://menu/art/start_image.png" type="Texture" id=6]
+[ext_resource path="res://menu/FadeIn.tscn" type="PackedScene" id=7]
 
-[node name="StartMenu" type="Node"]
+[node name="StartMenu" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -119,7 +120,7 @@ Scene = ExtResource( 4 )
 margin_top = 134.0
 margin_bottom = 181.0
 LabelText = "Options"
-Scene = ExtResource( 4 )
+Scene = ExtResource( 5 )
 
 [node name="Exit" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="3" instance=ExtResource( 3 )]
 
@@ -143,11 +144,11 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 stretch_mode = 0
 _sections_unfolded = [ "Anchor", "Rect" ]
 
-[node name="FadeIn" parent="." index="1" instance=ExtResource( 6 )]
+[node name="FadeIn" parent="." index="1" instance=ExtResource( 7 )]
 
 visible = false
 

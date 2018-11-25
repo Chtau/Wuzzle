@@ -5,7 +5,7 @@
 [ext_resource path="res://assests/fonts/Sunflower_m_24.tres" type="DynamicFont" id=3]
 [ext_resource path="res://menu/items/InputKeyMap.tscn" type="PackedScene" id=4]
 
-[node name="KeyMap" type="Node" index="0"]
+[node name="KeyMap" type="Node"]
 
 script = ExtResource( 1 )
 
