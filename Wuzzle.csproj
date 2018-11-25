@@ -70,7 +70,9 @@
     <Compile Include="hud\Question.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="menu\FadeIn.cs" />
+    <Compile Include="menu\items\InputKeyMap.cs" />
     <Compile Include="menu\items\MenuButton.cs" />
+    <Compile Include="menu\KeyMap.cs" />
     <Compile Include="menu\StartMenu.cs" />
     <Compile Include="Models\QuestionItem.cs" />
     <Compile Include="pickups\Box.cs" />

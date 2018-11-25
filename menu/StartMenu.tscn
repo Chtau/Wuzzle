@@ -7,7 +7,7 @@
 [ext_resource path="res://menu/art/start_image.png" type="Texture" id=5]
 [ext_resource path="res://menu/FadeIn.tscn" type="PackedScene" id=6]
 
-[node name="StartMenu" type="Node" index="0"]
+[node name="StartMenu" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -98,7 +98,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 20
 alignment = 0
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
+_sections_unfolded = [ "Margin", "Size Flags", "custom_constants" ]
 
 [node name="NewGame" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="0" instance=ExtResource( 3 )]
 
