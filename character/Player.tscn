@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://character/Player.cs" type="Script" id=1]
 [ext_resource path="res://character/CharacterSprite.tscn" type="PackedScene" id=2]
@@ -88,15 +88,10 @@ radius = 24.8093
 custom_solver_bias = 0.0
 radius = 25.2281
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=7]
 
 custom_solver_bias = 0.0
-extents = Vector2( 236.434, 266.794 )
-
-[sub_resource type="CircleShape2D" id=8]
-
-custom_solver_bias = 0.0
-radius = 7.18457
+radius = 23.4742
 
 [node name="Player" type="KinematicBody2D"]
 
@@ -179,7 +174,7 @@ _sections_unfolded = [ "Collision" ]
 
 shape = SubResource( 6 )
 
-[node name="DashArea2D" type="Area2D" parent="." index="6"]
+[node name="PickupArea2D" type="Area2D" parent="." index="6"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -192,44 +187,12 @@ audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Collision" ]
 
-[node name="DashRayCast2D" type="RayCast2D" parent="DashArea2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea2D" index="0"]
 
-enabled = false
-exclude_parent = true
-cast_to = Vector2( 0, 50 )
-collision_mask = 16
-_sections_unfolded = [ "Transform", "Z Index" ]
-
-[node name="DashCollisionShape2D" type="CollisionShape2D" parent="DashArea2D" index="1"]
-
-position = Vector2( -0.407152, 0 )
-scale = Vector2( 1.77884, 1 )
 shape = SubResource( 7 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="DashTargetArea2D" type="Area2D" parent="." index="7"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-collision_layer = 16
-collision_mask = 16
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DashTargetArea2D" index="0"]
-
-shape = SubResource( 8 )
 
 [connection signal="body_entered" from="Area2D" to="." method="OnMeleeBodyEnter"]
 
-[connection signal="body_entered" from="DashArea2D" to="." method="OnDashTargetBodyEnter"]
-
-[connection signal="body_exited" from="DashArea2D" to="." method="OnDashTargetBodyExited"]
-
-[connection signal="body_entered" from="DashTargetArea2D" to="." method="OnDashTargetReachBodyEnter"]
+[connection signal="body_entered" from="PickupArea2D" to="." method="OnDashTargetReachBodyEnter"]
 
 

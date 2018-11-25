@@ -1,20 +1,18 @@
 using Godot;
 using System;
 
-public class Box : StaticBody2D
+public class Box : StaticBody2D, IPickup
 {
     private bool Taken = false;
     private AnimationPlayer AnimationPlayer;
     private CollisionShape2D CollisionShape2D;
 
-    public Guid DashTargetId { get; }
     public Node2D Instance { get => this; }
 
-    public Player.TargetTriggerType TargetTriggerType => Player.TargetTriggerType.Question;
+    public Player.TargetTriggerType TargetTrigger => Player.TargetTriggerType.Question;
 
     public Box()
     {
-        DashTargetId = Guid.NewGuid();
     }
 
     public override void _Ready()
@@ -24,7 +22,7 @@ public class Box : StaticBody2D
         AnimationPlayer.Play("idle");
     }
 
-    public bool PlayerInteract()
+    public bool Interact()
     {
         if (Taken)
             return false;
@@ -33,15 +31,5 @@ public class Box : StaticBody2D
         //CollisionShape2D.QueueFree();
         AnimationPlayer.Play("taken");
         return true;
-    }
-
-    public void BeforeDashTo()
-    {
-        CollisionShape2D.Disabled = true;
-    }
-
-    public bool Reached()
-    {
-        return Taken;
     }
 }

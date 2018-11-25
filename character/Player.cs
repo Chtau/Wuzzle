@@ -44,11 +44,7 @@ public class Player : KinematicBody2D
     float strikeTime = 0f;
     float gotHitTime = 0f;
 
-    //Vector2 velocity;
     CollisionShape2D CollisionShape2D;
-
-    //private Dash Dash;
-    Area2D DashArea2D;
     Question question;
 
     public override void _Ready()
@@ -56,10 +52,7 @@ public class Player : KinematicBody2D
         characterSprite = (Sprite)GetNode("Sprite2");
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
-        DashArea2D = (Area2D)GetNode("DashArea2D");
         question = (Question)GetNode("../Question");
-        /*Dash = new Dash(DashArea2D, this, CollisionShape2D);
-        Dash.DashTargetReachedEvent += Dash_DashTargetReachedEvent;*/
     }
 
     //Vector2 vect = new Vector2();
@@ -299,36 +292,13 @@ public class Player : KinematicBody2D
 
     public void OnDashTargetReachBodyEnter(object body)
     {
-        if (body is Box box)
+        if (body is IPickup pickup)
         {
-            if (box.PlayerInteract())
+            if (pickup.Interact())
             {
-                //Dash.AddDash();
+                if (pickup.TargetTrigger == TargetTriggerType.Question)
+                    question.ShowQuestion();
             }
         }
     }
-
-    /*public void OnDashTargetBodyEnter(object body)
-    {
-        if (body is IDashTarget target)
-        {
-            //Dash.AddDashTarget(target);
-        }
-    }
-
-    public void OnDashTargetBodyExited(object body)
-    {
-        if (body is IDashTarget target)
-        {
-            //Dash.RemoveDashTarget(target);
-        }
-    }
-
-    private void Dash_DashTargetReachedEvent(object sender, IDashTarget e)
-    {
-        if (e.TargetTriggerType == TargetTriggerType.Question)
-        {
-            question.ShowQuestion();
-        }
-    }*/
 }

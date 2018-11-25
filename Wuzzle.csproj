@@ -76,6 +76,7 @@
     <Compile Include="Models\QuestionItem.cs" />
     <Compile Include="pickups\Box.cs" />
     <Compile Include="pickups\coin.cs" />
+    <Compile Include="pickups\interface\IPickup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedFunctions.cs" />
     <Compile Include="TestScene.cs" />
@@ -83,8 +84,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="pickups\interface\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
