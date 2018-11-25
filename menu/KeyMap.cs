@@ -66,20 +66,6 @@ public class KeyMap : Node
         }
     }
 
-    /*private void OnSaveConfig(string section, string key, object value)
-    {
-        var config = new ConfigFile();
-        var err = config.Load(ConfigFilePath);
-        if (err == Error.Ok)
-        {
-            config.SetValue(section, key, value);
-            config.Save(ConfigFilePath);
-        } else
-        {
-            GD.Print("OnSaveConfig Err:" + err);
-        }
-    }*/
-
     private void OnContextualHelpTextChanged(string text)
     {
         contextualHelp.Text = text;

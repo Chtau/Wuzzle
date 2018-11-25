@@ -28,10 +28,7 @@ public class InputKeyMap : HBoxContainer
 
     private void WaitForInput()
     {
-        //actionBinding = binding;
-        //keyButton = (Button)GetNode(actionBinding);
         EmitSignal(nameof(ContextualHelpTextChanged), "Press a key to assign to the '" + KeyLabel + "' action.");
-        //((Label)GetNode("contextualHelp")).Text = "Press a key to assign to the '" + KeyLabel + "' action.";
         SetProcessInput(true);
     }
 
@@ -42,7 +39,6 @@ public class InputKeyMap : HBoxContainer
             GetTree().SetInputAsHandled();
             SetProcessInput(false);
             EmitSignal(nameof(ContextualHelpTextChanged), "Click a key binding to reassign it, or press the Cancel action.");
-            //((Label)GetNode("contextualHelp")).Text = "Click a key binding to reassign it, or press the Cancel action.";
             if (!eventKey.IsAction("ui_cancel"))
             {
                 var scanCode = OS.GetScancodeString(eventKey.Scancode);
@@ -54,7 +50,6 @@ public class InputKeyMap : HBoxContainer
                 }
                 InputMap.ActionAddEvent(KeyMap, eventKey);
                 EmitSignal(nameof(InputSave), KeyMap, scanCode);
-                // OnSaveConfig(SectionKeyInput, actionBinding, scanCode);
             }
         }
     }
