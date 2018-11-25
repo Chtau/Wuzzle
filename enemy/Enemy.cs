@@ -76,7 +76,7 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
             newAnim = "move";
 
             // shooting
-            if (shootTimeout > .5)
+            /*if (shootTimeout > .5)
             {
                 var bullet = (Bullet)Bullet.Instance();
                 bullet.Position = this.GlobalPosition;
@@ -84,7 +84,7 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
                 bullet.AddCollisionExceptionWith(this);
                 GetParent().AddChild(bullet);
                 shootTimeout = 0;
-            }
+            }*/
         }
         else if (state == State.Killed)
             newAnim = "explode";

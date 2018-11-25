@@ -47,7 +47,7 @@ public class Player : KinematicBody2D
     //Vector2 velocity;
     CollisionShape2D CollisionShape2D;
 
-    private Dash Dash;
+    //private Dash Dash;
     Area2D DashArea2D;
     Question question;
 
@@ -58,18 +58,33 @@ public class Player : KinematicBody2D
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
         DashArea2D = (Area2D)GetNode("DashArea2D");
         question = (Question)GetNode("../Question");
-        Dash = new Dash(DashArea2D, this, CollisionShape2D);
-        Dash.DashTargetReachedEvent += Dash_DashTargetReachedEvent;
+        /*Dash = new Dash(DashArea2D, this, CollisionShape2D);
+        Dash.DashTargetReachedEvent += Dash_DashTargetReachedEvent;*/
     }
 
     //Vector2 vect = new Vector2();
     private float gotHitSpeed = 0f;
+    private float dashTimeout = 0f;
 
     public override void _PhysicsProcess(float delta)
     {
         onair_time += delta;
         if (State == PlayerPhysicsState.Strike)
             strikeTime += delta;
+
+        if (State == PlayerPhysicsState.Dash)
+        {
+            if (dashTimeout > .15)
+            {
+                dashTimeout = 0f;
+                linear_vel.x = 0;
+                State = PlayerPhysicsState.Idle;
+            }
+            else
+            {
+                dashTimeout += delta;
+            }
+        }
 
         if (State == PlayerPhysicsState.GotHit)
         {
@@ -106,8 +121,6 @@ public class Player : KinematicBody2D
             }
         }
 
-        State = Dash.ProcessPhysic(State, delta, ref linear_vel);
-
         // MOVEMENT
         // Apply Gravity
         // Move and Slide
@@ -117,6 +130,7 @@ public class Player : KinematicBody2D
             linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
         } else
         {
+            linear_vel += delta * GravityVector;
             linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
         }
         
@@ -151,32 +165,63 @@ public class Player : KinematicBody2D
 
         if (State != PlayerPhysicsState.Dash) // && State != PlayerPhysicsState.Strike
         {
-            // CONTROL
-            // Horizontal Movement
-            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
+            if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Dash))
             {
-                target_speed += -1;
-            }
-            if (Input.IsActionPressed(GlobalValues.Keymap_Move_Right))
+
+                bool moveLeft = false, moveRight = false;
+
+                if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
+                {
+                    moveLeft = true;
+                }
+                if (Input.IsActionPressed(GlobalValues.Keymap_Move_Right))
+                {
+                    moveRight = true;
+                }
+
+                if (moveLeft || moveRight)
+                {
+                    var target_speed_x = 0;
+                    if (moveRight)
+                        target_speed_x += 1;
+                    else if (moveLeft)
+                        target_speed_x += -1;
+                    target_speed_x *= 25000;
+
+                    linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed_x, 0.1f);
+
+                    State = PlayerPhysicsState.Dash;
+                }
+            } else
             {
-                target_speed += 1;
+                // CONTROL
+                // Horizontal Movement
+                if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
+                {
+                    target_speed += -1;
+                }
+                if (Input.IsActionPressed(GlobalValues.Keymap_Move_Right))
+                {
+                    target_speed += 1;
+                }
+
+                target_speed *= WalkSpeed;
+                linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed, 0.1f);
+
+                // Jumping
+                if (on_floor && Input.IsActionJustPressed(GlobalValues.Keymap_Move_Jump))
+                {
+                    linear_vel.y = -JumpSpeed;
+                    //$sound_jump.play()
+                }
+
+                if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
+                {
+                    State = PlayerPhysicsState.Strike;
+                    //GD.Print("execute Strike");
+                }
             }
 
-            target_speed *= WalkSpeed;
-            linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed, 0.1f);
-
-            // Jumping
-            if (on_floor && Input.IsActionJustPressed(GlobalValues.Keymap_Move_Jump))
-            {
-                linear_vel.y = -JumpSpeed;
-                //$sound_jump.play()
-            }
-
-            if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
-            {
-                State = PlayerPhysicsState.Strike;
-                //GD.Print("execute Strike");
-            }
         }
 
         // ANIMATION
@@ -258,16 +303,16 @@ public class Player : KinematicBody2D
         {
             if (box.PlayerInteract())
             {
-                Dash.AddDash();
+                //Dash.AddDash();
             }
         }
     }
 
-    public void OnDashTargetBodyEnter(object body)
+    /*public void OnDashTargetBodyEnter(object body)
     {
         if (body is IDashTarget target)
         {
-            Dash.AddDashTarget(target);
+            //Dash.AddDashTarget(target);
         }
     }
 
@@ -275,7 +320,7 @@ public class Player : KinematicBody2D
     {
         if (body is IDashTarget target)
         {
-            Dash.RemoveDashTarget(target);
+            //Dash.RemoveDashTarget(target);
         }
     }
 
@@ -285,5 +330,5 @@ public class Player : KinematicBody2D
         {
             question.ShowQuestion();
         }
-    }
+    }*/
 }
