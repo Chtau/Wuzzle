@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://character/Player.cs" type="Script" id=1]
 [ext_resource path="res://character/CharacterSprite.tscn" type="PackedScene" id=2]
-[ext_resource path="res://character/art/robot_demo.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 
@@ -10,36 +9,12 @@ resource_name = "falling"
 length = 0.01
 loop = true
 step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 21 ]
-}
 
 [sub_resource type="Animation" id=2]
 
 length = 7.0
 loop = true
 step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.25, 1.5, 2, 4.5, 4.75, 5, 5.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 16, 17, 18, 16, 19, 20, 19, 16 ]
-}
 
 [sub_resource type="Animation" id=3]
 
@@ -47,36 +22,12 @@ resource_name = "jumping"
 length = 0.5
 loop = true
 step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 23, 24, 23 ]
-}
 
 [sub_resource type="Animation" id=4]
 
 length = 1.25
 loop = true
 step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 0 ]
-}
 
 [sub_resource type="CircleShape2D" id=5]
 
@@ -106,16 +57,7 @@ _sections_unfolded = [ "Collision", "Material", "Pickable", "Transform", "Visibi
 
 scale = Vector2( 0.25, 0.25 )
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
-
-visible = false
-texture = ExtResource( 3 )
-vframes = 2
-hframes = 16
-frame = 21
-_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility", "Z Index" ]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -129,7 +71,7 @@ anims/run = SubResource( 4 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="Camera" type="Camera2D" parent="." index="3"]
+[node name="Camera" type="Camera2D" parent="." index="2"]
 
 anchor_mode = 1
 rotating = false
@@ -155,11 +97,11 @@ editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Limit", "Visibility" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 
 shape = SubResource( 5 )
 
-[node name="Area2D" type="Area2D" parent="." index="5"]
+[node name="Area2D" type="Area2D" parent="." index="4"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -174,7 +116,7 @@ _sections_unfolded = [ "Collision" ]
 
 shape = SubResource( 6 )
 
-[node name="PickupArea2D" type="Area2D" parent="." index="6"]
+[node name="PickupArea2D" type="Area2D" parent="." index="5"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
