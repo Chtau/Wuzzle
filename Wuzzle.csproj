@@ -62,6 +62,7 @@
     <Compile Include="character\Interfaces\IDashTarget.cs" />
     <Compile Include="character\Player.cs" />
     <Compile Include="character\Sword.cs" />
+    <Compile Include="ConfigHandler.cs" />
     <Compile Include="enemy\Bullet.cs" />
     <Compile Include="enemy\Enemy.cs" />
     <Compile Include="FileHandler.cs" />

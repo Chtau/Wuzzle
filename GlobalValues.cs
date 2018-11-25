@@ -17,4 +17,7 @@ public static class GlobalValues
     public const string Keymap_Answer_1 = "answer1";
     public const string Keymap_Answer_2 = "answer2";
     public const string Keymap_Answer_3 = "answer3";
+
+    public const string ConfigFilePath = "user://config.cfg";
+    public const string ConfigSectionKeyInput = "input";
 }

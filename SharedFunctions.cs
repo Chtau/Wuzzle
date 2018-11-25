@@ -16,6 +16,7 @@ public sealed class SharedFunctions
     private SharedFunctions()
     {
         FileHandler = new FileHandler();
+        ConfigHandler = new ConfigHandler();
     }
 
     public static SharedFunctions Instance { get; } = new SharedFunctions();
@@ -34,6 +35,7 @@ public sealed class SharedFunctions
     }
 
     public FileHandler FileHandler { get; set; }
+    public ConfigHandler ConfigHandler { get; set; }
 
     public void LoadScene(Node instance, string scenePath)
     {
