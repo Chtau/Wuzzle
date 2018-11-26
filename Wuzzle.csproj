@@ -65,6 +65,7 @@
     <Compile Include="FileHandler.cs" />
     <Compile Include="GlobalValues.cs" />
     <Compile Include="hud\Answer.cs" />
+    <Compile Include="hud\HUD.cs" />
     <Compile Include="hud\Question.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="menu\FadeIn.cs" />
