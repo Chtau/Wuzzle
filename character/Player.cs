@@ -29,6 +29,7 @@ public class Player : KinematicBody2D
     public float CurrentLife { get; private set; } = 50;
     public TimeSpan LevelGameTime { get; private set; } = new TimeSpan();
     public DateTime LevelStartTime { get; private set; } = DateTime.UtcNow;
+    public int RequieredQuestions { get; private set; } = 5;
 
     private Sprite characterSprite;
     private AnimationPlayer characterAnimationPlayer;
@@ -342,6 +343,8 @@ public class Player : KinematicBody2D
         SharedFunctions.Instance.GameState.MaxLife = MaxLife;
         CurrentLife = 50;
         SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
+        SharedFunctions.Instance.GameState.LevelAnsweredQuestions = 0;
+        SharedFunctions.Instance.GameState.LevelRequieredQuestions = RequieredQuestions;
 
         levelTimer.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
         levelTimer.Elapsed += LevelTimer_Elapsed;

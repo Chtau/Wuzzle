@@ -97,6 +97,10 @@ public class Question : CanvasLayer
     private void HandleAnswer(bool result)
     {
         GD.Print("Answer result:" + result);
+        if (result)
+        {
+            SharedFunctions.Instance.GameState.LevelAnsweredQuestions++;
+        }
         alreadyAnswered.Add(questionQueue.First().Id);
         questionQueue.RemoveAt(0);
 
