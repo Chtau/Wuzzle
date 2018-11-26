@@ -58,6 +58,8 @@ public class Player : KinematicBody2D
 
     private LevelStartMessage levelStartMessage;
     private ILevelConfiguration levelConfiguration;
+    private Spawn spawn;
+    private Spawn goal;
 
     public override void _Ready()
     {
@@ -67,6 +69,10 @@ public class Player : KinematicBody2D
         question = (Question)GetNode("../Question");
         levelConfiguration = (ILevelConfiguration)GetParent();
         levelStartMessage = (LevelStartMessage)GetNode("../LevelStartMessage");
+        spawn = (Spawn)GetNode("../Spawn");
+        spawn.SpawnType = Spawn.Type.Spawn;
+        goal = (Spawn)GetNode("../Goal");
+        goal.SpawnType = Spawn.Type.Goal;
         OnLevelLoad();
     }
 
@@ -337,6 +343,8 @@ public class Player : KinematicBody2D
     {
         State = PlayerPhysicsState.Waiting;
 
+        OnSetCharacterPosition();
+
         MaxLife = 50;
         SharedFunctions.Instance.GameState.MaxLife = MaxLife;
         CurrentLife = 50;
@@ -351,5 +359,19 @@ public class Player : KinematicBody2D
 
             State = PlayerPhysicsState.Idle;
         });
+    }
+
+    private void OnSetCharacterPosition()
+    {
+        this.GlobalPosition = spawn.SpawnGlobalPosition;
+    }
+
+    public void SpawnEnteredCallback(Spawn.Type type)
+    {
+        GD.Print("SpawnEnteredCallback: " + Enum.GetName(typeof(Spawn.Type), type));
+        if (type == Spawn.Type.Goal)
+        {
+            // level is finished
+        }
     }
 }

@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://map/Spawn.cs" type="Script" id=1]
+[ext_resource path="res://map/art/LevelTor.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 4.33832
+
+[node name="Spawn" type="Area2D"]
+
+show_behind_parent = true
+position = Vector2( -95.4428, -167.696 )
+scale = Vector2( 1.06818, 0.905159 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+position = Vector2( 0.825294, -23.4109 )
+scale = Vector2( 0.44, 0.44 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 1.40647, -11.1366 )
+scale = Vector2( 1.98279, 2.50613 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="OnSpawnBodyEntered"]
+
+

@@ -73,6 +73,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="map\interfaces\ILevelConfiguration.cs" />
     <Compile Include="map\map1.cs" />
+    <Compile Include="map\Spawn.cs" />
     <Compile Include="menu\FadeIn.cs" />
     <Compile Include="menu\items\InputKeyMap.cs" />
     <Compile Include="menu\items\MenuButton.cs" />
