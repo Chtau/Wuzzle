@@ -59,8 +59,14 @@ public class Player : KinematicBody2D
     private float gotHitSpeed = 0f;
     private float dashTimeout = 0f;
 
+    TimeSpan timeGame = new TimeSpan();
+    DateTime startTime = DateTime.UtcNow;
+
     public override void _PhysicsProcess(float delta)
     {
+        timeGame = DateTime.UtcNow - startTime;
+        SharedFunctions.Instance.GameState.LevelTime = timeGame;
+
         onair_time += delta;
         if (State == PlayerPhysicsState.Strike)
             strikeTime += delta;

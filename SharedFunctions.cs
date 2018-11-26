@@ -17,6 +17,7 @@ public sealed class SharedFunctions
     {
         FileHandler = new FileHandler();
         ConfigHandler = new ConfigHandler();
+        GameState = new GameState();
     }
 
     public static SharedFunctions Instance { get; } = new SharedFunctions();
@@ -41,4 +42,6 @@ public sealed class SharedFunctions
     {
         instance.GetTree().ChangeScene(scenePath);
     }
+
+    public GameState GameState { get; set; }
 }

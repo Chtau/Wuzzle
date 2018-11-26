@@ -63,6 +63,7 @@
     <Compile Include="enemy\Bullet.cs" />
     <Compile Include="enemy\Enemy.cs" />
     <Compile Include="FileHandler.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="GlobalValues.cs" />
     <Compile Include="hud\Answer.cs" />
     <Compile Include="hud\HUD.cs" />
