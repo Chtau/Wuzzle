@@ -352,7 +352,7 @@ public class Player : KinematicBody2D
         levelTimer.Start();
     }
 
-    int startCountdown = 6;
+    int startCountdown = GlobalValues.LevelStartCountdown + 1;
     private void LevelTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
     {
         if (State == PlayerPhysicsState.Waiting)

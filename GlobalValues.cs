@@ -20,4 +20,6 @@ public static class GlobalValues
 
     public const string ConfigFilePath = "user://config.cfg";
     public const string ConfigSectionKeyInput = "input";
+
+    public const int LevelStartCountdown = 5;
 }
