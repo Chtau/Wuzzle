@@ -52,6 +52,7 @@ public class HUD : CanvasLayer
     private void OnLifeChange(float newValue)
     {
         lifebar.Value = newValue;
+        lifeNumber.Text = newValue.ToString();
     }
 
     private void OnTimeChange(TimeSpan timeSpan)
