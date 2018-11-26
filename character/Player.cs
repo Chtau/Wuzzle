@@ -29,7 +29,6 @@ public class Player : KinematicBody2D
     public float CurrentLife { get; private set; } = 50;
     public TimeSpan LevelGameTime { get; private set; } = new TimeSpan();
     public DateTime LevelStartTime { get; private set; } = DateTime.UtcNow;
-    public int RequieredQuestions { get; private set; } = 5;
 
     private Sprite characterSprite;
     private AnimationPlayer characterAnimationPlayer;
@@ -60,6 +59,7 @@ public class Player : KinematicBody2D
     private System.Timers.Timer levelTimer = new System.Timers.Timer();
     private MarginContainer levelStartMessage;
     private Label levelStartCountdown;
+    private ILevelConfiguration levelConfiguration;
 
     public override void _Ready()
     {
@@ -69,6 +69,7 @@ public class Player : KinematicBody2D
         question = (Question)GetNode("../Question");
         levelStartMessage = (MarginContainer)GetNode("../LevelStartMessage/MarginContainer");
         levelStartCountdown = (Label)GetNode("../LevelStartMessage/MarginContainer/VBoxContainer/Countdown");
+        levelConfiguration = (ILevelConfiguration)GetParent();
         OnLevelLoad();
     }
 
@@ -344,7 +345,7 @@ public class Player : KinematicBody2D
         CurrentLife = 50;
         SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
         SharedFunctions.Instance.GameState.LevelAnsweredQuestions = 0;
-        SharedFunctions.Instance.GameState.LevelRequieredQuestions = RequieredQuestions;
+        SharedFunctions.Instance.GameState.LevelRequieredQuestions = levelConfiguration.RequieredQuestions;
 
         levelTimer.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
         levelTimer.Elapsed += LevelTimer_Elapsed;
