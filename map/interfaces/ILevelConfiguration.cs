@@ -7,5 +7,7 @@ using System.Threading.Tasks;
 public interface ILevelConfiguration
 {
     int RequieredQuestions { get; }
-    TimeSpan TimeLimit { get; }
+    TimeSpan GoldTime { get; }
+    TimeSpan SilverTime { get; }
+    TimeSpan BronzeTime { get; }
 }

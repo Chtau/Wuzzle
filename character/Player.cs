@@ -56,9 +56,7 @@ public class Player : KinematicBody2D
     private float gotHitSpeed = 0f;
     private float dashTimeout = 0f;
 
-    private System.Timers.Timer levelTimer = new System.Timers.Timer();
-    private MarginContainer levelStartMessage;
-    private Label levelStartCountdown;
+    private LevelStartMessage levelStartMessage;
     private ILevelConfiguration levelConfiguration;
 
     public override void _Ready()
@@ -67,9 +65,8 @@ public class Player : KinematicBody2D
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
         question = (Question)GetNode("../Question");
-        levelStartMessage = (MarginContainer)GetNode("../LevelStartMessage/MarginContainer");
-        levelStartCountdown = (Label)GetNode("../LevelStartMessage/MarginContainer/VBoxContainer/Countdown");
         levelConfiguration = (ILevelConfiguration)GetParent();
+        levelStartMessage = (LevelStartMessage)GetNode("../LevelStartMessage");
         OnLevelLoad();
     }
 
@@ -347,29 +344,12 @@ public class Player : KinematicBody2D
         SharedFunctions.Instance.GameState.LevelAnsweredQuestions = 0;
         SharedFunctions.Instance.GameState.LevelRequieredQuestions = levelConfiguration.RequieredQuestions;
 
-        levelTimer.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
-        levelTimer.Elapsed += LevelTimer_Elapsed;
-        levelTimer.Start();
-    }
-
-    int startCountdown = GlobalValues.LevelStartCountdown + 1;
-    private void LevelTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-    {
-        if (State == PlayerPhysicsState.Waiting)
+        levelStartMessage.Show(() =>
         {
-            startCountdown--;
-            if (!levelStartMessage.IsVisible())
-                levelStartMessage.Visible = true;
-            levelStartCountdown.Text = startCountdown.ToString();
-            if (startCountdown < 0)
-            {
-                levelStartMessage.Visible = false;
-                // set the Level initial values
-                LevelGameTime = new TimeSpan();
-                LevelStartTime = DateTime.UtcNow;
+            LevelGameTime = new TimeSpan();
+            LevelStartTime = DateTime.UtcNow;
 
-                State = PlayerPhysicsState.Idle;
-            }
-        }
+            State = PlayerPhysicsState.Idle;
+        });
     }
 }

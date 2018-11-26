@@ -67,6 +67,7 @@
     <Compile Include="GlobalValues.cs" />
     <Compile Include="hud\Answer.cs" />
     <Compile Include="hud\HUD.cs" />
+    <Compile Include="hud\LevelStartMessage.cs" />
     <Compile Include="hud\Question.cs" />
     <Compile Include="LevelTest.cs" />
     <Compile Include="Main.cs" />
