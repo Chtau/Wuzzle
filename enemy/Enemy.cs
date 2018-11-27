@@ -76,15 +76,15 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
             newAnim = "move";
 
             // shooting
-            /*if (shootTimeout > .5)
+            if (shootTimeout > 2)
             {
                 var bullet = (Bullet)Bullet.Instance();
                 bullet.Position = this.GlobalPosition;
-                bullet.LinearVelocity = new Vector2(sprite.Scale.x * 1000, 0);
+                bullet.LinearVelocity = new Vector2(sprite.Scale.x * 200, -100);
                 bullet.AddCollisionExceptionWith(this);
                 GetParent().AddChild(bullet);
                 shootTimeout = 0;
-            }*/
+            }
         }
         else if (state == State.Killed)
             newAnim = "explode";
