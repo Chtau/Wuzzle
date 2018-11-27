@@ -60,6 +60,7 @@ public class Player : KinematicBody2D
     private ILevelConfiguration levelConfiguration;
     private Spawn spawn;
     private Spawn goal;
+    private LevelFinishedMessage levelFinishedMessage;
 
     public override void _Ready()
     {
@@ -73,6 +74,7 @@ public class Player : KinematicBody2D
         spawn.SpawnType = Spawn.Type.Spawn;
         goal = (Spawn)GetNode("../Goal");
         goal.SpawnType = Spawn.Type.Goal;
+        levelFinishedMessage = (LevelFinishedMessage)GetNode("../LevelFinishedMessage");
         OnLevelLoad();
     }
 
@@ -372,6 +374,13 @@ public class Player : KinematicBody2D
         if (type == Spawn.Type.Goal)
         {
             // level is finished
+            OnLevelFinished();
         }
+    }
+
+    private void OnLevelFinished()
+    {
+        State = PlayerPhysicsState.Waiting;
+        levelFinishedMessage.Show(null);
     }
 }
