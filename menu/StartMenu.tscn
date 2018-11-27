@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://menu/StartMenu.cs" type="Script" id=1]
 [ext_resource path="res://menu/art/title.png" type="Texture" id=2]
 [ext_resource path="res://menu/items/MenuButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestScene.tscn" type="PackedScene" id=4]
 [ext_resource path="res://menu/Options.tscn" type="PackedScene" id=5]
-[ext_resource path="res://menu/art/start_image.png" type="Texture" id=6]
-[ext_resource path="res://menu/FadeIn.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menu/LevelSelect.tscn" type="PackedScene" id=6]
+[ext_resource path="res://menu/KeyMap.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menu/FadeIn.tscn" type="PackedScene" id=8]
 
-[node name="StartMenu" type="Node"]
+[node name="StartMenu" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -89,7 +90,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 379.0
+margin_right = 456.0
 margin_bottom = 427.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -99,58 +100,101 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 20
 alignment = 0
-_sections_unfolded = [ "Margin", "Size Flags", "custom_constants" ]
+_sections_unfolded = [ "Margin", "Rect", "Size Flags", "custom_constants" ]
 
-[node name="NewGame" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="0" instance=ExtResource( 3 )]
+[node name="Start" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="0" instance=ExtResource( 3 )]
 
 margin_top = 0.0
+margin_right = 456.0
 margin_bottom = 47.0
-LabelText = "New Game"
+_sections_unfolded = [ "Rect" ]
+LabelText = "Start"
 Scene = ExtResource( 4 )
 
-[node name="Continue" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="1" instance=ExtResource( 3 )]
+[node name="Options" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="1" instance=ExtResource( 3 )]
 
 margin_top = 67.0
+margin_right = 456.0
 margin_bottom = 114.0
-LabelText = "Continue"
-Scene = ExtResource( 4 )
-
-[node name="Options" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="2" instance=ExtResource( 3 )]
-
-margin_top = 134.0
-margin_bottom = 181.0
 LabelText = "Options"
 Scene = ExtResource( 5 )
 
-[node name="Exit" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="3" instance=ExtResource( 3 )]
+[node name="Exit" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="2" instance=ExtResource( 3 )]
 
-margin_top = 201.0
-margin_bottom = 248.0
+margin_top = 134.0
+margin_right = 456.0
+margin_bottom = 181.0
 LabelText = "Exit"
 Scene = ExtResource( 4 )
 
-[node name="Image" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+[node name="LevelSelect" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource( 6 )]
+
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 460.0
+margin_right = 916.0
+margin_bottom = 427.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="2"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 606.0
+margin_right = 916.0
+margin_bottom = 427.0
+rect_min_size = Vector2( 310, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+scroll_horizontal_enabled = false
+scroll_horizontal = 0
+scroll_vertical_enabled = true
+scroll_vertical = 0
+scroll_deadzone = 0
+_sections_unfolded = [ "Rect", "Scroll", "Size Flags" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 383.0
-margin_right = 916.0
-margin_bottom = 427.0
+margin_right = 310.0
+margin_bottom = 500.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 6 )
-stretch_mode = 0
-_sections_unfolded = [ "Anchor", "Rect" ]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 0
+_sections_unfolded = [ "Size Flags" ]
 
-[node name="FadeIn" parent="." index="1" instance=ExtResource( 7 )]
+[node name="KeyMap" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" index="0" instance=ExtResource( 7 )]
+
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 298.0
+margin_bottom = 500.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="FadeIn" parent="." index="1" instance=ExtResource( 8 )]
 
 visible = false
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/Start" to="." method="OnStartPressed"]
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/Options" to="." method="OnOptionsPressed"]
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/Exit" to="." method="OnExitPressed"]
 
 [connection signal="FadeInFinished" from="FadeIn" to="." method="_on_FadeIn_FadeInFinished"]
 

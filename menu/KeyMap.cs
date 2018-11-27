@@ -8,7 +8,7 @@ public class KeyMap : Node
     public override void _Ready()
     {
         SharedFunctions.Instance.ConfigHandler.LoadConfig();
-        contextualHelp = (Label)GetNode("MarginContainer/VBoxContainer/ContextualHelp");
+        contextualHelp = (Label)GetNode("VBoxContainer/ContextualHelp");
     }
 
     private void OnContextualHelpTextChanged(string text)

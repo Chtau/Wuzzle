@@ -22,7 +22,7 @@ public class MenuButton : Button
 
     public override void _Ready()
     {
-        Connect("pressed", this, nameof(OnButtonPressed));
+        //Connect("pressed", this, nameof(OnButtonPressed));
 
         labelNode = (Label)GetNode("Label");
         OnLabelChange(label);

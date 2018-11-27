@@ -8,11 +8,13 @@ public class LevelSelect : Node
     public PackedScene PackedScene;
 
     private VBoxContainer scrollWrapper;
+    private VBoxContainer container;
 
     public override void _Ready()
     {
         SharedFunctions.Instance.LevelManager.Init();
 
+        container = (VBoxContainer)GetNode("VBoxContainer");
         scrollWrapper = (VBoxContainer)GetNode("VBoxContainer/ScrollContainer/ScrollWrapper");
         scrollWrapper.RemoveChild(scrollWrapper.GetChild(0));
 
@@ -23,6 +25,11 @@ public class LevelSelect : Node
             select.ChangeLevelItem(item);
             scrollWrapper.AddChild(select);
         }
+    }
+
+    public void SetVisible(bool visible)
+    {
+        container.Visible = visible;
     }
 
 }
