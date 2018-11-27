@@ -1,13 +1,7 @@
 using Godot;
 using System;
 
-public class LevelTest : Node, ILevelConfiguration
+public class LevelTest : Node, IID
 {
-    public int RequieredQuestions => 7;
-
-    public TimeSpan GoldTime => TimeSpan.FromMinutes(5);
-
-    public TimeSpan SilverTime => TimeSpan.FromMinutes(7);
-
-    public TimeSpan BronzeTime => TimeSpan.FromMinutes(10);
+    public Guid Id => new Guid("6B8C6BC0-6D53-4FC1-8A7B-18131E651802");
 }

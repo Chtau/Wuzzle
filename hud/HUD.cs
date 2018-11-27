@@ -62,7 +62,7 @@ public class HUD : CanvasLayer
     {
         lifebar.MaxValue = maxLife;
         lifebar.Value = currentLife;
-        timeText.Text = OnFormatTimeSpan(startTime);
+        timeText.Text = SharedFunctions.Instance.FormatTimeSpan(startTime);
     }
 
     private void OnLifeChange(float newValue)
@@ -73,16 +73,11 @@ public class HUD : CanvasLayer
 
     private void OnTimeChange(TimeSpan timeSpan)
     {
-        timeText.Text = OnFormatTimeSpan(timeSpan);
+        timeText.Text = SharedFunctions.Instance.FormatTimeSpan(timeSpan);
     }
 
     private void OnQuestionCountChange(int questionAnswered, int questionTotal)
     {
         questionCountText.Text = questionAnswered + "/" + questionTotal;
-    }
-
-    private string OnFormatTimeSpan(TimeSpan timeSpan)
-    {
-        return timeSpan.ToString("mm':'ss':'fff");
     }
 }

@@ -11,6 +11,6 @@ public class Options : Node
 
     private void OnBackPressed()
     {
-        SharedFunctions.Instance.LoadScene(this, "res://menu/StartMenu.tscn");
+        SharedFunctions.Instance.LoadScene(this, GlobalValues.MainMenuScene);
     }
 }

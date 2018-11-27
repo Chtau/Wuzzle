@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class GameState
+public class GameState : ISingletonHandler
 {
     public event EventHandler<float> CurrentLifeChanged;
     public event EventHandler<float> MaxLifeChanged;
@@ -64,5 +64,10 @@ public class GameState
             levelAnsweredQuestions = value;
             LevelAnsweredQuestionsChanged?.Invoke(this, levelAnsweredQuestions);
         }
+    }
+
+    public void Init()
+    {
+        
     }
 }

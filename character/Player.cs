@@ -57,18 +57,23 @@ public class Player : KinematicBody2D
     private float dashTimeout = 0f;
 
     private LevelStartMessage levelStartMessage;
-    private ILevelConfiguration levelConfiguration;
+    private IID levelConfiguration;
     private Spawn spawn;
     private Spawn goal;
     private LevelFinishedMessage levelFinishedMessage;
 
+    private LevelItem levelItem;
+
     public override void _Ready()
     {
+        SharedFunctions.Instance.LevelManager.Init();
+
         characterSprite = (Sprite)GetNode("Sprite2");
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
         question = (Question)GetNode("../Question");
-        levelConfiguration = (ILevelConfiguration)GetParent();
+        levelConfiguration = (IID)GetParent();
+        levelItem = SharedFunctions.Instance.LevelManager.ById(levelConfiguration.Id);
         levelStartMessage = (LevelStartMessage)GetNode("../LevelStartMessage");
         spawn = (Spawn)GetNode("../Spawn");
         spawn.SpawnType = Spawn.Type.Spawn;
@@ -352,7 +357,7 @@ public class Player : KinematicBody2D
         CurrentLife = 50;
         SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
         SharedFunctions.Instance.GameState.LevelAnsweredQuestions = 0;
-        SharedFunctions.Instance.GameState.LevelRequieredQuestions = levelConfiguration.RequieredQuestions;
+        SharedFunctions.Instance.GameState.LevelRequieredQuestions = levelItem.RequieredQuestions;
 
         levelStartMessage.Show(() =>
         {
@@ -370,8 +375,8 @@ public class Player : KinematicBody2D
 
     public void SpawnEnteredCallback(Spawn.Type type)
     {
-        GD.Print("SpawnEnteredCallback: " + Enum.GetName(typeof(Spawn.Type), type));
-        if (type == Spawn.Type.Goal)
+        if (type == Spawn.Type.Goal && State != PlayerPhysicsState.Waiting
+            && SharedFunctions.Instance.GameState.LevelAnsweredQuestions >= SharedFunctions.Instance.GameState.LevelRequieredQuestions)
         {
             // level is finished
             OnLevelFinished();
@@ -381,6 +386,6 @@ public class Player : KinematicBody2D
     private void OnLevelFinished()
     {
         State = PlayerPhysicsState.Waiting;
-        levelFinishedMessage.Show(null);
+        levelFinishedMessage.Show(levelItem, LevelGameTime);
     }
 }

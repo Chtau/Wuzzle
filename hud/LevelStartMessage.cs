@@ -14,6 +14,8 @@ public class LevelStartMessage : CanvasLayer
         levelStartMessage = (MarginContainer)GetNode("MarginContainer");
         levelStartCountdown = (Label)GetNode("MarginContainer/VBoxContainer/Countdown");
 
+        levelStartCountdown.Text = GlobalValues.LevelStartCountdown.ToString();
+
         levelTimer.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
         levelTimer.Elapsed += LevelTimer_Elapsed;
     }

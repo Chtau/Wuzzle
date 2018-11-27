@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class ConfigHandler
+public class ConfigHandler : ISingletonHandler
 {
     public void LoadConfig()
     {
+        GD.Print("LoadConfig");
         var config = new ConfigFile();
         var err = config.Load(GlobalValues.ConfigFilePath);
         //GD.Print("Config load Code:" + err);
@@ -71,5 +72,10 @@ public class ConfigHandler
         {
             GD.Print("OnSaveConfig Err:" + err);
         }
+    }
+
+    public void Init()
+    {
+        LoadConfig();
     }
 }

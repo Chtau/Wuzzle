@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class FileHandler
+public class FileHandler : ISingletonHandler
 {
     public void Save<T>(T content, string path, string pass = null)
     {
@@ -27,17 +27,27 @@ public class FileHandler
         T retVal = default;
         using (var file = new File())
         {
-            if (!file.FileExists($"user://{path}"))
-                return default;
-
-            if (!string.IsNullOrWhiteSpace(pass))
-                file.OpenEncryptedWithPass($"user://{path}", (int)File.ModeFlags.Read, pass);
-            else
-                file.Open($"user://{path}", (int)File.ModeFlags.Read);
-            retVal = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(file.GetAsText());
-            GD.Print("Load Path:" + file.GetPathAbsolute());
-            file.Close();
+            try
+            {
+                if (!file.FileExists($"user://{path}"))
+                    return default;
+                if (!string.IsNullOrWhiteSpace(pass))
+                    file.OpenEncryptedWithPass($"user://{path}", (int)File.ModeFlags.Read, pass);
+                else
+                    file.Open($"user://{path}", (int)File.ModeFlags.Read);
+                retVal = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(file.GetAsText());
+                GD.Print("Load Path:" + file.GetPathAbsolute());
+                file.Close();
+            } catch (Exception ex)
+            {
+                GD.Print("Load<T> Err: " + ex.ToString());
+            }
         }
         return retVal;
+    }
+
+    public void Init()
+    {
+        
     }
 }

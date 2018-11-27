@@ -18,10 +18,24 @@ public sealed class SharedFunctions
         FileHandler = new FileHandler();
         ConfigHandler = new ConfigHandler();
         GameState = new GameState();
+        LevelManager = new LevelManager();
     }
 
     public static SharedFunctions Instance { get; } = new SharedFunctions();
     #endregion
+
+    private bool initLoaded = false;
+    public void Init()
+    {
+        if (!initLoaded)
+        {
+            FileHandler.Init();
+            ConfigHandler.Init();
+            GameState.Init();
+            LevelManager.Init();
+            initLoaded = true;
+        }
+    }
 
     private Random rand = new Random();
 
@@ -35,6 +49,11 @@ public sealed class SharedFunctions
         return (float)(rand.NextDouble() * (max - min) + min);
     }
 
+    public string FormatTimeSpan(TimeSpan timeSpan)
+    {
+        return timeSpan.ToString("mm':'ss':'fff");
+    }
+
     public FileHandler FileHandler { get; set; }
     public ConfigHandler ConfigHandler { get; set; }
 
@@ -44,4 +63,5 @@ public sealed class SharedFunctions
     }
 
     public GameState GameState { get; set; }
+    public LevelManager LevelManager { get; set; }
 }

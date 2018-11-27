@@ -70,9 +70,11 @@
     <Compile Include="hud\LevelFinishedMessage.cs" />
     <Compile Include="hud\LevelStartMessage.cs" />
     <Compile Include="hud\Question.cs" />
+    <Compile Include="ISingletonHandler.cs" />
+    <Compile Include="LevelManager.cs" />
     <Compile Include="LevelTest.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="map\interfaces\ILevelConfiguration.cs" />
+    <Compile Include="map\interfaces\IID.cs" />
     <Compile Include="map\map1.cs" />
     <Compile Include="map\Spawn.cs" />
     <Compile Include="menu\FadeIn.cs" />
@@ -81,6 +83,8 @@
     <Compile Include="menu\KeyMap.cs" />
     <Compile Include="menu\Options.cs" />
     <Compile Include="menu\StartMenu.cs" />
+    <Compile Include="Models\LevelItem.cs" />
+    <Compile Include="Models\LevelUserItem.cs" />
     <Compile Include="Models\QuestionItem.cs" />
     <Compile Include="pickups\Box.cs" />
     <Compile Include="pickups\coin.cs" />
