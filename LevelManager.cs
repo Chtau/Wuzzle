@@ -35,7 +35,8 @@ public class LevelManager : ISingletonHandler
             RequieredQuestions = 1,
             FinishedCount = UserFinishedCountById(userRecords, new Guid("6B8C6BC0-6D53-4FC1-8A7B-18131E651802")),
             Record = UserRecordTimeSpanById(userRecords, new Guid("6B8C6BC0-6D53-4FC1-8A7B-18131E651802")),
-            LevelTitle = "Test Level-1"
+            LevelTitle = "Test Level-1",
+            LevelDescription = "Internal Test level while Development"
         });
     }
 
@@ -90,4 +91,5 @@ public class LevelManager : ISingletonHandler
         });
         SharedFunctions.Instance.FileHandler.Save(userRecords, GlobalValues.UserRecordsPath);
     }
+
 }
