@@ -23,6 +23,9 @@ public class Bullet : RigidBody2D, IDamager
         if (body is IDamageReceiver receiver)
         {
             receiver.ReceiveHit(HitDamage);
+        } else if (body is Player)
+        {
+
         }
     }
 }

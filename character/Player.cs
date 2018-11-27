@@ -61,6 +61,7 @@ public class Player : KinematicBody2D
     private Spawn spawn;
     private Spawn goal;
     private LevelFinishedMessage levelFinishedMessage;
+    private LevelGameOverMessage levelGameOverMessage;
 
     private LevelItem levelItem;
 
@@ -80,6 +81,7 @@ public class Player : KinematicBody2D
         goal = (Spawn)GetNode("../Goal");
         goal.SpawnType = Spawn.Type.Goal;
         levelFinishedMessage = (LevelFinishedMessage)GetNode("../LevelFinishedMessage");
+        levelGameOverMessage = (LevelGameOverMessage)GetNode("../LevelGameOverMessage");
         OnLevelLoad();
     }
 
@@ -319,18 +321,28 @@ public class Player : KinematicBody2D
 
     public void OnMeleeBodyEnter(object body)
     {
-        if (body is IDamager damager)
+        if (State != PlayerPhysicsState.Waiting)
         {
-            if (damager.HitDamage > 0)
+            if (body is IDamager damager)
             {
-                GD.Print("Player got hit! Dmg:" + damager.HitDamage);
-                CurrentLife += -1 * damager.HitDamage;
-                SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
-                State = PlayerPhysicsState.GotHit;
+                if (damager.HitDamage > 0)
+                {
+                    //GD.Print("Player got hit! Dmg:" + damager.HitDamage);
+                    CurrentLife += -1 * damager.HitDamage;
+                    SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
+                    State = PlayerPhysicsState.GotHit;
+                    if (CurrentLife <= 0)
+                    {
+                        CurrentLife = 0;
+                        SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
+                        OnLevelGameOver();
+                    }
+                }
             }
-        } else
-        {
-            //GD.Print("Melee Body Enter: " + body);
+            else
+            {
+                //GD.Print("Melee Body Enter: " + body);
+            }
         }
     }
 
@@ -387,5 +399,11 @@ public class Player : KinematicBody2D
     {
         State = PlayerPhysicsState.Waiting;
         levelFinishedMessage.Show(levelItem, LevelGameTime);
+    }
+
+    private void OnLevelGameOver()
+    {
+        State = PlayerPhysicsState.Waiting;
+        levelGameOverMessage.Show(levelItem);
     }
 }
