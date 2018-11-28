@@ -30,6 +30,9 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
     private RayCast2D detectWallRight;
     private RayCast2D detectFloorRight;
     private AnimationPlayer animationPlayer;
+    private AnimationPlayer animationSprite;
+    private Sprite shootPoint;
+    private CollisionShape2D collision;
 
     public Guid DashTargetId => Guid.NewGuid();
 
@@ -49,6 +52,9 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
         detectWallRight = (RayCast2D)GetNode("DetectWallRight");
         detectFloorRight = (RayCast2D)GetNode("DetectFloorRight");
         animationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
+        shootPoint = (Sprite)GetNode("ShootPoint");
+        animationSprite = (AnimationPlayer)sprite.GetNode("AnimationPlayer");
+        collision = (CollisionShape2D)GetNode("CollisionShape2D");
     }
 
     public override void _PhysicsProcess(float delta)
@@ -64,41 +70,56 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
 
             linear_velocity = MoveAndSlide(linear_velocity, FloorNormal);
 
-            if (!detectFloorLeft.IsColliding() || detectWallLeft.IsColliding())
+            if (detectWallLeft.IsColliding())
             {
                 direction = 1.0f;
-            }
-            else if (!detectFloorRight.IsColliding() || detectWallRight.IsColliding())
+            } else if (detectWallRight.IsColliding())
+            {
                 direction = -1.0f;
+            }
+            if (!detectFloorLeft.IsColliding())
+            {
+                direction = 1.0f;
+            } else if (!detectFloorRight.IsColliding())
+            {
+                direction = -1.0f;
+            }
 
-            sprite.Scale = new Vector2(direction, 1.0f);
+            if (direction < 0)
+                sprite.Scale = new Vector2(.35f, .35f);
+            else
+                sprite.Scale = new Vector2(-.35f, .35f);
 
-            newAnim = "move";
+            newAnim = "walk";
 
             // shooting
             if (shootTimeout > 2)
             {
                 var bullet = (Bullet)Bullet.Instance();
-                bullet.Position = this.GlobalPosition;
-                bullet.LinearVelocity = new Vector2(sprite.Scale.x * 200, -100);
+                bullet.Position = shootPoint.GlobalPosition;
+                if (direction < 0)
+                    bullet.LinearVelocity = new Vector2(-1f * 200, -100);
+                else
+                    bullet.LinearVelocity = new Vector2(1f * 200, -100);
                 bullet.AddCollisionExceptionWith(this);
                 GetParent().AddChild(bullet);
                 shootTimeout = 0;
             }
         }
         else if (state == State.Killed)
-            newAnim = "explode";
+            newAnim = "killed";
 
         if (anim != newAnim)
         {
             anim = newAnim;
-            animationPlayer.Play(anim);
+            animationSprite.Play(anim);
         }
     }
 
     public void Hit()
     {
         state = State.Killed;
+        collision.Disabled = true;
     }
 
     public void ReceiveHit(float damage)

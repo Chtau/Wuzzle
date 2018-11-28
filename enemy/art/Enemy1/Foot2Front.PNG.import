@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemy.png-0882f830996d77cba0ab10134483cd7c.stex"
+path="res://.import/Foot2Front.PNG-f76a1cf118a85b94ccb0aab9028c222b.stex"
 
 [deps]
 
-source_file="res://enemy/art/enemy.png"
-dest_files=[ "res://.import/enemy.png-0882f830996d77cba0ab10134483cd7c.stex" ]
+source_file="res://enemy/art/Enemy1/Foot2Front.PNG"
+dest_files=[ "res://.import/Foot2Front.PNG-f76a1cf118a85b94ccb0aab9028c222b.stex" ]
 
 [params]
 

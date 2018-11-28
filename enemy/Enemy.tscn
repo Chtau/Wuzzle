@@ -1,12 +1,12 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://enemy/Enemy.cs" type="Script" id=1]
-[ext_resource path="res://enemy/art/enemy.png" type="Texture" id=2]
+[ext_resource path="res://enemy/Enemy1.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 15.0
+radius = 14.3629
 height = 12.0
 
 [sub_resource type="Animation" id=2]
@@ -15,49 +15,13 @@ resource_name = "explode"
 length = 5.0
 loop = false
 step = 0.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 3.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 180.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 2.6, 3.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 4.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -71,36 +35,12 @@ tracks/3/keys = {
 length = 6.75
 loop = true
 step = 0.75
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.75, 1.5, 2.25, 3, 3.75, 4.5, 5.25, 6, 6.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 6, 5, 6, 5, 6, 7, 6, 7, 5 ]
-}
 
 [sub_resource type="Animation" id=4]
 
 length = 1.25
 loop = true
 step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 0 ]
-}
 
 [node name="Enemy" type="KinematicBody2D"]
 
@@ -109,16 +49,14 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "collision" ]
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collision" ]
 Bullet = null
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="0" instance=ExtResource( 2 )]
 
-texture = ExtResource( 2 )
-flip_h = true
-hframes = 8
-frame = 1
-_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
+position = Vector2( -1.42697, 0.71347 )
+scale = Vector2( 0.35, 0.35 )
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
@@ -159,7 +97,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="DetectWallRight" type="RayCast2D" parent="." index="5"]
 
-position = Vector2( 3.2788, -0.381488 )
+position = Vector2( 3.9923, -0.381489 )
 rotation = -1.5708
 enabled = true
 exclude_parent = true
@@ -188,5 +126,9 @@ pause_animated_sprites = true
 process_parent = false
 physics_process_parent = false
 _sections_unfolded = [ "Transform" ]
+
+[node name="ShootPoint" type="Sprite" parent="." index="8"]
+
+position = Vector2( -6.18347, -24.9718 )
 
 
