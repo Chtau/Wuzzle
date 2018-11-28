@@ -11,7 +11,7 @@
 [ext_resource path="res://hud/LevelGameOverMessage.tscn" type="PackedScene" id=9]
 [ext_resource path="res://map/Spawn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://character/Player.tscn" type="PackedScene" id=11]
-[ext_resource path="res://levels/art/LevelBackground.png" type="Texture" id=12]
+[ext_resource path="res://levels/Background.tscn" type="PackedScene" id=12]
 
 [node name="Level1" type="Node" index="0"]
 
@@ -91,12 +91,6 @@ position = Vector2( -180.107, -229.776 )
 
 position = Vector2( 362.001, 302.001 )
 
-[node name="Sprite" type="Sprite" parent="." index="4"]
-
-position = Vector2( 2383.57, -550.698 )
-scale = Vector2( 1.83327, 3.61573 )
-z_index = -1
-texture = ExtResource( 12 )
-_sections_unfolded = [ "Z Index" ]
+[node name="Background" parent="." index="4" instance=ExtResource( 12 )]
 
 
