@@ -1,13 +1,31 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://map/art/Tileset_Fill.png" type="Texture" id=1]
-[ext_resource path="res://map/art/Tileset_Diag.png" type="Texture" id=2]
-[ext_resource path="res://map/art/Tileset_Diag_Mirror.png" type="Texture" id=3]
+[ext_resource path="res://map/art/Tileset_Flat.png" type="Texture" id=2]
+[ext_resource path="res://map/art/Tileset_Flat_1010.png" type="Texture" id=3]
+[ext_resource path="res://map/art/Tileset_Flat_1001.png" type="Texture" id=4]
+[ext_resource path="res://map/art/Tileset_Flat_1110.png" type="Texture" id=5]
+[ext_resource path="res://map/art/Tileset_Fill_0100.png" type="Texture" id=6]
+[ext_resource path="res://map/art/Tileset_Fill_1.png" type="Texture" id=7]
+[ext_resource path="res://map/art/Tileset_Fill_2.png" type="Texture" id=8]
+[ext_resource path="res://map/art/Tileset_Flat_1111.png" type="Texture" id=9]
+[ext_resource path="res://map/art/Tileset_Flat_1_1.png" type="Texture" id=10]
+[ext_resource path="res://map/art/Tileset_Flat_1_2.png" type="Texture" id=11]
+[ext_resource path="res://map/art/Tileset_Flat_1_3.png" type="Texture" id=12]
+[ext_resource path="res://map/art/Tileset_Up.png" type="Texture" id=13]
+[ext_resource path="res://map/art/Tileset_Up_101.png" type="Texture" id=14]
+[ext_resource path="res://map/art/Tileset_Up_110.png" type="Texture" id=15]
+[ext_resource path="res://map/art/Tileset_Up_111.png" type="Texture" id=16]
+[ext_resource path="res://map/art/Tileset_Down.png" type="Texture" id=17]
+[ext_resource path="res://map/art/Tileset_Down_110.png" type="Texture" id=18]
+[ext_resource path="res://map/art/Tileset_Down_111.png" type="Texture" id=19]
+[ext_resource path="res://map/art/Tileset_Down_101.png" type="Texture" id=20]
 
 [node name="Tileset" type="Node"]
 
 [node name="Fill" type="Sprite" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( 35, 35 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -27,10 +45,253 @@ bounce = 0.0
 build_mode = 0
 polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
 
-[node name="Ramp Up" type="Sprite" parent="." index="1"]
+[node name="Flat" type="Sprite" parent="." index="1"]
 
-position = Vector2( 105, 35 )
+editor/display_folded = true
+position = Vector2( 245, 35 )
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Flat" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flat/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Flat1010" type="Sprite" parent="." index="2"]
+
+editor/display_folded = true
+position = Vector2( 315, 35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Flat1010" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flat1010/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Flat1001" type="Sprite" parent="." index="3"]
+
+editor/display_folded = true
+position = Vector2( 385, 35 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Flat1001" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flat1001/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Flat1110" type="Sprite" parent="." index="4"]
+
+editor/display_folded = true
+position = Vector2( 455, 35 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Flat1110" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flat1110/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Fill0100" type="Sprite" parent="." index="5"]
+
+editor/display_folded = true
+position = Vector2( 455, 105 )
+texture = ExtResource( 6 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Fill0100" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Fill0100/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Fill1" type="Sprite" parent="." index="6"]
+
+editor/display_folded = true
+position = Vector2( 525, 105 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Fill1" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Fill1/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Fill2" type="Sprite" parent="." index="7"]
+
+editor/display_folded = true
+position = Vector2( 595, 105 )
+texture = ExtResource( 8 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Fill2" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Fill2/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Flat1111" type="Sprite" parent="." index="8"]
+
+editor/display_folded = true
+position = Vector2( 525, 35 )
+texture = ExtResource( 9 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Flat1111" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flat1111/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Flat_1_1" type="Sprite" parent="." index="9"]
+
+editor/display_folded = true
+position = Vector2( 595, 35 )
+texture = ExtResource( 10 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Flat_1_1" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flat_1_1/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Flat_1_2" type="Sprite" parent="." index="10"]
+
+editor/display_folded = true
+position = Vector2( 655, 35 )
+texture = ExtResource( 11 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Flat_1_2" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flat_1_2/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Flat_1_3" type="Sprite" parent="." index="11"]
+
+editor/display_folded = true
+position = Vector2( 725, 35 )
+texture = ExtResource( 12 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Flat_1_3" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flat_1_3/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, 25, -25, 25, 25, -25, 25 )
+
+[node name="Ramp Up" type="Sprite" parent="." index="12"]
+
+editor/display_folded = true
+position = Vector2( 105, 35 )
+texture = ExtResource( 13 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Ramp Up" index="0"]
@@ -48,10 +309,77 @@ bounce = 0.0
 build_mode = 0
 polygon = PoolVector2Array( -25, 25, 25, 25, 25, -25 )
 
-[node name="Ramp Down" type="Sprite" parent="." index="2"]
+[node name="Ramp Up101" type="Sprite" parent="." index="13"]
 
+editor/display_folded = true
+position = Vector2( 245, 106 )
+texture = ExtResource( 14 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ramp Up101" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ramp Up101/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, 25, 25, 25, 25, -25 )
+
+[node name="Ramp Up110" type="Sprite" parent="." index="14"]
+
+editor/display_folded = true
+position = Vector2( 315, 106 )
+texture = ExtResource( 15 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ramp Up110" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ramp Up110/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, 25, 25, 25, 25, -25 )
+
+[node name="Ramp Up111" type="Sprite" parent="." index="15"]
+
+editor/display_folded = true
+position = Vector2( 385, 106 )
+texture = ExtResource( 16 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ramp Up111" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ramp Up111/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, 25, 25, 25, 25, -25 )
+
+[node name="Ramp Down" type="Sprite" parent="." index="16"]
+
+editor/display_folded = true
 position = Vector2( 175, 35 )
-texture = ExtResource( 3 )
+texture = ExtResource( 17 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Ramp Down" index="0"]
@@ -65,6 +393,72 @@ friction = 1.0
 bounce = 0.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ramp Down/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, -25, 25, 25, 25 )
+
+[node name="Ramp Down110" type="Sprite" parent="." index="17"]
+
+editor/display_folded = true
+position = Vector2( 35, 106 )
+texture = ExtResource( 18 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ramp Down110" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ramp Down110/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, -25, 25, 25, 25 )
+
+[node name="Ramp Down111" type="Sprite" parent="." index="18"]
+
+editor/display_folded = true
+position = Vector2( 105, 106 )
+texture = ExtResource( 19 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ramp Down111" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ramp Down111/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -25, -25, -25, 25, 25, 25 )
+
+[node name="Ramp Down101" type="Sprite" parent="." index="19"]
+
+editor/display_folded = true
+position = Vector2( 175, 106 )
+texture = ExtResource( 20 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ramp Down101" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ramp Down101/StaticBody2D" index="0"]
 
 build_mode = 0
 polygon = PoolVector2Array( -25, -25, -25, 25, 25, 25 )

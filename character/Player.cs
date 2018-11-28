@@ -39,7 +39,7 @@ public class Player : KinematicBody2D
     Vector2 FloorNormal = new Vector2(0, -1);
     const float SlopeSlideStop = 25.0f;
     const float MinOnAirTime = 0.1f;
-    const int WalkSpeed = 250; // pixels/sec
+    const int WalkSpeed = 350; // pixels/sec
     const int JumpSpeed = 480;
     const int SidingChangeSpeed = 10;
 

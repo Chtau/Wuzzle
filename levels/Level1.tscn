@@ -11,7 +11,7 @@
 [ext_resource path="res://hud/LevelGameOverMessage.tscn" type="PackedScene" id=9]
 [ext_resource path="res://map/Spawn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://character/Player.tscn" type="PackedScene" id=11]
-[ext_resource path="res://levels/Background.tscn" type="PackedScene" id=12]
+[ext_resource path="res://levels/ParallaxBackground.tscn" type="PackedScene" id=12]
 
 [node name="Level1" type="Node" index="0"]
 
@@ -25,7 +25,7 @@ script = ExtResource( 1 )
 
 position = Vector2( 3123.13, 533.968 )
 scale = Vector2( 0.3, 0.3 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="QuestionStand4" parent="Questions" index="1" instance=ExtResource( 3 )]
 
@@ -91,6 +91,6 @@ position = Vector2( -180.107, -229.776 )
 
 position = Vector2( 362.001, 302.001 )
 
-[node name="Background" parent="." index="4" instance=ExtResource( 12 )]
+[node name="ParallaxBackground" parent="." index="4" instance=ExtResource( 12 )]
 
 
