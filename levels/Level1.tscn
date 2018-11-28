@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://levels/Level1.cs" type="Script" id=1]
 [ext_resource path="res://map/MapLVL1.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://hud/LevelGameOverMessage.tscn" type="PackedScene" id=9]
 [ext_resource path="res://map/Spawn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://character/Player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/art/LevelBackground.png" type="Texture" id=12]
 
 [node name="Level1" type="Node" index="0"]
 
@@ -44,7 +45,13 @@ position = Vector2( 4748.51, 84.1677 )
 scale = Vector2( 0.3, 0.3 )
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="QuestionStand3" parent="Questions" index="4" instance=ExtResource( 3 )]
+[node name="QuestionStand6" parent="Questions" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 3569.92, 234.223 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand3" parent="Questions" index="5" instance=ExtResource( 3 )]
 
 position = Vector2( 4758.55, 434.768 )
 scale = Vector2( 0.3, 0.3 )
@@ -83,5 +90,13 @@ position = Vector2( -180.107, -229.776 )
 [node name="Player" parent="LevelNodes" index="7" instance=ExtResource( 11 )]
 
 position = Vector2( 362.001, 302.001 )
+
+[node name="Sprite" type="Sprite" parent="." index="4"]
+
+position = Vector2( 2383.57, -550.698 )
+scale = Vector2( 1.83327, 3.61573 )
+z_index = -1
+texture = ExtResource( 12 )
+_sections_unfolded = [ "Z Index" ]
 
 

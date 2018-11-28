@@ -16,8 +16,10 @@ public class LevelStartMessage : CanvasLayer
 
         levelStartCountdown.Text = GlobalValues.LevelStartCountdown.ToString();
 
+        levelStartMessage.Visible = true;
         levelTimer.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
         levelTimer.Elapsed += LevelTimer_Elapsed;
+        LevelTimer_Elapsed(this, null);
     }
 
     public void Show(Action callback)
