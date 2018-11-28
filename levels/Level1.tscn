@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://levels/Level1.cs" type="Script" id=1]
+[ext_resource path="res://map/MapLVL1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://pickups/QuestionStand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://items/Spikes.tscn" type="PackedScene" id=4]
+[ext_resource path="res://hud/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://hud/Question.tscn" type="PackedScene" id=6]
+[ext_resource path="res://hud/LevelStartMessage.tscn" type="PackedScene" id=7]
+[ext_resource path="res://hud/LevelFinishedMessage.tscn" type="PackedScene" id=8]
+[ext_resource path="res://hud/LevelGameOverMessage.tscn" type="PackedScene" id=9]
+[ext_resource path="res://map/Spawn.tscn" type="PackedScene" id=10]
+[ext_resource path="res://character/Player.tscn" type="PackedScene" id=11]
+
+[node name="Level1" type="Node" index="0"]
+
+script = ExtResource( 1 )
+
+[node name="MapLVL1" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="Questions" type="Node" parent="." index="1"]
+
+[node name="QuestionStand" parent="Questions" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 3123.13, 533.968 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="QuestionStand4" parent="Questions" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 1296.46, 384.153 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand5" parent="Questions" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 648.459, -265.849 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand2" parent="Questions" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 4748.51, 84.1677 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand3" parent="Questions" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 4758.55, 434.768 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="Traps" type="Node" parent="." index="2"]
+
+[node name="Spikes" parent="Traps" index="0" instance=ExtResource( 4 )]
+
+position = Vector2( 1024, 523.002 )
+scale = Vector2( 0.6, 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="LevelNodes" type="Node" parent="." index="3"]
+
+editor/display_folded = true
+
+[node name="HUD" parent="LevelNodes" index="0" instance=ExtResource( 5 )]
+
+[node name="Question" parent="LevelNodes" index="1" instance=ExtResource( 6 )]
+
+[node name="LevelStartMessage" parent="LevelNodes" index="2" instance=ExtResource( 7 )]
+
+[node name="LevelFinishedMessage" parent="LevelNodes" index="3" instance=ExtResource( 8 )]
+
+[node name="LevelGameOverMessage" parent="LevelNodes" index="4" instance=ExtResource( 9 )]
+
+[node name="Spawn" parent="LevelNodes" index="5" instance=ExtResource( 10 )]
+
+position = Vector2( 113.855, 369.784 )
+
+[node name="Goal" parent="LevelNodes" index="6" instance=ExtResource( 10 )]
+
+position = Vector2( -180.107, -229.776 )
+
+[node name="Player" parent="LevelNodes" index="7" instance=ExtResource( 11 )]
+
+position = Vector2( 362.001, 302.001 )
+
+

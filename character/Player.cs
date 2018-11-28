@@ -73,7 +73,7 @@ public class Player : KinematicBody2D
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
         question = (Question)GetNode("../Question");
-        levelConfiguration = (IID)GetParent();
+        levelConfiguration = (IID)GetParent().GetParent();
         levelItem = SharedFunctions.Instance.LevelManager.ById(levelConfiguration.Id);
         levelStartMessage = (LevelStartMessage)GetNode("../LevelStartMessage");
         spawn = (Spawn)GetNode("../Spawn");

@@ -38,6 +38,21 @@ public class LevelManager : ISingletonHandler
             LevelTitle = "Test Level-1",
             LevelDescription = "Internal Test level while Development"
         });
+
+        Levels.Add(new LevelItem
+        {
+            Id = new Guid("85DDBFAB-5208-4F7D-82A9-8FB224CB5403"),
+            BronzeTime = TimeSpan.FromMinutes(10),
+            SilverTime = TimeSpan.FromMinutes(7),
+            GoldTime = TimeSpan.FromMinutes(5),
+            ScenePath = "res://levels/Level1.tscn",
+            Order = 1,
+            RequieredQuestions = 3,
+            FinishedCount = UserFinishedCountById(userRecords, new Guid("85DDBFAB-5208-4F7D-82A9-8FB224CB5403")),
+            Record = UserRecordTimeSpanById(userRecords, new Guid("85DDBFAB-5208-4F7D-82A9-8FB224CB5403")),
+            LevelTitle = "Level 1",
+            LevelDescription = "Fast and easy level to start off"
+        });
     }
 
     private TimeSpan? UserRecordTimeSpanById(List<LevelUserItem> userRecords, Guid id)

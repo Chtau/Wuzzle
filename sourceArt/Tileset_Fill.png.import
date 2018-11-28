@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/custom_sonic_item_custom_monitor_sprites_by_danielmania123-dbcaic3.png-6ad5f24ff08e1234b44c4c66ded62612.stex"
+path="res://.import/Tileset_Fill.png-928420279208b6b6a341792069f679bd.stex"
 
 [deps]
 
-source_file="res://pickups/art/custom_sonic_item_custom_monitor_sprites_by_danielmania123-dbcaic3.png"
-dest_files=[ "res://.import/custom_sonic_item_custom_monitor_sprites_by_danielmania123-dbcaic3.png-6ad5f24ff08e1234b44c4c66ded62612.stex" ]
+source_file="res://sourceArt/Tileset_Fill.png"
+dest_files=[ "res://.import/Tileset_Fill.png-928420279208b6b6a341792069f679bd.stex" ]
 
 [params]
 

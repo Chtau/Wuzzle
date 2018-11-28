@@ -3,7 +3,7 @@
 [ext_resource path="res://hud/LevelStartMessage.cs" type="Script" id=1]
 [ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=2]
 
-[node name="LevelStartMessage" type="CanvasLayer"]
+[node name="LevelStartMessage" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -14,6 +14,7 @@ script = ExtResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="." index="0"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
