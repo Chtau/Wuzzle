@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://enemy/Enemy.cs" type="Script" id=1]
 [ext_resource path="res://enemy/Enemy1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assests/audio/mutantdie.wav" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -130,5 +131,14 @@ _sections_unfolded = [ "Transform" ]
 [node name="ShootPoint" type="Sprite" parent="." index="8"]
 
 position = Vector2( -6.18347, -24.9718 )
+
+[node name="SFX" type="AudioStreamPlayer" parent="." index="9"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 

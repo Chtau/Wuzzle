@@ -33,6 +33,7 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
     private AnimationPlayer animationSprite;
     private Sprite shootPoint;
     private CollisionShape2D collision;
+    private AudioStreamPlayer sfx;
 
     public Guid DashTargetId => Guid.NewGuid();
 
@@ -55,6 +56,22 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
         shootPoint = (Sprite)GetNode("ShootPoint");
         animationSprite = (AnimationPlayer)sprite.GetNode("AnimationPlayer");
         collision = (CollisionShape2D)GetNode("CollisionShape2D");
+        sfx = (AudioStreamPlayer)GetNode("SFX");
+
+        sfx.VolumeDb = SharedFunctions.Instance.AudioManager.SFXDB;
+        SharedFunctions.Instance.AudioManager.SFXDBChanged += AudioManager_SFXDBChanged;
+    }
+
+    public override void _ExitTree()
+    {
+        SharedFunctions.Instance.AudioManager.SFXDBChanged -= AudioManager_SFXDBChanged;
+        base._ExitTree();
+    }
+
+    private void AudioManager_SFXDBChanged(object sender, float e)
+    {
+        if (sfx != null)
+            sfx.VolumeDb = e;
     }
 
     public override void _PhysicsProcess(float delta)
@@ -120,6 +137,8 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
     {
         state = State.Killed;
         collision.Disabled = true;
+        sfx.Play();
+        SharedFunctions.Instance.AudioManager.SFXDBChanged -= AudioManager_SFXDBChanged;
     }
 
     public void ReceiveHit(float damage)
