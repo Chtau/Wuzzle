@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/particl.png-0896d9c32baccec656bfc1a65b45a198.stex"
+path="res://.import/Character_Dash_Particle.png-bc275cb04db84678d932662f59df7729.stex"
 
 [deps]
 
-source_file="res://character/art/particl.png"
-dest_files=[ "res://.import/particl.png-0896d9c32baccec656bfc1a65b45a198.stex" ]
+source_file="res://character/art/Character_Dash_Particle.png"
+dest_files=[ "res://.import/Character_Dash_Particle.png-bc275cb04db84678d932662f59df7729.stex" ]
 
 [params]
 

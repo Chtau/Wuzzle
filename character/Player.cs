@@ -292,12 +292,14 @@ public class Player : KinematicBody2D
                 else
                     new_anim = "fall";
             }
+            if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Dash))
+                new_anim = "dash";
             if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
                 new_anim = "strike";
 
             //GD.Print("State: " + Enum.GetName(typeof(PlayerPhysicsState), State));
 
-            if (new_anim != anim)
+            if (allowAnimation && new_anim != anim)
             {
                 if (State == PlayerPhysicsState.Strike)
                 {
@@ -313,8 +315,17 @@ public class Player : KinematicBody2D
                         if (anim != "strike")
                         {
                             anim = "strike";
+                            allowAnimation = false;
                             characterAnimationPlayer.Play(anim, -1, 5);
                         }
+                    }
+                } else if (State == PlayerPhysicsState.Dash)
+                {
+                    if (anim != "dash")
+                    {
+                        anim = "dash";
+                        allowAnimation = false;
+                        characterAnimationPlayer.Play(anim, -1, 5);
                     }
                 }
                 else
@@ -414,12 +425,18 @@ public class Player : KinematicBody2D
         levelGameOverMessage.Show(levelItem);
     }
 
+    private bool allowAnimation = true;
     private void OnAnimationFinished(string animation)
     {
-        if (animation == "strike" && State == PlayerPhysicsState.Strike)
+        if (animation == "strike")
         {
             State = PlayerPhysicsState.Idle;
             strikeTime = 0f;
+            allowAnimation = true;
+        } else if (animation == "dash")
+        {
+            State = PlayerPhysicsState.Idle;
+            allowAnimation = true;
         }
     }
 }
