@@ -3,14 +3,24 @@ using System;
 
 public class Audio : Node
 {
+    const string PlayerHit = "res://assests/audio/skweak1.wav";
+
+    public enum SFX
+    {
+        Hit
+    }
+
     private AudioStreamPlayer sfx;
     private AudioStreamPlayer backgroundMusic;
     private bool playBackground;
+    private AudioStream playerHitResource;
 
     public override void _Ready()
     {
         backgroundMusic = (AudioStreamPlayer)GetNode("BackgroundMusic");
         sfx = (AudioStreamPlayer)GetNode("SFX");
+
+        playerHitResource = (AudioStream)GD.Load(PlayerHit);
 
         SharedFunctions.Instance.AudioManager.BackgroundMusicDBChanged += AudioManager_BackgroundMusicChanged;
         SharedFunctions.Instance.AudioManager.SFXDBChanged += AudioManager_SFXDBChanged;
@@ -69,5 +79,14 @@ public class Audio : Node
     {
         backgroundMusic.VolumeDb = SharedFunctions.Instance.AudioManager.BackgroundMusicDB;
         backgroundMusic.Play(SharedFunctions.Instance.AudioManager.BackgroundMusicPosition);
+    }
+
+    public void PlaySFX(SFX sFX)
+    {
+        if (!sfx.IsPlaying())
+        {
+            sfx.Stream = playerHitResource;
+            sfx.Play();
+        }
     }
 }

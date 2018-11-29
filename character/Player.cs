@@ -367,6 +367,7 @@ public class Player : KinematicBody2D
                     CurrentLife += -1 * damager.HitDamage;
                     SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
                     State = PlayerPhysicsState.GotHit;
+                    audio.PlaySFX(Audio.SFX.Hit);
                     if (CurrentLife <= 0)
                     {
                         CurrentLife = 0;
