@@ -19,6 +19,7 @@ public sealed class SharedFunctions
         ConfigHandler = new ConfigHandler();
         GameState = new GameState();
         LevelManager = new LevelManager();
+        AudioManager = new AudioManager();
     }
 
     public static SharedFunctions Instance { get; } = new SharedFunctions();
@@ -33,6 +34,7 @@ public sealed class SharedFunctions
             ConfigHandler.Init();
             GameState.Init();
             LevelManager.Init();
+            AudioManager.Init();
             initLoaded = true;
         }
     }
@@ -64,4 +66,5 @@ public sealed class SharedFunctions
 
     public GameState GameState { get; set; }
     public LevelManager LevelManager { get; set; }
+    public AudioManager AudioManager { get; set; }
 }

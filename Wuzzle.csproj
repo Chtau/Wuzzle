@@ -55,6 +55,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio.cs" />
+    <Compile Include="AudioManager.cs" />
     <Compile Include="character\Interfaces\IDamager.cs" />
     <Compile Include="character\Interfaces\IDamageReceiver.cs" />
     <Compile Include="character\Player.cs" />

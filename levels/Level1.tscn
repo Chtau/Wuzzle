@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://levels/Level1.cs" type="Script" id=1]
 [ext_resource path="res://map/MapLVL1.tscn" type="PackedScene" id=2]
@@ -11,9 +11,10 @@
 [ext_resource path="res://hud/LevelGameOverMessage.tscn" type="PackedScene" id=9]
 [ext_resource path="res://map/Spawn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://character/Player.tscn" type="PackedScene" id=11]
-[ext_resource path="res://levels/ParallaxBackground.tscn" type="PackedScene" id=12]
-[ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=13]
-[ext_resource path="res://enemy/Bullet.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Audio.tscn" type="PackedScene" id=12]
+[ext_resource path="res://levels/ParallaxBackground.tscn" type="PackedScene" id=13]
+[ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=14]
+[ext_resource path="res://enemy/Bullet.tscn" type="PackedScene" id=15]
 
 [node name="Level1" type="Node" index="0"]
 
@@ -91,33 +92,35 @@ position = Vector2( -180.107, -224.776 )
 
 position = Vector2( 362.001, 302.001 )
 
-[node name="ParallaxBackground" parent="." index="4" instance=ExtResource( 12 )]
+[node name="Audio" parent="LevelNodes" index="8" instance=ExtResource( 12 )]
+
+[node name="ParallaxBackground" parent="." index="4" instance=ExtResource( 13 )]
 
 [node name="Enemies" type="Node" parent="." index="5"]
 
-[node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 13 )]
+[node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 14 )]
 
 position = Vector2( 749.244, 377.463 )
-Bullet = ExtResource( 14 )
+Bullet = ExtResource( 15 )
 
-[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource( 13 )]
+[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource( 14 )]
 
 position = Vector2( 1064.91, -217.124 )
-Bullet = ExtResource( 14 )
+Bullet = ExtResource( 15 )
 
-[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource( 13 )]
+[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource( 14 )]
 
 position = Vector2( 4076.26, 227.146 )
-Bullet = ExtResource( 14 )
+Bullet = ExtResource( 15 )
 
-[node name="Enemy4" parent="Enemies" index="3" instance=ExtResource( 13 )]
+[node name="Enemy4" parent="Enemies" index="3" instance=ExtResource( 14 )]
 
 position = Vector2( 2978.95, 223.805 )
-Bullet = ExtResource( 14 )
+Bullet = ExtResource( 15 )
 
-[node name="Enemy5" parent="Enemies" index="4" instance=ExtResource( 13 )]
+[node name="Enemy5" parent="Enemies" index="4" instance=ExtResource( 14 )]
 
 position = Vector2( 4649.13, 80.1692 )
-Bullet = ExtResource( 14 )
+Bullet = ExtResource( 15 )
 
 

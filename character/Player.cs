@@ -64,6 +64,7 @@ public class Player : KinematicBody2D
     private LevelGameOverMessage levelGameOverMessage;
     private Area2D gotHitArea;
     private CollisionShape2D gotHitCollision;
+    private Audio audio;
 
     private LevelItem levelItem;
 
@@ -88,11 +89,13 @@ public class Player : KinematicBody2D
         levelGameOverMessage = (LevelGameOverMessage)GetNode("../LevelGameOverMessage");
         gotHitArea = (Area2D)GetNode("Area2D");
         gotHitCollision = (CollisionShape2D)GetNode("Area2D/CollisionShape2D");
+        audio = (Audio)GetNode("../Audio");
         OnLevelLoad();
     }
 
     public override void _ExitTree()
     {
+        audio.PauseBackground();
         SharedFunctions.Instance.GameState.LevelAnsweredQuestionsChanged -= GameState_LevelAnsweredQuestionsChanged;
         base._ExitTree();
     }
@@ -404,13 +407,14 @@ public class Player : KinematicBody2D
         SharedFunctions.Instance.GameState.LevelAnsweredQuestions = 0;
         SharedFunctions.Instance.GameState.LevelRequieredQuestions = levelItem.RequieredQuestions;
 
+        audio.PlayBackground();
         spawn.Active();
 
         levelStartMessage.Show(() =>
         {
             LevelGameTime = new TimeSpan();
             LevelStartTime = DateTime.UtcNow;
-
+            
             State = PlayerPhysicsState.Idle;
             spawn.Deactivated();
         });
