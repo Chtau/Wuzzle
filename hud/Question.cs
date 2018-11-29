@@ -24,7 +24,7 @@ public class Question : CanvasLayer
     {
         panel = (Panel)GetNode("Panel");
         panel.Visible = false;
-        question = (Label)GetNode("Panel/VBoxContainer/QuestionBox/QuestionLabel");
+        question = (Label)GetNode("Panel/VBoxContainer/QuestionLabel");
         answer1 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox");
         answer2 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox2");
         answer3 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox3");
@@ -53,8 +53,7 @@ public class Question : CanvasLayer
                 questionTimeout.Value = 0;
                 questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
                 ResetQuestion();
-                questionQueue.Remove(question);
-                currentQuestionId = Guid.Empty;
+                HandleAnswer(question.Id, false);
             }
             else
             {
@@ -159,6 +158,7 @@ public class Question : CanvasLayer
 
     private void ResetQuestion()
     {
+        questionTime = new TimeSpan();
         panel.Visible = false;
         timer.Stop();
     }
