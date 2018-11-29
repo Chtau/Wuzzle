@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 public class AudioManager : ISingletonHandler
 {
+    // TODO: for SFX use only .wav format because this will not loop
+
     public float BackgroundMusicPosition { get; set; }
     public event EventHandler<float> BackgroundMusicDBChanged;
     public event EventHandler<float> SFXDBChanged;
