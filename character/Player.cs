@@ -53,7 +53,6 @@ public class Player : KinematicBody2D
     CollisionShape2D CollisionShape2D;
     Question question;
 
-    private float gotHitSpeed = 0f;
     private float dashTimeout = 0f;
 
     private LevelStartMessage levelStartMessage;
@@ -85,6 +84,7 @@ public class Player : KinematicBody2D
         spawn.SpawnType = Spawn.Type.Spawn;
         goal = (Spawn)GetNode("../Goal");
         goal.SpawnType = Spawn.Type.Goal;
+        goal.Deactivated();
         levelFinishedMessage = (LevelFinishedMessage)GetNode("../LevelFinishedMessage");
         levelGameOverMessage = (LevelGameOverMessage)GetNode("../LevelGameOverMessage");
         gotHitArea = (Area2D)GetNode("Area2D");
@@ -144,36 +144,9 @@ public class Player : KinematicBody2D
             {
                 if (gotHitTime > .5)
                 {
-                    //gotHitCollision.Disabled = false;
                     State = PlayerPhysicsState.Idle;
                     gotHitTime = 0f;
                     linear_vel.x = 0;
-                    gotHitSpeed = 0f;
-                }
-                else
-                {
-                    //gotHitCollision.Disabled = true;
-                    if (gotHitTime == 0)
-                    {
-                        /*if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
-                        {
-                            gotHitSpeed += 1;
-                        }
-                        if (Input.IsActionPressed(GlobalValues.Keymap_Move_Right))
-                        {
-                            gotHitSpeed += -1;
-                        }*/
-                    }
-                    /*gotHitTime += delta;
-
-
-
-                    linear_vel.x = Mathf.Lerp(linear_vel.x, gotHitSpeed * WalkSpeed, 0.1f);
-                    linear_vel += delta * GravityVector;
-
-                    linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
-
-                    return;*/
                 }
             }
 
@@ -316,21 +289,17 @@ public class Player : KinematicBody2D
             if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
                 new_anim = "strike";
 
-            //GD.Print("State: " + Enum.GetName(typeof(PlayerPhysicsState), State));
-
             if (allowAnimation && new_anim != anim)
             {
                 if (State == PlayerPhysicsState.Strike)
                 {
                     if (strikeTime > .5)
                     {
-                        //GD.Print("Striketime: " + strikeTime);
                         State = PlayerPhysicsState.Idle;
                         strikeTime = 0f;
                     }
                     else
                     {
-                        //GD.Print("Striketime: " + strikeTime);
                         if (anim != "strike")
                         {
                             anim = "strike";

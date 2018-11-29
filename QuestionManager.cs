@@ -608,7 +608,6 @@ public class QuestionManager : ISingletonHandler
         {
             current = q.ElementAt(SharedFunctions.Instance.RandRand(0, q.Count()));
         }
-        //alreadyAnswered.Add(current.Id);
         return current;
     }
 
