@@ -1,12 +1,52 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://map/Spawn.cs" type="Script" id=1]
-[ext_resource path="res://map/art/LevelTor.png" type="Texture" id=2]
+[ext_resource path="res://map/art/LevelTor/Outer.PNG" type="Texture" id=2]
+[ext_resource path="res://map/art/LevelTor/Innerbackground.PNG" type="Texture" id=3]
+[ext_resource path="res://map/art/LevelTor/Inner.PNG" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 4.33832
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "active"
+length = 0.6
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background/Inner:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.313726 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+
+resource_name = "idle"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background/Inner:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Spawn" type="Area2D"]
 
@@ -23,18 +63,41 @@ audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Visibility" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="Background" type="Sprite" parent="." index="0"]
 
 position = Vector2( 0.825294, -23.4109 )
 scale = Vector2( 0.44, 0.44 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
+[node name="InnerBackground" type="Sprite" parent="Background" index="0"]
+
+position = Vector2( -2.12766, 10.0434 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 3 )
+
+[node name="Inner" type="Sprite" parent="Background" index="1"]
+
+position = Vector2( -1.00047, 9.3783 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Visibility" ]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 position = Vector2( 1.40647, -11.1366 )
 scale = Vector2( 1.98279, 2.50613 )
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/active = SubResource( 3 )
+anims/idle = SubResource( 2 )
+blend_times = [  ]
 
 [connection signal="body_entered" from="." to="." method="OnSpawnBodyEntered"]
 

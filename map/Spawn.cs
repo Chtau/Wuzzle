@@ -12,6 +12,7 @@ public class Spawn : Area2D
     public Type SpawnType { get; set; } = Type.Spawn;
 
     private CollisionShape2D collisionShape;
+    private AnimationPlayer animation;
 
     public Vector2 SpawnGlobalPosition
     {
@@ -24,7 +25,9 @@ public class Spawn : Area2D
 
     public override void _Ready()
     {
+        animation = (AnimationPlayer)GetNode("AnimationPlayer");
         collisionShape = (CollisionShape2D)GetNode("CollisionShape2D");
+        animation.Play("idle");
     }
 
     private void OnSpawnBodyEntered(Godot.Object body)
@@ -33,5 +36,15 @@ public class Spawn : Area2D
         {
             player.SpawnEnteredCallback(SpawnType);
         }
+    }
+
+    public void Active()
+    {
+        animation.Play("active");
+    }
+
+    public void Deactivated()
+    {
+        animation.Play("idle");
     }
 }

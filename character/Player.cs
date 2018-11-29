@@ -70,6 +70,7 @@ public class Player : KinematicBody2D
     public override void _Ready()
     {
         SharedFunctions.Instance.LevelManager.Init();
+        SharedFunctions.Instance.GameState.LevelAnsweredQuestionsChanged += GameState_LevelAnsweredQuestionsChanged;
 
         characterSprite = (Sprite)GetNode("Sprite2");
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
@@ -88,6 +89,20 @@ public class Player : KinematicBody2D
         gotHitArea = (Area2D)GetNode("Area2D");
         gotHitCollision = (CollisionShape2D)GetNode("Area2D/CollisionShape2D");
         OnLevelLoad();
+    }
+
+    public override void _ExitTree()
+    {
+        SharedFunctions.Instance.GameState.LevelAnsweredQuestionsChanged -= GameState_LevelAnsweredQuestionsChanged;
+        base._ExitTree();
+    }
+
+    private void GameState_LevelAnsweredQuestionsChanged(object sender, int e)
+    {
+        if (SharedFunctions.Instance.GameState.LevelAnsweredQuestions >= SharedFunctions.Instance.GameState.LevelRequieredQuestions)
+        {
+            goal.Active();
+        }
     }
 
     public override void _PhysicsProcess(float delta)
@@ -389,12 +404,15 @@ public class Player : KinematicBody2D
         SharedFunctions.Instance.GameState.LevelAnsweredQuestions = 0;
         SharedFunctions.Instance.GameState.LevelRequieredQuestions = levelItem.RequieredQuestions;
 
+        spawn.Active();
+
         levelStartMessage.Show(() =>
         {
             LevelGameTime = new TimeSpan();
             LevelStartTime = DateTime.UtcNow;
 
             State = PlayerPhysicsState.Idle;
+            spawn.Deactivated();
         });
     }
 
@@ -409,6 +427,7 @@ public class Player : KinematicBody2D
             && SharedFunctions.Instance.GameState.LevelAnsweredQuestions >= SharedFunctions.Instance.GameState.LevelRequieredQuestions)
         {
             // level is finished
+            goal.Deactivated();
             OnLevelFinished();
         }
     }
