@@ -467,80 +467,104 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=4]
 
-length = 5.0
+length = 4.5
 loop = true
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Foot1:rotation_degrees")
+tracks/0/path = NodePath("Ear1:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ -0.453883, 27.4843, -0.117566, -25.616, -46.1818, -14.7921, 8.38538, 27.7846, 11.9511, -19.084 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Ear1:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.189507, 0.189507 ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Foot2:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ -0.405922, 40.028, 8.5794, -35.6709, -1.36157, 26.4002, -1.49622, -40.3899, -4.73664, -29.2352 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Hand:rotation_degrees")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hand:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 34.695, 13.5338, -11.5205, -26.9822, -7.86027, 2.82805, 10.5735, 0.322278, -9.35564 ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Ear2:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ear2:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ -0.255234, -0.255234 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sword:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4, 4.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Foot1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -11.7826, 66.5251 ), Vector2( 43.9447, 63.8715 ), Vector2( -15.9843, 68.8103 ), Vector2( 36.9511, 66.5344 ), Vector2( -17.1137, 72.5039 ), Vector2( 50.7803, 62.883 ), Vector2( -20.1133, 64.9383 ), Vector2( 40.3503, 64.0081 ), Vector2( -27.779, 64.1837 ), Vector2( 36.7758, 64.3593 ) ]
+}
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sword:self_modulate")
+tracks/5/path = NodePath("Foot1:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [ -0.453883, -46.6635, -4.08081, -35.3446, -0.802837, -0.744678, -8.05348, -19.0652, -18.7226, -18.3801 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Foot2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 21.7466, 68.9201 ), Vector2( -35.9709, 64.2762 ), Vector2( 40.7646, 64.7921 ), Vector2( -29.945, 67.9618 ), Vector2( 45.1083, 66.1084 ), Vector2( -22.4737, 63.2599 ), Vector2( 45.4148, 61.0749 ), Vector2( -34.1419, 64.363 ), Vector2( 42.2053, 63.2284 ), Vector2( -41.6637, 64.084 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Foot2:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -0.405922, 15.4639, -25.5369, 12.8206, 10.9311, 40.0092, 1.05305, 0.688305, 0.323563, 12.7005 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -856,7 +880,7 @@ tracks/5/keys = {
 "values": [ Vector2( -34.1334, -16.5018 ), Vector2( -34.1334, -16.5018 ) ]
 }
 
-[node name="Sprite" type="Sprite"]
+[node name="Sprite" type="Sprite" index="0"]
 
 _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
@@ -869,8 +893,8 @@ offset = Vector2( 1.53486, -12.6474 )
 
 [node name="Foot2" type="Sprite" parent="." index="1"]
 
-position = Vector2( 21.7466, 68.9201 )
-rotation = -0.462285
+position = Vector2( -41.6637, 64.084 )
+rotation = 0.221666
 texture = ExtResource( 2 )
 offset = Vector2( -0.860563, 14.4264 )
 
@@ -916,7 +940,7 @@ rotation = 1.81074
 [node name="Hand" type="Sprite" parent="." index="7"]
 
 position = Vector2( -34.1334, -16.5018 )
-rotation = 2.27025
+rotation = -0.163287
 texture = ExtResource( 10 )
 offset = Vector2( 0.00537109, 27.8778 )
 
@@ -929,8 +953,8 @@ offset = Vector2( -1.51718, -4.65724 )
 
 [node name="Foot1" type="Sprite" parent="." index="9"]
 
-position = Vector2( -11.7826, 66.5251 )
-rotation = -0.795527
+position = Vector2( 36.7758, 64.3593 )
+rotation = -0.320793
 texture = ExtResource( 12 )
 offset = Vector2( -11.5681, 16.6993 )
 
