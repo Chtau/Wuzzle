@@ -70,7 +70,7 @@ public class Player : KinematicBody2D
 
     public override void _Ready()
     {
-        SharedFunctions.Instance.LevelManager.Init();
+        SharedFunctions.Instance.Init();
         SharedFunctions.Instance.GameState.LevelAnsweredQuestionsChanged += GameState_LevelAnsweredQuestionsChanged;
 
         characterSprite = (Sprite)GetNode("Sprite2");

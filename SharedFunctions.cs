@@ -20,6 +20,7 @@ public sealed class SharedFunctions
         GameState = new GameState();
         LevelManager = new LevelManager();
         AudioManager = new AudioManager();
+        QuestionManager = new QuestionManager();
     }
 
     public static SharedFunctions Instance { get; } = new SharedFunctions();
@@ -35,6 +36,7 @@ public sealed class SharedFunctions
             GameState.Init();
             LevelManager.Init();
             AudioManager.Init();
+            QuestionManager.Init();
             initLoaded = true;
         }
     }
@@ -67,4 +69,5 @@ public sealed class SharedFunctions
     public GameState GameState { get; set; }
     public LevelManager LevelManager { get; set; }
     public AudioManager AudioManager { get; set; }
+    public QuestionManager QuestionManager { get; set; }
 }

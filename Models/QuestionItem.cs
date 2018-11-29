@@ -10,6 +10,8 @@ public class QuestionItem
     public string Question { get; set; }
     public List<Tuple<string, bool>> Answer { get; set; }
     public float Seconds { get; set; }
+    public QuestionManager.Difficulty Difficulty { get; set; }
+    public QuestionManager.Categorie Categorie { get; set; }
 
     public QuestionItem()
     {
@@ -17,5 +19,7 @@ public class QuestionItem
         Question = null;
         Answer = new List<Tuple<string, bool>>();
         Seconds = 30;
+        Difficulty = QuestionManager.Difficulty.Easy;
+        Categorie = QuestionManager.Categorie.Math;
     }
 }

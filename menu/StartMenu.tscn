@@ -9,7 +9,7 @@
 [ext_resource path="res://menu/KeyMap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://menu/FadeIn.tscn" type="PackedScene" id=8]
 
-[node name="StartMenu" type="Node" index="0"]
+[node name="StartMenu" type="Node"]
 
 script = ExtResource( 1 )
 

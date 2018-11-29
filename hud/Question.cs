@@ -5,8 +5,8 @@ using System.Linq;
 
 public class Question : CanvasLayer
 {
-    private List<QuestionItem> questions;
-    private List<Guid> alreadyAnswered;
+    //private List<QuestionItem> questions;
+    //private List<Guid> alreadyAnswered;
 
     private List<QuestionItem> questionQueue = new List<QuestionItem>();
 
@@ -25,7 +25,6 @@ public class Question : CanvasLayer
     {
         panel = (Panel)GetNode("Panel");
         panel.Visible = false;
-        InitQuestions();
         question = (Label)GetNode("Panel/VBoxContainer/QuestionBox/QuestionLabel");
         answer1 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox");
         answer2 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox2");
@@ -73,7 +72,7 @@ public class Question : CanvasLayer
 
     public void ShowQuestion()
     {
-        questionQueue.Add(QuestionItem());
+        questionQueue.Add(SharedFunctions.Instance.QuestionManager.Question());
 
         var item = questionQueue.First();
         question.Text = item.Question;
@@ -101,7 +100,8 @@ public class Question : CanvasLayer
         {
             SharedFunctions.Instance.GameState.LevelAnsweredQuestions++;
         }
-        alreadyAnswered.Add(questionQueue.First().Id);
+        SharedFunctions.Instance.QuestionManager.AnsweredQuestion(questionQueue.First());
+        //alreadyAnswered.Add(questionQueue.First().Id);
         questionQueue.RemoveAt(0);
 
         if (questionQueue.Count > 0)
@@ -120,7 +120,7 @@ public class Question : CanvasLayer
         timer.Stop();
     }
 
-    private void InitQuestions()
+    /*private void InitQuestions()
     {
         questions = new List<QuestionItem>
         {
@@ -136,14 +136,10 @@ public class Question : CanvasLayer
             }
         };
 
-        /*SharedFunctions.Instance.FileHandler.Save(questions, "questions.dat");
-
-        var qs = SharedFunctions.Instance.FileHandler.Load<List<QuestionItem>>("questions.dat");
-        GD.Print("Loaded questions:" + qs.Count);*/
         alreadyAnswered = new List<Guid>();
-    }
+    }*/
 
-    private QuestionItem QuestionItem()
+    /*private QuestionItem QuestionItem()
     {
         QuestionItem current = null;
         var q = questions.Where(x => !alreadyAnswered.Contains(x.Id));
@@ -163,5 +159,5 @@ public class Question : CanvasLayer
         }
         alreadyAnswered.Add(current.Id);
         return current;
-    }
+    }*/
 }

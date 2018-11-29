@@ -11,8 +11,14 @@ config_version=3
 [application]
 
 config/name="Wuzzle"
-run/main_scene="res://LevelTest.tscn"
+run/main_scene="res://menu/StartMenu.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1440
+window/size/height=900
+window/stretch/shrink="1"
 
 [input]
 
