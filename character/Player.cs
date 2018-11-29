@@ -248,6 +248,7 @@ public class Player : KinematicBody2D
                         linear_vel.x = Mathf.Lerp(linear_vel.x, target_speed_x, 0.1f);
 
                         State = PlayerPhysicsState.Dash;
+                        audio.PlaySFX(Audio.SFX.Dash);
                     }
                 }
                 else
@@ -270,13 +271,13 @@ public class Player : KinematicBody2D
                     if (on_floor && Input.IsActionJustPressed(GlobalValues.Keymap_Move_Jump))
                     {
                         linear_vel.y = -JumpSpeed;
-                        //$sound_jump.play()
+                        audio.PlaySFX(Audio.SFX.Jump);
                     }
 
                     if (Input.IsActionJustPressed(GlobalValues.Keymap_Move_Strike))
                     {
                         State = PlayerPhysicsState.Strike;
-                        //GD.Print("execute Strike");
+                        audio.PlaySFX(Audio.SFX.Strike);
                     }
                 }
 

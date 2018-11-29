@@ -4,16 +4,25 @@ using System;
 public class Audio : Node
 {
     const string PlayerHit = "res://assests/audio/skweak1.wav";
+    const string PlayerDash = "res://assests/audio/sfx_throw.wav";
+    const string PlayerStrike = "res://assests/audio/knifesharpener1.wav";
+    const string PlayerJump = "res://assests/audio/sfx_jump.wav";
 
     public enum SFX
     {
-        Hit
+        Hit,
+        Dash,
+        Strike,
+        Jump
     }
 
     private AudioStreamPlayer sfx;
     private AudioStreamPlayer backgroundMusic;
     private bool playBackground;
     private AudioStream playerHitResource;
+    private AudioStream playerDashResource;
+    private AudioStream playerStrikeResource;
+    private AudioStream playerJumpResource;
 
     public override void _Ready()
     {
@@ -21,6 +30,9 @@ public class Audio : Node
         sfx = (AudioStreamPlayer)GetNode("SFX");
 
         playerHitResource = (AudioStream)GD.Load(PlayerHit);
+        playerDashResource = (AudioStream)GD.Load(PlayerDash);
+        playerStrikeResource = (AudioStream)GD.Load(PlayerStrike);
+        playerJumpResource = (AudioStream)GD.Load(PlayerJump);
 
         SharedFunctions.Instance.AudioManager.BackgroundMusicDBChanged += AudioManager_BackgroundMusicChanged;
         SharedFunctions.Instance.AudioManager.SFXDBChanged += AudioManager_SFXDBChanged;
@@ -83,7 +95,15 @@ public class Audio : Node
     {
         if (!sfx.IsPlaying())
         {
-            sfx.Stream = playerHitResource;
+            if (sFX == SFX.Hit)
+                sfx.Stream = playerHitResource;
+            else if (sFX == SFX.Dash)
+                sfx.Stream = playerDashResource;
+            else if (sFX == SFX.Strike)
+                sfx.Stream = playerStrikeResource;
+            else if (sFX == SFX.Jump)
+                sfx.Stream = playerJumpResource;
+
             sfx.VolumeDb = SharedFunctions.Instance.AudioManager.SFXDB;
             sfx.Play();
         }
