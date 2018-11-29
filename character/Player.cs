@@ -62,6 +62,8 @@ public class Player : KinematicBody2D
     private Spawn goal;
     private LevelFinishedMessage levelFinishedMessage;
     private LevelGameOverMessage levelGameOverMessage;
+    private Area2D gotHitArea;
+    private CollisionShape2D gotHitCollision;
 
     private LevelItem levelItem;
 
@@ -71,6 +73,7 @@ public class Player : KinematicBody2D
 
         characterSprite = (Sprite)GetNode("Sprite2");
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
+        characterAnimationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
         question = (Question)GetNode("../Question");
         levelConfiguration = (IID)GetParent().GetParent();
@@ -82,6 +85,8 @@ public class Player : KinematicBody2D
         goal.SpawnType = Spawn.Type.Goal;
         levelFinishedMessage = (LevelFinishedMessage)GetNode("../LevelFinishedMessage");
         levelGameOverMessage = (LevelGameOverMessage)GetNode("../LevelGameOverMessage");
+        gotHitArea = (Area2D)GetNode("Area2D");
+        gotHitCollision = (CollisionShape2D)GetNode("Area2D/CollisionShape2D");
         OnLevelLoad();
     }
 
@@ -121,6 +126,7 @@ public class Player : KinematicBody2D
             {
                 if (gotHitTime > .5)
                 {
+                    //gotHitCollision.Disabled = false;
                     State = PlayerPhysicsState.Idle;
                     gotHitTime = 0f;
                     linear_vel.x = 0;
@@ -128,18 +134,19 @@ public class Player : KinematicBody2D
                 }
                 else
                 {
+                    //gotHitCollision.Disabled = true;
                     if (gotHitTime == 0)
                     {
-                        if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
+                        /*if (Input.IsActionPressed(GlobalValues.Keymap_Move_Left))
                         {
                             gotHitSpeed += 1;
                         }
                         if (Input.IsActionPressed(GlobalValues.Keymap_Move_Right))
                         {
                             gotHitSpeed += -1;
-                        }
+                        }*/
                     }
-                    gotHitTime += delta;
+                    /*gotHitTime += delta;
 
 
 
@@ -148,7 +155,7 @@ public class Player : KinematicBody2D
 
                     linear_vel = MoveAndSlide(linear_vel, FloorNormal, SlopeSlideStop);
 
-                    return;
+                    return;*/
                 }
             }
 
@@ -405,5 +412,14 @@ public class Player : KinematicBody2D
     {
         State = PlayerPhysicsState.Waiting;
         levelGameOverMessage.Show(levelItem);
+    }
+
+    private void OnAnimationFinished(string animation)
+    {
+        if (animation == "strike" && State == PlayerPhysicsState.Strike)
+        {
+            State = PlayerPhysicsState.Idle;
+            strikeTime = 0f;
+        }
     }
 }

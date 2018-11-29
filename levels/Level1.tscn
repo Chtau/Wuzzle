@@ -69,8 +69,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="LevelNodes" type="Node" parent="." index="3"]
 
-editor/display_folded = true
-
 [node name="HUD" parent="LevelNodes" index="0" instance=ExtResource( 5 )]
 
 [node name="Question" parent="LevelNodes" index="1" instance=ExtResource( 6 )]
@@ -100,6 +98,26 @@ position = Vector2( 362.001, 302.001 )
 [node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 13 )]
 
 position = Vector2( 749.244, 377.463 )
+Bullet = ExtResource( 14 )
+
+[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource( 13 )]
+
+position = Vector2( 1064.91, -217.124 )
+Bullet = ExtResource( 14 )
+
+[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource( 13 )]
+
+position = Vector2( 4076.26, 227.146 )
+Bullet = ExtResource( 14 )
+
+[node name="Enemy4" parent="Enemies" index="3" instance=ExtResource( 13 )]
+
+position = Vector2( 2978.95, 223.805 )
+Bullet = ExtResource( 14 )
+
+[node name="Enemy5" parent="Enemies" index="4" instance=ExtResource( 13 )]
+
+position = Vector2( 4649.13, 80.1692 )
 Bullet = ExtResource( 14 )
 
 
