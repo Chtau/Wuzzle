@@ -391,7 +391,7 @@ public class Player : KinematicBody2D
             if (pickup.Interact())
             {
                 if (pickup.TargetTrigger == TargetTriggerType.Question)
-                    question.ShowQuestion();
+                    question.AddShowQuestion();
             }
         }
     }

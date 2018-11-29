@@ -7,6 +7,7 @@ public class Answer : HBoxContainer
     private string text = null;
 
     public bool IsCorrect { get; private set; }
+    public Guid QuestionId { get; set; }
 
     public override void _Ready()
     {

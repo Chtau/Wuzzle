@@ -5,10 +5,8 @@ using System.Linq;
 
 public class Question : CanvasLayer
 {
-    //private List<QuestionItem> questions;
-    //private List<Guid> alreadyAnswered;
-
     private List<QuestionItem> questionQueue = new List<QuestionItem>();
+    private Guid currentQuestionId = Guid.Empty;
 
     private Label question;
     private Answer answer1;
@@ -20,6 +18,7 @@ public class Question : CanvasLayer
 
     private System.Timers.Timer timer = new System.Timers.Timer();
     private TimeSpan questionTime = new TimeSpan();
+    private System.Timers.Timer timerQueuedQuestions = new System.Timers.Timer();
 
     public override void _Ready()
     {
@@ -34,50 +33,88 @@ public class Question : CanvasLayer
 
         timer.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timer.Elapsed += Timer_Elapsed;
+        timerQueuedQuestions.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
+        timerQueuedQuestions.Elapsed += TimerQueuedQuestions_Elapsed;
+    }
+
+    private void TimerQueuedQuestions_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    {
+        OnShowQuestion();
+        timerQueuedQuestions.Stop();
     }
 
     private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
     {
-        if (questionTime.TotalSeconds >= (questionQueue.First().Seconds - 1))
+        var question = ActiveQuestion();
+        if (question != null)
         {
-            questionTimeout.Value = 0;
-            questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
-            ResetQuestion();
+            if (questionTime.TotalSeconds >= (question.Seconds - 1))
+            {
+                questionTimeout.Value = 0;
+                questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
+                ResetQuestion();
+                questionQueue.Remove(question);
+                currentQuestionId = Guid.Empty;
+            }
+            else
+            {
+                questionTime = questionTime.Add(new TimeSpan(0, 0, 1));
+                questionTimeout.Value -= 1;
+                questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
+            }
         } else
         {
-            questionTime = questionTime.Add(new TimeSpan(0, 0, 1));
-            questionTimeout.Value -= 1;
-            questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
+            ResetQuestion();
+            currentQuestionId = Guid.Empty;
         }
     }
 
     public override void _Process(float delta)
     {
-        if (questionQueue.Count > 0)
+        if (ActiveQuestion() != null)
         {
             if (Input.IsActionPressed(GlobalValues.Keymap_Answer_1))
             {
-                HandleAnswer(answer1.IsCorrect);
+                HandleAnswer(answer1.QuestionId, answer1.IsCorrect);
             }
             else if (Input.IsActionPressed(GlobalValues.Keymap_Answer_2))
             {
-                HandleAnswer(answer2.IsCorrect);
+                HandleAnswer(answer2.QuestionId, answer2.IsCorrect);
             }
             else if (Input.IsActionPressed(GlobalValues.Keymap_Answer_3))
             {
-                HandleAnswer(answer3.IsCorrect);
+                HandleAnswer(answer3.QuestionId, answer3.IsCorrect);
             }
         }
     }
 
-    public void ShowQuestion()
+    public void AddShowQuestion()
     {
-        questionQueue.Add(SharedFunctions.Instance.QuestionManager.Question());
+        var newQuestion = SharedFunctions.Instance.QuestionManager.Question();
+        questionQueue.Add(newQuestion);
 
-        var item = questionQueue.First();
+        if (currentQuestionId == Guid.Empty)
+            currentQuestionId = newQuestion.Id;
+        else
+            return;
+
+        OnShowQuestion();
+    }
+
+    private void OnShowQuestion()
+    {
+        var item = ActiveQuestion();
+        if (item == null)
+        {
+            ResetQuestion();
+            return;
+        }
         question.Text = item.Question;
+        answer1.QuestionId = item.Id;
         answer1.SetAnswer(item.Answer[0].Item1, item.Answer[0].Item2);
+        answer2.QuestionId = item.Id;
         answer2.SetAnswer(item.Answer[1].Item1, item.Answer[1].Item2);
+        answer3.QuestionId = item.Id;
         answer3.SetAnswer(item.Answer[2].Item1, item.Answer[2].Item2);
 
         questionTimeout.MaxValue = item.Seconds;
@@ -93,21 +130,27 @@ public class Question : CanvasLayer
         return time + " seconds left";
     }
 
-    private void HandleAnswer(bool result)
+    private void HandleAnswer(Guid questionId, bool result)
     {
+        if (SharedFunctions.Instance.QuestionManager.AlreadyAnswered(questionId))
+            return;
         GD.Print("Answer result:" + result);
         if (result)
         {
             SharedFunctions.Instance.GameState.LevelAnsweredQuestions++;
         }
-        SharedFunctions.Instance.QuestionManager.AnsweredQuestion(questionQueue.First());
-        //alreadyAnswered.Add(questionQueue.First().Id);
-        questionQueue.RemoveAt(0);
+        var question = ActiveQuestion();
+        SharedFunctions.Instance.QuestionManager.AnsweredQuestion(question);
+        questionQueue.Remove(question);
+        currentQuestionId = Guid.Empty;
 
+        GD.Print("questionQueue =>" + questionQueue.Count);
         if (questionQueue.Count > 0)
         {
             // show the next question form the queue
-            ShowQuestion();
+            currentQuestionId = questionQueue.First().Id;
+            ResetQuestion();
+            timerQueuedQuestions.Start();
         } else
         {
             ResetQuestion();
@@ -120,44 +163,12 @@ public class Question : CanvasLayer
         timer.Stop();
     }
 
-    /*private void InitQuestions()
+    private QuestionItem ActiveQuestion()
     {
-        questions = new List<QuestionItem>
+        if (currentQuestionId != Guid.Empty && questionQueue != null && questionQueue.Any(x => x.Id == currentQuestionId))
         {
-            new QuestionItem
-            {
-                Question = "Calculate the sum for '12 * 3 + 7'",
-                Answer = new List<Tuple<string, bool>>
-            {
-                new Tuple<string, bool>("43", true),
-                new Tuple<string, bool>("67", false),
-                new Tuple<string, bool>("50", false)
-            }
-            }
-        };
-
-        alreadyAnswered = new List<Guid>();
-    }*/
-
-    /*private QuestionItem QuestionItem()
-    {
-        QuestionItem current = null;
-        var q = questions.Where(x => !alreadyAnswered.Contains(x.Id));
-        if (q.Count() == 0)
-        {
-            // reset the already answered questions
-            alreadyAnswered.Clear();
-            q = questions.Where(x => !alreadyAnswered.Contains(x.Id));
+            return questionQueue.First(x => x.Id == currentQuestionId);
         }
-        if (q.Count() == 1)
-        {
-            current = q.First();
-            
-        } else
-        {
-            current = q.ElementAt(SharedFunctions.Instance.RandRand(0, q.Count()));
-        }
-        alreadyAnswered.Add(current.Id);
-        return current;
-    }*/
+        return null;
+    }
 }

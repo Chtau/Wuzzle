@@ -608,12 +608,17 @@ public class QuestionManager : ISingletonHandler
         {
             current = q.ElementAt(SharedFunctions.Instance.RandRand(0, q.Count()));
         }
-        alreadyAnswered.Add(current.Id);
+        //alreadyAnswered.Add(current.Id);
         return current;
     }
 
     public void AnsweredQuestion(QuestionItem question)
     {
         alreadyAnswered.Add(question.Id);
+    }
+
+    public bool AlreadyAnswered(Guid id)
+    {
+        return alreadyAnswered.Any(x => x == id);
     }
 }
