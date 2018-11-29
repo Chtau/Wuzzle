@@ -9,8 +9,25 @@ public class Audio : Node
     public override void _Ready()
     {
         backgroundMusic = (AudioStreamPlayer)GetNode("BackgroundMusic");
+
+        SharedFunctions.Instance.AudioManager.BackgroundMusicDBChanged += AudioManager_BackgroundMusicChanged;
+
         if (playBackground)
-            backgroundMusic.Play(SharedFunctions.Instance.AudioManager.BackgroundMusicPosition);
+            OnPlayBackground();
+    }
+
+    public override void _ExitTree()
+    {
+        SharedFunctions.Instance.AudioManager.BackgroundMusicDBChanged -= AudioManager_BackgroundMusicChanged;
+        base._ExitTree();
+    }
+
+    private void AudioManager_BackgroundMusicChanged(object sender, float e)
+    {
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.VolumeDb = e;
+        }
     }
 
     public void PlayBackground()
@@ -18,7 +35,7 @@ public class Audio : Node
         playBackground = true;
         if (backgroundMusic != null)
         {
-            backgroundMusic.Play(SharedFunctions.Instance.AudioManager.BackgroundMusicPosition);
+            OnPlayBackground();
         }
     }
 
@@ -32,5 +49,11 @@ public class Audio : Node
     {
         backgroundMusic.Stop();
         SharedFunctions.Instance.AudioManager.BackgroundMusicPosition = 0f;
+    }
+
+    private void OnPlayBackground()
+    {
+        backgroundMusic.VolumeDb = SharedFunctions.Instance.AudioManager.BackgroundMusicDB;
+        backgroundMusic.Play(SharedFunctions.Instance.AudioManager.BackgroundMusicPosition);
     }
 }

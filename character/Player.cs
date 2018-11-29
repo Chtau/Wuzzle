@@ -407,7 +407,6 @@ public class Player : KinematicBody2D
         SharedFunctions.Instance.GameState.LevelAnsweredQuestions = 0;
         SharedFunctions.Instance.GameState.LevelRequieredQuestions = levelItem.RequieredQuestions;
 
-        audio.PlayBackground();
         spawn.Active();
 
         levelStartMessage.Show(() =>
@@ -417,6 +416,7 @@ public class Player : KinematicBody2D
             
             State = PlayerPhysicsState.Idle;
             spawn.Deactivated();
+            audio.PlayBackground();
         });
     }
 
