@@ -27,8 +27,6 @@ public class Audio : Node
 
         if (playBackground)
             OnPlayBackground();
-
-        //GD.Load()
     }
 
     private void AudioManager_SFXDBChanged(object sender, float e)
@@ -86,6 +84,7 @@ public class Audio : Node
         if (!sfx.IsPlaying())
         {
             sfx.Stream = playerHitResource;
+            sfx.VolumeDb = SharedFunctions.Instance.AudioManager.SFXDB;
             sfx.Play();
         }
     }
