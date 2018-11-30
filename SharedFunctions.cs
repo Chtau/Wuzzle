@@ -63,6 +63,8 @@ public sealed class SharedFunctions
 
     public void LoadScene(Node instance, string scenePath)
     {
+        if (instance.GetTree().IsPaused())
+            instance.GetTree().Paused = false;
         instance.GetTree().ChangeScene(scenePath);
     }
 

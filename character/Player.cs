@@ -97,6 +97,9 @@ public class Player : KinematicBody2D
         levelStartMessage.Visible = false;
         question.Visible = false;
 
+        if (GetTree().IsPaused())
+            GetTree().Paused = false;
+
         OnLevelLoad();
     }
 
@@ -437,6 +440,7 @@ public class Player : KinematicBody2D
     {
         State = PlayerPhysicsState.Waiting;
         levelGameOverMessage.Show(levelItem);
+        GetTree().Paused = true;
     }
 
     private bool allowAnimation = true;
