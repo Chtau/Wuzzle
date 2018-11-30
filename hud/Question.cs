@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 public class Question : Control
 {
@@ -15,16 +16,23 @@ public class Question : Control
     private Panel panel;
     private TextureProgress questionTimeout;
     private Label questionTimeoutText;
+    private CenterContainer answerHandleMessage;
+    private Label correctAnswer;
+    private Label wrongAnswer;
+    private VBoxContainer wrongAnswerDetail;
+    private Label wrongAnswerDetailQuestion;
+    private Label wrongAnswerDetailAnswer;
 
     private System.Timers.Timer timer = new System.Timers.Timer();
     private TimeSpan questionTime = new TimeSpan();
     private System.Timers.Timer timerQueuedQuestions = new System.Timers.Timer();
+    private System.Timers.Timer answerResult = new System.Timers.Timer();
 
     public override void _Ready()
     {
         panel = (Panel)GetNode("CanvasLayer/Panel");
         panel.Visible = false;
-        this.Visible = true;
+        this.Visible = false;
         question = (Label)panel.GetNode("VBoxContainer/QuestionLabel");
         answer1 = (Answer)panel.GetNode("VBoxContainer/AnswerBox");
         answer2 = (Answer)panel.GetNode("VBoxContainer/AnswerBox2");
@@ -32,10 +40,29 @@ public class Question : Control
         questionTimeout = (TextureProgress)panel.GetNode("VBoxContainer/MarginContainer/HBoxContainer/TextureProgress");
         questionTimeoutText = (Label)panel.GetNode("VBoxContainer/MarginContainer/HBoxContainer/Label");
 
+        answerHandleMessage = (CenterContainer)GetNode("CanvasLayer/AnswerHandleMessage");
+        answerHandleMessage.Visible = false;
+        correctAnswer = (Label)answerHandleMessage.GetNode("VBoxContainer/CorrectAnswer");
+        correctAnswer.Visible = false;
+        wrongAnswer = (Label)answerHandleMessage.GetNode("VBoxContainer/WrongAnswer");
+        wrongAnswer.Visible = false;
+        wrongAnswerDetail = (VBoxContainer)answerHandleMessage.GetNode("VBoxContainer/WrongAnswerDetail");
+        wrongAnswerDetail.Visible = false;
+        wrongAnswerDetailQuestion = (Label)wrongAnswerDetail.GetNode("Question");
+        wrongAnswerDetailAnswer = (Label)wrongAnswerDetail.GetNode("Answer");
+
+
         timer.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timer.Elapsed += Timer_Elapsed;
         timerQueuedQuestions.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timerQueuedQuestions.Elapsed += TimerQueuedQuestions_Elapsed;
+        answerResult.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
+        answerResult.Elapsed += AnswerResult_Elapsed;
+    }
+
+    private void AnswerResult_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    {
+        ResetQuestion(false);
     }
 
     private void TimerQueuedQuestions_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -53,7 +80,7 @@ public class Question : Control
             {
                 questionTimeout.Value = 0;
                 questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
-                ResetQuestion();
+                ResetQuestion(false);
                 HandleAnswer(question.Id, false);
             }
             else
@@ -64,7 +91,7 @@ public class Question : Control
             }
         } else
         {
-            ResetQuestion();
+            ResetQuestion(false);
             currentQuestionId = Guid.Empty;
         }
     }
@@ -106,7 +133,7 @@ public class Question : Control
         var item = ActiveQuestion();
         if (item == null)
         {
-            ResetQuestion();
+            ResetQuestion(false);
             return;
         }
         question.Text = item.Question;
@@ -141,6 +168,8 @@ public class Question : Control
             SharedFunctions.Instance.GameState.LevelAnsweredQuestions++;
         }
         var question = ActiveQuestion();
+        string questionText = question.Question;
+        string correctAnswer = question.Answer.First(x => x.Item2).Item1;
         SharedFunctions.Instance.QuestionManager.AnsweredQuestion(question);
         questionQueue.Remove(question);
         currentQuestionId = Guid.Empty;
@@ -150,19 +179,32 @@ public class Question : Control
         {
             // show the next question form the queue
             currentQuestionId = questionQueue.First().Id;
-            ResetQuestion();
+            ResetQuestion(result, questionText, correctAnswer);
             timerQueuedQuestions.Start();
         } else
         {
-            ResetQuestion();
+            ResetQuestion(result, questionText, correctAnswer);
         }
     }
 
-    private void ResetQuestion()
+    private void ResetQuestion(bool correct, string question = null, string answer = null)
     {
         questionTime = new TimeSpan();
-        panel.Visible = false;
-        this.Visible = false;
+        if (!string.IsNullOrWhiteSpace(question))
+        {
+            panel.Visible = false;
+            OnShowAnsweredInfo(correct, question, answer);
+            answerResult.Start();
+        } else
+        {
+            panel.Visible = false;
+            this.Visible = false;
+            answerHandleMessage.Visible = false;
+            correctAnswer.Visible = false;
+            wrongAnswer.Visible = false;
+            wrongAnswerDetail.Visible = false;
+            answerResult.Stop();
+        }
         timer.Stop();
     }
 
@@ -173,5 +215,27 @@ public class Question : Control
             return questionQueue.First(x => x.Id == currentQuestionId);
         }
         return null;
+    }
+
+    private void OnShowAnsweredInfo(bool correct, string question = null, string answer = null)
+    {
+        if (correct)
+        {
+            answerHandleMessage.Visible = true;
+            correctAnswer.Visible = true;
+            wrongAnswer.Visible = false;
+            wrongAnswerDetail.Visible = false;
+        } else
+        {
+            if (!string.IsNullOrWhiteSpace(question))
+            {
+                wrongAnswerDetailQuestion.Text = "Question: " + question;
+                wrongAnswerDetailAnswer.Text = "Correct answer: " + answer;
+                answerHandleMessage.Visible = true;
+                correctAnswer.Visible = false;
+                wrongAnswer.Visible = true;
+                wrongAnswerDetail.Visible = true;
+            }
+        }
     }
 }
