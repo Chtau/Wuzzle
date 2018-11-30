@@ -71,6 +71,7 @@ public class Player : KinematicBody2D
     {
         SharedFunctions.Instance.Init();
         SharedFunctions.Instance.GameState.LevelAnsweredQuestionsChanged += GameState_LevelAnsweredQuestionsChanged;
+        SharedFunctions.Instance.GameState.LevelAnsweredQuestionsWrongChanged += GameState_LevelAnsweredQuestionsWrongChanged;
 
         characterSprite = (Sprite)GetNode("Sprite2");
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
@@ -102,8 +103,20 @@ public class Player : KinematicBody2D
     public override void _ExitTree()
     {
         audio.PauseBackground();
+        SharedFunctions.Instance.GameState.LevelAnsweredQuestionsWrongChanged -= GameState_LevelAnsweredQuestionsWrongChanged;
         SharedFunctions.Instance.GameState.LevelAnsweredQuestionsChanged -= GameState_LevelAnsweredQuestionsChanged;
         base._ExitTree();
+    }
+
+
+    private void GameState_LevelAnsweredQuestionsWrongChanged(object sender, int e)
+    {
+        int maxFalseQuestions = (levelItem.TotalQuestionAvailable - levelItem.RequieredQuestions);
+        //GD.Print("Max False:" + maxFalseQuestions);
+        if (maxFalseQuestions < SharedFunctions.Instance.GameState.LevelAnsweredQuestionsWrong)
+        {
+            OnLevelGameOver();
+        }
     }
 
     private void GameState_LevelAnsweredQuestionsChanged(object sender, int e)
@@ -382,6 +395,7 @@ public class Player : KinematicBody2D
         CurrentLife = 50;
         SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
         SharedFunctions.Instance.GameState.LevelAnsweredQuestions = 0;
+        SharedFunctions.Instance.GameState.LevelAnsweredQuestionsWrong = 0;
         SharedFunctions.Instance.GameState.LevelRequieredQuestions = levelItem.RequieredQuestions;
 
         spawn.Active();

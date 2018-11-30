@@ -56,7 +56,7 @@ public class Question : Control
         timer.Elapsed += Timer_Elapsed;
         timerQueuedQuestions.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timerQueuedQuestions.Elapsed += TimerQueuedQuestions_Elapsed;
-        answerResult.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
+        answerResult.Interval = new TimeSpan(0, 0, 2).TotalMilliseconds;
         answerResult.Elapsed += AnswerResult_Elapsed;
     }
 
@@ -162,10 +162,12 @@ public class Question : Control
     {
         if (SharedFunctions.Instance.QuestionManager.AlreadyAnswered(questionId))
             return;
-        GD.Print("Answer result:" + result);
         if (result)
         {
             SharedFunctions.Instance.GameState.LevelAnsweredQuestions++;
+        } else
+        {
+            SharedFunctions.Instance.GameState.LevelAnsweredQuestionsWrong++;
         }
         var question = ActiveQuestion();
         string questionText = question.Question;
@@ -180,7 +182,6 @@ public class Question : Control
             // show the next question form the queue
             currentQuestionId = questionQueue.First().Id;
             ResetQuestion(result, questionText, correctAnswer);
-            timerQueuedQuestions.Start();
         } else
         {
             ResetQuestion(result, questionText, correctAnswer);
@@ -204,6 +205,7 @@ public class Question : Control
             wrongAnswer.Visible = false;
             wrongAnswerDetail.Visible = false;
             answerResult.Stop();
+            timerQueuedQuestions.Start();
         }
         timer.Stop();
     }

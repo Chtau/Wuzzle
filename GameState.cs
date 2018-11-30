@@ -11,6 +11,7 @@ public class GameState : ISingletonHandler
     public event EventHandler<TimeSpan> LevelTimeChanged;
     public event EventHandler<int> LevelRequieredQuestionsChanged;
     public event EventHandler<int> LevelAnsweredQuestionsChanged;
+    public event EventHandler<int> LevelAnsweredQuestionsWrongChanged;
 
     private float currentLife;
     public float CurrentLife
@@ -63,6 +64,17 @@ public class GameState : ISingletonHandler
         {
             levelAnsweredQuestions = value;
             LevelAnsweredQuestionsChanged?.Invoke(this, levelAnsweredQuestions);
+        }
+    }
+
+    private int levelAnsweredQuestionsWrong;
+    public int LevelAnsweredQuestionsWrong
+    {
+        get { return levelAnsweredQuestionsWrong; }
+        set
+        {
+            levelAnsweredQuestionsWrong = value;
+            LevelAnsweredQuestionsWrongChanged?.Invoke(this, levelAnsweredQuestionsWrong);
         }
     }
 

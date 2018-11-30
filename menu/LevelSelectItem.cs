@@ -14,7 +14,7 @@ public class LevelSelectItem : Control
 
     public override void _Ready()
     {
-        title = (Label)GetNode("Panel/HBoxContainer/Title");//MarginContainer/
+        title = (Label)GetNode("Panel/HBoxContainer/Title");
         desciption = (Label)GetNode("Panel/HBoxContainer/VBoxContainer/Description");
         record = (Label)GetNode("Panel/HBoxContainer/VBoxContainer/RecordWrapper/Record");
         medailleGold = (TextureRect)GetNode("Panel/HBoxContainer/VBoxContainer/RecordWrapper/MedailleGold");

@@ -49,6 +49,7 @@ public class LevelManager : ISingletonHandler
             ScenePath = "res://levels/Level1.tscn",
             Order = 1,
             RequieredQuestions = 3,
+            TotalQuestionAvailable = 6,
             FinishedCount = UserFinishedCountById(userRecords, new Guid("85DDBFAB-5208-4F7D-82A9-8FB224CB5403")),
             Record = UserRecordTimeSpanById(userRecords, new Guid("85DDBFAB-5208-4F7D-82A9-8FB224CB5403")),
             LevelTitle = "Level 1",

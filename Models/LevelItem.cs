@@ -12,6 +12,7 @@ public class LevelItem : LevelUserItem
     public string LevelDescription { get; set; }
     public string ScenePath { get; set; }
     public int RequieredQuestions { get; set; }
+    public int TotalQuestionAvailable { get; set; }
     public TimeSpan GoldTime { get; set; }
     public TimeSpan SilverTime { get; set; }
     public TimeSpan BronzeTime { get; set; }
