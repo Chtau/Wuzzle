@@ -88,6 +88,7 @@
     <Compile Include="menu\KeyMap.cs" />
     <Compile Include="menu\LevelSelect.cs" />
     <Compile Include="menu\LevelSelectItem.cs" />
+    <Compile Include="menu\Sound.cs" />
     <Compile Include="menu\StartMenu.cs" />
     <Compile Include="Models\LevelItem.cs" />
     <Compile Include="Models\LevelUserItem.cs" />

@@ -18,6 +18,8 @@ public class StartMenu : Node
 
     public override void _Ready()
     {
+        SharedFunctions.Instance.Init();
+
         contentPanel = (Panel)GetNode("ContainerContent/Panel");
         levels = (LevelSelect)contentPanel.GetNode("MarginContainer/LevelSelect");
         options = (Control)contentPanel.GetNode("MarginContainer/Options");
