@@ -61,6 +61,7 @@ public class Player : KinematicBody2D
     private Spawn goal;
     private LevelFinishedMessage levelFinishedMessage;
     private LevelGameOverMessage levelGameOverMessage;
+    private LevelMenu levelMenu;
     private Area2D gotHitArea;
     private CollisionShape2D gotHitCollision;
     private Audio audio;
@@ -91,6 +92,7 @@ public class Player : KinematicBody2D
         gotHitArea = (Area2D)GetNode("Area2D");
         gotHitCollision = (CollisionShape2D)GetNode("Area2D/CollisionShape2D");
         audio = (Audio)GetNode("../Audio");
+        levelMenu = (LevelMenu)GetNode("../LevelMenu");
 
         levelFinishedMessage.Visible = false;
         levelGameOverMessage.Visible = false;
@@ -141,6 +143,11 @@ public class Player : KinematicBody2D
         }
         else
         {
+            if (Input.IsActionJustPressed("ui_cancel"))
+            {
+                levelMenu.Show(levelItem);
+            }
+
             LevelGameTime = DateTime.UtcNow - LevelStartTime;
             SharedFunctions.Instance.GameState.LevelTime = LevelGameTime;
 
@@ -434,6 +441,7 @@ public class Player : KinematicBody2D
     {
         State = PlayerPhysicsState.Waiting;
         levelFinishedMessage.Show(levelItem, LevelGameTime);
+        GetTree().Paused = true;
     }
 
     private void OnLevelGameOver()

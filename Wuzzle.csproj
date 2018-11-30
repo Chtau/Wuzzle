@@ -71,6 +71,7 @@
     <Compile Include="hud\HUD.cs" />
     <Compile Include="hud\LevelFinishedMessage.cs" />
     <Compile Include="hud\LevelGameOverMessage.cs" />
+    <Compile Include="hud\LevelMenu.cs" />
     <Compile Include="hud\LevelStartMessage.cs" />
     <Compile Include="hud\Question.cs" />
     <Compile Include="ISingletonHandler.cs" />

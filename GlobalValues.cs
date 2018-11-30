@@ -22,7 +22,7 @@ public static class GlobalValues
     public const string ConfigSectionKeyInput = "input";
     public const string ConfigSectionAudio = "audio";
 
-    public const int LevelStartCountdown = 0;
+    public const int LevelStartCountdown = 5;
 
     public const string UserRecordsPath = "records.dat";
 
