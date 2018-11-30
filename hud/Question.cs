@@ -13,7 +13,7 @@ public class Question : CanvasLayer
     private Answer answer2;
     private Answer answer3;
     private Panel panel;
-    private ProgressBar questionTimeout;
+    private TextureProgress questionTimeout;
     private Label questionTimeoutText;
 
     private System.Timers.Timer timer = new System.Timers.Timer();
@@ -28,8 +28,8 @@ public class Question : CanvasLayer
         answer1 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox");
         answer2 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox2");
         answer3 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox3");
-        questionTimeout = (ProgressBar)GetNode("Panel/VBoxContainer/HBoxContainer/ProgressBar");
-        questionTimeoutText = (Label)GetNode("Panel/VBoxContainer/HBoxContainer/Label");
+        questionTimeout = (TextureProgress)GetNode("Panel/VBoxContainer/MarginContainer/HBoxContainer/TextureProgress");
+        questionTimeoutText = (Label)GetNode("Panel/VBoxContainer/MarginContainer/HBoxContainer/Label");
 
         timer.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timer.Elapsed += Timer_Elapsed;

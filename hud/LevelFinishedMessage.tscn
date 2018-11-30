@@ -31,7 +31,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.196078 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="LevelFinishedMessage" type="CanvasLayer"]
+[node name="LevelFinishedMessage" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )

@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://hud/Question.cs" type="Script" id=1]
 [ext_resource path="res://assests/themes/menu_theme.tres" type="Theme" id=2]
 [ext_resource path="res://hud/Answer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://hud/art/texturebar_back.png" type="Texture" id=4]
+[ext_resource path="res://hud/art/texturebar_fill.png" type="Texture" id=5]
 
 [node name="Question" type="CanvasLayer"]
 
@@ -20,10 +22,10 @@ anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
 anchor_bottom = 0.0
-margin_left = -250.0
-margin_top = 100.0
-margin_right = 250.0
-margin_bottom = 280.0
+margin_left = -300.0
+margin_top = 90.0
+margin_right = 324.0
+margin_bottom = 357.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -53,9 +55,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 19.0
-margin_right = 500.0
-margin_bottom = 44.0
+margin_top = 63.0
+margin_right = 624.0
+margin_bottom = 88.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -72,28 +74,48 @@ max_lines_visible = -1
 
 [node name="AnswerBox" parent="Panel/VBoxContainer" index="1" instance=ExtResource( 3 )]
 
-margin_top = 48.0
-margin_bottom = 73.0
+margin_top = 92.0
+margin_right = 624.0
+margin_bottom = 117.0
 
 [node name="AnswerBox2" parent="Panel/VBoxContainer" index="2" instance=ExtResource( 3 )]
 
-margin_top = 77.0
-margin_bottom = 102.0
+margin_top = 121.0
+margin_right = 624.0
+margin_bottom = 146.0
 
 [node name="AnswerBox3" parent="Panel/VBoxContainer" index="3" instance=ExtResource( 3 )]
 
-margin_top = 106.0
-margin_bottom = 131.0
+margin_top = 150.0
+margin_right = 624.0
+margin_bottom = 175.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" index="4"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 135.0
-margin_right = 500.0
-margin_bottom = 160.0
+margin_top = 179.0
+margin_right = 624.0
+margin_bottom = 204.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 624.0
+margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -103,13 +125,46 @@ size_flags_vertical = 1
 alignment = 1
 _sections_unfolded = [ "Margin" ]
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel/VBoxContainer/HBoxContainer" index="0"]
+[node name="TextureProgress" type="TextureProgress" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 366.0
+margin_left = 106.0
+margin_right = 306.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 200, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 50.0
+exp_edit = false
+rounded = false
+texture_under = ExtResource( 4 )
+texture_over = null
+texture_progress = ExtResource( 5 )
+radial_fill_degrees = 360.0
+radial_center_offset = Vector2( 0, 0 )
+nine_patch_stretch = true
+_sections_unfolded = [ "Rect", "Textures" ]
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer" index="1"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.0
+margin_right = 358.0
 margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -127,16 +182,16 @@ rounded = false
 percent_visible = false
 _sections_unfolded = [ "Anchor", "Margin", "Percent", "Size Flags" ]
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer" index="1"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 370.0
-margin_right = 500.0
+margin_left = 310.0
+margin_right = 510.0
 margin_bottom = 25.0
-rect_min_size = Vector2( 50, 0 )
+rect_min_size = Vector2( 200, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
