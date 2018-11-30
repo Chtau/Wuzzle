@@ -138,11 +138,11 @@ public class Question : Control
         }
         question.Text = item.Question;
         answer1.QuestionId = item.Id;
-        answer1.SetAnswer(item.Answer[0].Item1, item.Answer[0].Item2);
+        answer1.SetAnswer(OnAnswerPrefix(GlobalValues.Keymap_Answer_1) + item.Answer[0].Item1, item.Answer[0].Item2);
         answer2.QuestionId = item.Id;
-        answer2.SetAnswer(item.Answer[1].Item1, item.Answer[1].Item2);
+        answer2.SetAnswer(OnAnswerPrefix(GlobalValues.Keymap_Answer_2) + item.Answer[1].Item1, item.Answer[1].Item2);
         answer3.QuestionId = item.Id;
-        answer3.SetAnswer(item.Answer[2].Item1, item.Answer[2].Item2);
+        answer3.SetAnswer(OnAnswerPrefix(GlobalValues.Keymap_Answer_3) + item.Answer[2].Item1, item.Answer[2].Item2);
 
         questionTimeout.MaxValue = item.Seconds;
         questionTimeout.Value = item.Seconds;
@@ -151,6 +151,12 @@ public class Question : Control
         panel.Visible = true;
         this.Visible = true;
         timer.Start();
+    }
+    
+    private string OnAnswerPrefix(string keyMap)
+    {
+        InputEventKey inputEvent = (InputEventKey)InputMap.GetActionList(keyMap)[0];
+        return OS.GetScancodeString(inputEvent.Scancode) + ".) ";
     }
 
     private string QuestionTimeText(float time)
