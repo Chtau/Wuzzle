@@ -3,17 +3,30 @@ using System;
 
 public class KeyMap : Node
 {
-    Label contextualHelp;
+    //Label contextualHelp;
+    Label inputHelper;
+    CenterContainer inputHelpWrapper;
 
     public override void _Ready()
     {
         SharedFunctions.Instance.ConfigHandler.LoadConfig();
-        contextualHelp = (Label)GetNode("VBoxContainer/ContextualHelp");
+        inputHelpWrapper = (CenterContainer)GetNode("CenterContainer");
+        inputHelper = (Label)inputHelpWrapper.GetNode("Panel/InputHelper");
+        //contextualHelp = (Label)GetNode("VBoxContainer/ContextualHelp");
+        inputHelpWrapper.Visible = false;
     }
 
-    private void OnContextualHelpTextChanged(string text)
+    private void OnContextualHelpTextChanged(string text, bool activate)
     {
-        contextualHelp.Text = text;
+        if (activate)
+        {
+            inputHelper.Text = text;
+            inputHelpWrapper.Visible = true;
+        } else
+        {
+            inputHelpWrapper.Visible = false;
+        }
+        //contextualHelp.Text = text;
     }
 
     private void OnInputSave(string actionBinding, string scanCode)

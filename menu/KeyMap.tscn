@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://menu/KeyMap.cs" type="Script" id=1]
 [ext_resource path="res://assests/fonts/Sunflower_m_24.tres" type="DynamicFont" id=2]
 [ext_resource path="res://menu/items/InputKeyMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=4]
 
-[node name="KeyMap" type="Control" index="0"]
+[node name="KeyMap" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -535.0
-margin_bottom = -50.0
+margin_bottom = -270.0
 rect_min_size = Vector2( 0, 500 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -53,7 +54,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 2 )
-text = "Click a key binding to reassign it, or press the Cancel action."
+text = "Click a key binding to reassign it."
 valign = 1
 autowrap = true
 percent_visible = 1.0
@@ -140,6 +141,61 @@ margin_right = 905.0
 margin_bottom = 485.0
 KeyMap = "answer3"
 KeyLabel = "Answer 3"
+
+[node name="CenterContainer" type="CenterContainer" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+
+[node name="Panel" type="Panel" parent="CenterContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 152.0
+margin_top = 165.0
+margin_right = 752.0
+margin_bottom = 465.0
+rect_min_size = Vector2( 600, 300 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="InputHelper" type="Label" parent="CenterContainer/Panel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 4 )
+text = "Click a key binding to reassign it, or press the Cancel action."
+align = 1
+valign = 1
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_fonts" ]
 
 [connection signal="ContextualHelpTextChanged" from="VBoxContainer/Left" to="." method="OnContextualHelpTextChanged"]
 

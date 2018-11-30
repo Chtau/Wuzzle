@@ -4,7 +4,7 @@ using System;
 public class InputKeyMap : HBoxContainer
 {
     [Signal]
-    delegate void ContextualHelpTextChanged(string text);
+    delegate void ContextualHelpTextChanged(string text, bool activate);
     [Signal]
     delegate void InputSave(string actionBinding, string scanCode);
 
@@ -28,7 +28,7 @@ public class InputKeyMap : HBoxContainer
 
     private void WaitForInput()
     {
-        EmitSignal(nameof(ContextualHelpTextChanged), "Press a key to assign to the '" + KeyLabel + "' action.");
+        EmitSignal(nameof(ContextualHelpTextChanged), "Press a key to assign to the '" + KeyLabel + "' action. (Press ESC Key to cancel)", true);
         SetProcessInput(true);
     }
 
@@ -38,7 +38,7 @@ public class InputKeyMap : HBoxContainer
         {
             GetTree().SetInputAsHandled();
             SetProcessInput(false);
-            EmitSignal(nameof(ContextualHelpTextChanged), "Click a key binding to reassign it, or press the Cancel action.");
+            EmitSignal(nameof(ContextualHelpTextChanged), "Click a key binding to reassign it, or press the Cancel action.", false);
             if (!eventKey.IsAction("ui_cancel"))
             {
                 var scanCode = OS.GetScancodeString(eventKey.Scancode);

@@ -246,5 +246,5 @@ TabContainer/icons/menu_highlight = null
 TabContainer/styles/panel = SubResource( 7 )
 TabContainer/styles/tab_bg = SubResource( 9 )
 TabContainer/styles/tab_fg = SubResource( 8 )
-_sections_unfolded = [ "Button/colors", "Button/constants", "Button/fonts", "Button/styles", "HSlider", "HSlider/icons", "HSlider/styles", "Panel/styles", "TabContainer/colors", "TabContainer/constants", "TabContainer/fonts", "TabContainer/styles" ]
+_sections_unfolded = [ "Button", "Button/colors", "Button/fonts", "Button/styles", "HSlider/icons", "HSlider/styles", "Panel/styles", "TabContainer/colors", "TabContainer/constants", "TabContainer/fonts", "TabContainer/styles" ]
 
