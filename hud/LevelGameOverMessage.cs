@@ -1,15 +1,15 @@
 using Godot;
 using System;
 
-public class LevelGameOverMessage : CanvasLayer
+public class LevelGameOverMessage : Control
 {
     private Panel panel;
     private LevelItem levelItem;
 
     public override void _Ready()
     {
-        panel = (Panel)GetNode("Panel");
-
+        panel = (Panel)GetNode("CanvasLayer/Panel");
+        this.Visible = false;
         panel.Visible = false;
     }
 
@@ -27,5 +27,6 @@ public class LevelGameOverMessage : CanvasLayer
     {
         this.levelItem = levelItem;
         panel.Visible = true;
+        this.Visible = true;
     }
 }

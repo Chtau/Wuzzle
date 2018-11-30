@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class LevelStartMessage : CanvasLayer
+public class LevelStartMessage : Control
 {
     private MarginContainer levelStartMessage;
     private Label levelStartCountdown;
@@ -11,11 +11,12 @@ public class LevelStartMessage : CanvasLayer
 
     public override void _Ready()
     {
-        levelStartMessage = (MarginContainer)GetNode("MarginContainer");
-        levelStartCountdown = (Label)GetNode("MarginContainer/VBoxContainer/Countdown");
+        levelStartMessage = (MarginContainer)GetNode("CanvasLayer/MarginContainer");
+        levelStartCountdown = (Label)levelStartMessage.GetNode("VBoxContainer/Countdown");
 
         levelStartCountdown.Text = GlobalValues.LevelStartCountdown.ToString();
 
+        this.Visible = true;
         levelStartMessage.Visible = true;
         levelTimer.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
         levelTimer.Elapsed += LevelTimer_Elapsed;
@@ -25,7 +26,6 @@ public class LevelStartMessage : CanvasLayer
     public void Show(Action callback)
     {
         showCallback = callback;
-
         levelTimer.Start();
     }
 
@@ -39,6 +39,7 @@ public class LevelStartMessage : CanvasLayer
         {
             levelTimer.Stop();
             levelStartMessage.Visible = false;
+            this.Visible = false;
             showCallback.Invoke();
         }
     }

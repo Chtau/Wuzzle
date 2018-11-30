@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 
-public class LevelFinishedMessage : CanvasLayer
+public class LevelFinishedMessage : Control
 {
     private Label time;
     private Label previousRecord;
@@ -15,13 +15,14 @@ public class LevelFinishedMessage : CanvasLayer
 
     public override void _Ready()
     {
-        container = (Panel)GetNode("Panel");
-        time = (Label)GetNode("Panel/CenterContainer/VBoxContainer/TimeWrapper/Value");
-        previousRecord = (Label)GetNode("Panel/CenterContainer/VBoxContainer/PreviousRecordWrapper/Value");
-        newRecord = (Label)GetNode("Panel/CenterContainer/VBoxContainer/NewRecordWrapper/Label");
-        nextLevel = (Button)GetNode("Panel/CenterContainer/VBoxContainer/NextLevelWrapper/Button");
+        container = (Panel)GetNode("CanvasLayer/Panel");
+        time = (Label)container.GetNode("CenterContainer/VBoxContainer/TimeWrapper/Value");
+        previousRecord = (Label)container.GetNode("CenterContainer/VBoxContainer/PreviousRecordWrapper/Value");
+        newRecord = (Label)container.GetNode("CenterContainer/VBoxContainer/NewRecordWrapper/Label");
+        nextLevel = (Button)container.GetNode("CenterContainer/VBoxContainer/NextLevelWrapper/Button");
         animationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
 
+        this.Visible = false;
         nextLevelItem = null;
         newRecord.Visible = false;
         container.Visible = false;
@@ -59,6 +60,7 @@ public class LevelFinishedMessage : CanvasLayer
         else
             previousRecord.Text = "--:--:--";
 
+        this.Visible = true;
         container.Visible = true;
         Task.Run(() =>
         {

@@ -4,26 +4,39 @@
 [ext_resource path="res://assests/themes/menu_theme.tres" type="Theme" id=2]
 [ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=3]
 
-[node name="LevelGameOverMessage" type="CanvasLayer"]
+[node name="LevelGameOverMessage" type="Control"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-script = ExtResource( 1 )
 
-[node name="Panel" type="Panel" parent="." index="0"]
+[node name="Panel" type="Panel" parent="CanvasLayer" index="0"]
 
 self_modulate = Color( 1, 1, 1, 0.784314 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -242.5
-margin_top = -153.5
-margin_right = 242.5
-margin_bottom = 153.5
+margin_left = -237.0
+margin_top = -194.0
+margin_right = 248.0
+margin_bottom = 113.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -33,7 +46,7 @@ size_flags_vertical = 1
 theme = ExtResource( 2 )
 _sections_unfolded = [ "Anchor", "Theme", "Visibility" ]
 
-[node name="CenterContainer" type="CenterContainer" parent="Panel" index="0"]
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Panel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -47,7 +60,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 use_top_left = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/CenterContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -67,7 +80,7 @@ custom_constants/separation = 20
 alignment = 0
 _sections_unfolded = [ "custom_constants" ]
 
-[node name="Label" type="Label" parent="Panel/CenterContainer/VBoxContainer" index="0"]
+[node name="Label" type="Label" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -90,7 +103,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="TryAgainWrapper" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer" index="1"]
+[node name="TryAgainWrapper" type="HBoxContainer" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -107,7 +120,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 1
 
-[node name="TryAgain" type="Button" parent="Panel/CenterContainer/VBoxContainer/TryAgainWrapper" index="0"]
+[node name="TryAgain" type="Button" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/TryAgainWrapper" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -133,7 +146,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="BackWrapper" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer" index="2"]
+[node name="BackWrapper" type="HBoxContainer" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -150,7 +163,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 1
 
-[node name="Back" type="Button" parent="Panel/CenterContainer/VBoxContainer/BackWrapper" index="0"]
+[node name="Back" type="Button" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/BackWrapper" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -175,8 +188,8 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[connection signal="pressed" from="Panel/CenterContainer/VBoxContainer/TryAgainWrapper/TryAgain" to="." method="OnTryAgainPressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/CenterContainer/VBoxContainer/TryAgainWrapper/TryAgain" to="." method="OnTryAgainPressed"]
 
-[connection signal="pressed" from="Panel/CenterContainer/VBoxContainer/BackWrapper/Back" to="." method="OnBackPressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/CenterContainer/VBoxContainer/BackWrapper/Back" to="." method="OnBackPressed"]
 
 

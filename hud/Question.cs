@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Question : CanvasLayer
+public class Question : Control
 {
     private List<QuestionItem> questionQueue = new List<QuestionItem>();
     private Guid currentQuestionId = Guid.Empty;
@@ -22,14 +22,15 @@ public class Question : CanvasLayer
 
     public override void _Ready()
     {
-        panel = (Panel)GetNode("Panel");
+        panel = (Panel)GetNode("CanvasLayer/Panel");
         panel.Visible = false;
-        question = (Label)GetNode("Panel/VBoxContainer/QuestionLabel");
-        answer1 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox");
-        answer2 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox2");
-        answer3 = (Answer)GetNode("Panel/VBoxContainer/AnswerBox3");
-        questionTimeout = (TextureProgress)GetNode("Panel/VBoxContainer/MarginContainer/HBoxContainer/TextureProgress");
-        questionTimeoutText = (Label)GetNode("Panel/VBoxContainer/MarginContainer/HBoxContainer/Label");
+        this.Visible = true;
+        question = (Label)panel.GetNode("VBoxContainer/QuestionLabel");
+        answer1 = (Answer)panel.GetNode("VBoxContainer/AnswerBox");
+        answer2 = (Answer)panel.GetNode("VBoxContainer/AnswerBox2");
+        answer3 = (Answer)panel.GetNode("VBoxContainer/AnswerBox3");
+        questionTimeout = (TextureProgress)panel.GetNode("VBoxContainer/MarginContainer/HBoxContainer/TextureProgress");
+        questionTimeoutText = (Label)panel.GetNode("VBoxContainer/MarginContainer/HBoxContainer/Label");
 
         timer.Interval = new TimeSpan(0, 0, 1).TotalMilliseconds;
         timer.Elapsed += Timer_Elapsed;
@@ -121,6 +122,7 @@ public class Question : CanvasLayer
         questionTimeoutText.Text = QuestionTimeText(questionTimeout.Value);
 
         panel.Visible = true;
+        this.Visible = true;
         timer.Start();
     }
 
@@ -160,6 +162,7 @@ public class Question : CanvasLayer
     {
         questionTime = new TimeSpan();
         panel.Visible = false;
+        this.Visible = false;
         timer.Stop();
     }
 

@@ -90,6 +90,12 @@ public class Player : KinematicBody2D
         gotHitArea = (Area2D)GetNode("Area2D");
         gotHitCollision = (CollisionShape2D)GetNode("Area2D/CollisionShape2D");
         audio = (Audio)GetNode("../Audio");
+
+        levelFinishedMessage.Visible = false;
+        levelGameOverMessage.Visible = false;
+        levelStartMessage.Visible = false;
+        question.Visible = false;
+
         OnLevelLoad();
     }
 
