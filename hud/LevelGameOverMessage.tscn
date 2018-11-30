@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://hud/LevelGameOverMessage.cs" type="Script" id=1]
-[ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assests/themes/menu_theme.tres" type="Theme" id=2]
+[ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=3]
 
-[node name="LevelGameOverMessage" type="CanvasLayer" index="0"]
+[node name="LevelGameOverMessage" type="CanvasLayer"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -14,7 +15,7 @@ script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="." index="0"]
 
-visible = false
+self_modulate = Color( 1, 1, 1, 0.784314 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -29,6 +30,8 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+theme = ExtResource( 2 )
+_sections_unfolded = [ "Anchor", "Theme", "Visibility" ]
 
 [node name="CenterContainer" type="CenterContainer" parent="Panel" index="0"]
 
@@ -50,10 +53,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 120.0
-margin_top = 66.0
-margin_right = 365.0
-margin_bottom = 241.0
+margin_left = 126.0
+margin_top = 72.0
+margin_right = 359.0
+margin_bottom = 235.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -70,7 +73,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 245.0
+margin_right = 233.0
 margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -78,7 +81,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "Game over"
 align = 1
 valign = 1
@@ -94,8 +97,8 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 61.0
-margin_right = 245.0
-margin_bottom = 108.0
+margin_right = 233.0
+margin_bottom = 102.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -111,8 +114,8 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 38.0
-margin_right = 207.0
-margin_bottom = 47.0
+margin_right = 195.0
+margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -120,7 +123,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -136,9 +139,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 128.0
-margin_right = 245.0
-margin_bottom = 175.0
+margin_top = 122.0
+margin_right = 233.0
+margin_bottom = 163.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -153,8 +156,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 245.0
-margin_bottom = 47.0
+margin_right = 233.0
+margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -162,7 +165,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

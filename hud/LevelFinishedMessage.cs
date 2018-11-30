@@ -7,7 +7,7 @@ public class LevelFinishedMessage : CanvasLayer
     private Label time;
     private Label previousRecord;
     private Label newRecord;
-    private MarginContainer container;
+    private Panel container;
     private Button nextLevel;
     private AnimationPlayer animationPlayer;
 
@@ -15,11 +15,11 @@ public class LevelFinishedMessage : CanvasLayer
 
     public override void _Ready()
     {
-        container = (MarginContainer)GetNode("MarginContainer");
-        time = (Label)GetNode("MarginContainer/Panel/CenterContainer/VBoxContainer/TimeWrapper/Value");
-        previousRecord = (Label)GetNode("MarginContainer/Panel/CenterContainer/VBoxContainer/PreviousRecordWrapper/Value");
-        newRecord = (Label)GetNode("MarginContainer/Panel/CenterContainer/VBoxContainer/NewRecordWrapper/Label");
-        nextLevel = (Button)GetNode("MarginContainer/Panel/CenterContainer/VBoxContainer/NextLevelWrapper/Button");
+        container = (Panel)GetNode("Panel");
+        time = (Label)GetNode("Panel/CenterContainer/VBoxContainer/TimeWrapper/Value");
+        previousRecord = (Label)GetNode("Panel/CenterContainer/VBoxContainer/PreviousRecordWrapper/Value");
+        newRecord = (Label)GetNode("Panel/CenterContainer/VBoxContainer/NewRecordWrapper/Label");
+        nextLevel = (Button)GetNode("Panel/CenterContainer/VBoxContainer/NextLevelWrapper/Button");
         animationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
 
         nextLevelItem = null;
