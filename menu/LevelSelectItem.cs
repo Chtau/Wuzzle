@@ -8,12 +8,23 @@ public class LevelSelectItem : Control
     private Label title;
     private Label desciption;
     private Label record;
+    private TextureRect medailleGold;
+    private TextureRect medailleSilber;
+    private TextureRect medailleBronze;
 
     public override void _Ready()
     {
-        title = (Label)GetNode("MarginContainer/Panel/HBoxContainer/Title");
-        desciption = (Label)GetNode("MarginContainer/Panel/HBoxContainer/VBoxContainer/Description");
-        record = (Label)GetNode("MarginContainer/Panel/HBoxContainer/VBoxContainer/Record");
+        title = (Label)GetNode("Panel/HBoxContainer/Title");//MarginContainer/
+        desciption = (Label)GetNode("Panel/HBoxContainer/VBoxContainer/Description");
+        record = (Label)GetNode("Panel/HBoxContainer/VBoxContainer/RecordWrapper/Record");
+        medailleGold = (TextureRect)GetNode("Panel/HBoxContainer/VBoxContainer/RecordWrapper/MedailleGold");
+        medailleSilber = (TextureRect)GetNode("Panel/HBoxContainer/VBoxContainer/RecordWrapper/MedailleSilber");
+        medailleBronze = (TextureRect)GetNode("Panel/HBoxContainer/VBoxContainer/RecordWrapper/MedailleBronze");
+
+        medailleSilber.Visible = false;
+        medailleGold.Visible = false;
+        medailleBronze.Visible = false;
+
         OnLevelItemChanged();
     }
 
@@ -35,7 +46,20 @@ public class LevelSelectItem : Control
             title.Text = LevelItem.LevelTitle;
             desciption.Text = LevelItem.LevelDescription;
             if (LevelItem.Record.HasValue)
+            {
+                if (LevelItem.Record.Value < LevelItem.GoldTime)
+                {
+                    medailleGold.Visible = true;
+                } else if (LevelItem.Record.Value < LevelItem.SilverTime)
+                {
+                    medailleSilber.Visible = true;
+                }
+                else if (LevelItem.Record.Value < LevelItem.BronzeTime)
+                {
+                    medailleBronze.Visible = true;
+                }
                 record.Text = SharedFunctions.Instance.FormatTimeSpan(LevelItem.Record.Value);
+            }
             else
                 record.Text = "--:--:--";
         }

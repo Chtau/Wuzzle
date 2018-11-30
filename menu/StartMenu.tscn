@@ -334,6 +334,7 @@ _sections_unfolded = [ "Margin" ]
 
 [node name="Options" parent="ContainerContent/Panel/MarginContainer" index="0" instance=ExtResource( 7 )]
 
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
@@ -351,7 +352,6 @@ margin_bottom = 590.0
 
 [node name="LevelSelect" parent="ContainerContent/Panel/MarginContainer" index="2" instance=ExtResource( 9 )]
 
-visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
