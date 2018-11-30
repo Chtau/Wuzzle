@@ -11,21 +11,17 @@ public class StartMenu : Node
         Credits
     }
 
-    private ScrollContainer options;
+    private Control options;
     private LevelSelect levels;
     private Panel contentPanel;
+    private Control credits;
 
     public override void _Ready()
     {
         contentPanel = (Panel)GetNode("ContainerContent/Panel");
         levels = (LevelSelect)contentPanel.GetNode("MarginContainer/LevelSelect");
-        options = (ScrollContainer)contentPanel.GetNode("MarginContainer/ScrollContainer");
-        //optionsWrapper = (ScrollContainer)GetNode("MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer");
-        //levelSelect = (LevelSelect)GetNode("MarginContainer/VBoxContainer/HBoxContainer/LevelSelect");
-
-        //optionsWrapper.Visible = false;
-        //levelSelect.SetVisible(true);
-        //levelSelect.Visible = true;
+        options = (Control)contentPanel.GetNode("MarginContainer/Options");
+        credits = (Control)contentPanel.GetNode("MarginContainer/Credits");
 
         OnShowContent(ContentType.None);
     }
@@ -47,7 +43,6 @@ public class StartMenu : Node
 
     private void OnExitPressed()
     {
-        // Replace with function body
         GetTree().Quit();
     }
 
@@ -57,11 +52,15 @@ public class StartMenu : Node
         {
             if (!contentPanel.IsVisible())
                 contentPanel.Visible = true;
+            levels.SetVisible(false);
+            credits.Visible = true;
+            options.Visible = false;
         } else if (contentType == ContentType.Options)
         {
             if (!contentPanel.IsVisible())
                 contentPanel.Visible = true;
             levels.SetVisible(false);
+            credits.Visible = false;
             options.Visible = true;
         } else if (contentType == ContentType.Levels)
         {
@@ -69,11 +68,13 @@ public class StartMenu : Node
                 contentPanel.Visible = true;
             levels.SetVisible(true);
             options.Visible = false;
+            credits.Visible = false;
         } else
         {
             contentPanel.Visible = false;
             levels.SetVisible(false);
             options.Visible = false;
+            credits.Visible = false;
         }
     }
 }

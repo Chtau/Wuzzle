@@ -44,7 +44,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 489.0
+margin_right = 905.0
 margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -68,8 +68,8 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 45.0
-margin_right = 489.0
-margin_bottom = 98.0
+margin_right = 905.0
+margin_bottom = 70.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -87,81 +87,81 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="Left" parent="VBoxContainer" index="2" instance=ExtResource( 4 )]
 
-margin_top = 102.0
-margin_right = 489.0
-margin_bottom = 133.0
+margin_top = 74.0
+margin_right = 905.0
+margin_bottom = 105.0
 KeyMap = "move_left"
 KeyLabel = "Left"
 
 [node name="Right" parent="VBoxContainer" index="3" instance=ExtResource( 4 )]
 
-margin_top = 137.0
-margin_right = 489.0
-margin_bottom = 168.0
+margin_top = 109.0
+margin_right = 905.0
+margin_bottom = 140.0
 KeyMap = "move_right"
 KeyLabel = "Right"
 
 [node name="Down" parent="VBoxContainer" index="4" instance=ExtResource( 4 )]
 
-margin_top = 172.0
-margin_right = 489.0
-margin_bottom = 203.0
+margin_top = 144.0
+margin_right = 905.0
+margin_bottom = 175.0
 KeyMap = "move_down"
 KeyLabel = "Down"
 
 [node name="Up" parent="VBoxContainer" index="5" instance=ExtResource( 4 )]
 
-margin_top = 207.0
-margin_right = 489.0
-margin_bottom = 238.0
+margin_top = 179.0
+margin_right = 905.0
+margin_bottom = 210.0
 KeyMap = "move_up"
 KeyLabel = "Up"
 
 [node name="Dash" parent="VBoxContainer" index="6" instance=ExtResource( 4 )]
 
-margin_top = 242.0
-margin_right = 489.0
-margin_bottom = 273.0
+margin_top = 214.0
+margin_right = 905.0
+margin_bottom = 245.0
 KeyMap = "move_dash"
 KeyLabel = "Dash"
 
 [node name="Jump" parent="VBoxContainer" index="7" instance=ExtResource( 4 )]
 
-margin_top = 277.0
-margin_right = 489.0
-margin_bottom = 308.0
+margin_top = 249.0
+margin_right = 905.0
+margin_bottom = 280.0
 KeyMap = "jump"
 KeyLabel = "Jump"
 
 [node name="Strike" parent="VBoxContainer" index="8" instance=ExtResource( 4 )]
 
-margin_top = 312.0
-margin_right = 489.0
-margin_bottom = 343.0
+margin_top = 284.0
+margin_right = 905.0
+margin_bottom = 315.0
 KeyMap = "strike"
 KeyLabel = "Strike"
 
 [node name="Answer1" parent="VBoxContainer" index="9" instance=ExtResource( 4 )]
 
-margin_top = 347.0
-margin_right = 489.0
-margin_bottom = 378.0
+margin_top = 319.0
+margin_right = 905.0
+margin_bottom = 350.0
 KeyMap = "answer1"
 KeyLabel = "Answer 1"
 
 [node name="Answer2" parent="VBoxContainer" index="10" instance=ExtResource( 4 )]
 
-margin_top = 382.0
-margin_right = 489.0
-margin_bottom = 413.0
+margin_top = 354.0
+margin_right = 905.0
+margin_bottom = 385.0
 KeyMap = "answer2"
 KeyLabel = "Answer 2"
 
 [node name="Answer3" parent="VBoxContainer" index="11" instance=ExtResource( 4 )]
 
-margin_top = 417.0
-margin_right = 489.0
-margin_bottom = 448.0
+margin_top = 389.0
+margin_right = 905.0
+margin_bottom = 420.0
 KeyMap = "answer3"
 KeyLabel = "Answer 3"
 

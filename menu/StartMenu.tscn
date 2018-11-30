@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://menu/StartMenu.cs" type="Script" id=1]
 [ext_resource path="res://menu/art/Menu_Background.png" type="Texture" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://assests/themes/menu_theme.tres" type="Theme" id=4]
 [ext_resource path="res://menu/art/Panel_Border_Background.png" type="Texture" id=5]
 [ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=6]
-[ext_resource path="res://menu/LevelSelect.tscn" type="PackedScene" id=7]
-[ext_resource path="res://menu/KeyMap.tscn" type="PackedScene" id=8]
+[ext_resource path="res://menu/Options.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menu/Credits.tscn" type="PackedScene" id=8]
+[ext_resource path="res://menu/LevelSelect.tscn" type="PackedScene" id=9]
 
 [node name="StartMenu" type="Node" index="0"]
 
@@ -143,8 +144,11 @@ _sections_unfolded = [ "Margin" ]
 
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 326.0
+margin_bottom = 224.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -161,7 +165,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 326.0
+margin_right = 318.0
 margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -187,7 +191,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 61.0
-margin_right = 326.0
+margin_right = 318.0
 margin_bottom = 102.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -213,7 +217,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 122.0
-margin_right = 326.0
+margin_right = 318.0
 margin_bottom = 163.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -239,7 +243,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 183.0
-margin_right = 326.0
+margin_right = 318.0
 margin_bottom = 224.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -328,7 +332,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Margin" ]
 
-[node name="LevelSelect" parent="ContainerContent/Panel/MarginContainer" index="0" instance=ExtResource( 7 )]
+[node name="Options" parent="ContainerContent/Panel/MarginContainer" index="0" instance=ExtResource( 7 )]
 
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -336,56 +340,23 @@ margin_left = 8.0
 margin_right = 672.0
 margin_bottom = 590.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ContainerContent/Panel/MarginContainer" index="1"]
+[node name="Credits" parent="ContainerContent/Panel/MarginContainer" index="1" instance=ExtResource( 8 )]
 
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
 margin_right = 672.0
 margin_bottom = 590.0
-rect_min_size = Vector2( 310, 0 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-scroll_horizontal_enabled = false
-scroll_horizontal = 0
-scroll_vertical_enabled = true
-scroll_vertical = 0
-scroll_deadzone = 0
-_sections_unfolded = [ "Rect", "Scroll", "Size Flags" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContainerContent/Panel/MarginContainer/ScrollContainer" index="0"]
+[node name="LevelSelect" parent="ContainerContent/Panel/MarginContainer" index="2" instance=ExtResource( 9 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 664.0
+margin_left = 8.0
+margin_right = 672.0
 margin_bottom = 590.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 0
-_sections_unfolded = [ "Size Flags" ]
-
-[node name="KeyMap" parent="ContainerContent/Panel/MarginContainer/ScrollContainer/VBoxContainer" index="0" instance=ExtResource( 8 )]
-
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 664.0
-margin_bottom = 590.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-_sections_unfolded = [ "Rect", "Size Flags" ]
 
 [connection signal="pressed" from="ContainerButtons/Panel/MarginContainer/VBoxContainer/Levels" to="." method="OnLevelPressed"]
 

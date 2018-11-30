@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Linq;
 
-public class LevelSelect : Node
+public class LevelSelect : Control
 {
     [Export]
     public PackedScene PackedScene;
@@ -26,10 +26,4 @@ public class LevelSelect : Node
             scrollWrapper.AddChild(select);
         }
     }
-
-    public void SetVisible(bool visible)
-    {
-        container.Visible = visible;
-    }
-
 }
