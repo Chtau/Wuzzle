@@ -3,7 +3,6 @@ using System;
 
 public class KeyMap : Node
 {
-    //Label contextualHelp;
     Label inputHelper;
     CenterContainer inputHelpWrapper;
 
@@ -12,7 +11,6 @@ public class KeyMap : Node
         SharedFunctions.Instance.ConfigHandler.LoadConfig();
         inputHelpWrapper = (CenterContainer)GetNode("CenterContainer");
         inputHelper = (Label)inputHelpWrapper.GetNode("Panel/InputHelper");
-        //contextualHelp = (Label)GetNode("VBoxContainer/ContextualHelp");
         inputHelpWrapper.Visible = false;
     }
 
@@ -26,7 +24,6 @@ public class KeyMap : Node
         {
             inputHelpWrapper.Visible = false;
         }
-        //contextualHelp.Text = text;
     }
 
     private void OnInputSave(string actionBinding, string scanCode)
