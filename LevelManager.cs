@@ -21,10 +21,11 @@ public class LevelManager : ISingletonHandler
 
     private void OnLoadLevels()
     {
+        Levels = new List<LevelItem>();
         userRecords = new List<LevelUserItem>();
         userRecords = SharedFunctions.Instance.FileHandler.Load<List<LevelUserItem>>(GlobalValues.UserRecordsPath);
 
-        Levels.Add(new LevelItem
+        /*Levels.Add(new LevelItem
         {
             Id = new Guid("6B8C6BC0-6D53-4FC1-8A7B-18131E651802"),
             BronzeTime = TimeSpan.FromMinutes(10),
@@ -37,14 +38,14 @@ public class LevelManager : ISingletonHandler
             Record = UserRecordTimeSpanById(userRecords, new Guid("6B8C6BC0-6D53-4FC1-8A7B-18131E651802")),
             LevelTitle = "Test Level-1",
             LevelDescription = "Internal Test level while Development"
-        });
+        });*/
 
         Levels.Add(new LevelItem
         {
             Id = new Guid("85DDBFAB-5208-4F7D-82A9-8FB224CB5403"),
-            BronzeTime = TimeSpan.FromMinutes(10),
-            SilverTime = TimeSpan.FromMinutes(7),
-            GoldTime = TimeSpan.FromMinutes(5),
+            BronzeTime = TimeSpan.FromMinutes(1),
+            SilverTime = TimeSpan.FromSeconds(30),
+            GoldTime = TimeSpan.FromSeconds(20),
             ScenePath = "res://levels/Level1.tscn",
             Order = 1,
             RequieredQuestions = 3,
