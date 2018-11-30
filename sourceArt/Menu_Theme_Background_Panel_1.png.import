@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/start_image.png-c12aa5e45197a0c3f38515d56565e8ca.stex"
+path="res://.import/Menu_Theme_Background_Panel_1.png-b452105933bf89dab02eb4874392f4e3.stex"
 
 [deps]
 
-source_file="res://menu/art/start_image.png"
-dest_files=[ "res://.import/start_image.png-c12aa5e45197a0c3f38515d56565e8ca.stex" ]
+source_file="res://sourceArt/Menu_Theme_Background_Panel_1.png"
+dest_files=[ "res://.import/Menu_Theme_Background_Panel_1.png-b452105933bf89dab02eb4874392f4e3.stex" ]
 
 [params]
 

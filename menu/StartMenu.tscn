@@ -1,28 +1,34 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://menu/StartMenu.cs" type="Script" id=1]
-[ext_resource path="res://menu/art/title.png" type="Texture" id=2]
-[ext_resource path="res://menu/items/MenuButton.tscn" type="PackedScene" id=3]
-[ext_resource path="res://TestScene.tscn" type="PackedScene" id=4]
-[ext_resource path="res://menu/Options.tscn" type="PackedScene" id=5]
-[ext_resource path="res://menu/LevelSelect.tscn" type="PackedScene" id=6]
-[ext_resource path="res://menu/KeyMap.tscn" type="PackedScene" id=7]
-[ext_resource path="res://menu/FadeIn.tscn" type="PackedScene" id=8]
+[ext_resource path="res://menu/art/Menu_Background.png" type="Texture" id=2]
+[ext_resource path="res://menu/art/title.png" type="Texture" id=3]
+[ext_resource path="res://assests/themes/menu_theme.tres" type="Theme" id=4]
+[ext_resource path="res://menu/art/Panel_Border_Background.png" type="Texture" id=5]
+[ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=6]
+[ext_resource path="res://menu/LevelSelect.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menu/KeyMap.tscn" type="PackedScene" id=8]
 
-[node name="StartMenu" type="Node"]
+[node name="StartMenu" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
-[node name="MarginContainer" type="MarginContainer" parent="." index="0"]
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+position = Vector2( 1526.64, 395.142 )
+scale = Vector2( 1.7467, 2.26375 )
+texture = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.0
 margin_left = 50.0
-margin_top = 20.0
+margin_top = 50.0
 margin_right = -50.0
-margin_bottom = -20.0
+margin_bottom = 133.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -38,8 +44,8 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
-margin_right = 924.0
-margin_bottom = 560.0
+margin_right = 1340.0
+margin_bottom = 129.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -54,7 +60,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 916.0
+margin_right = 1332.0
 margin_bottom = 129.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -62,89 +68,284 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 stretch_mode = 0
 _sections_unfolded = [ "Rect" ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" index="1"]
+[node name="ContainerButtons" type="Container" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 133.0
-margin_right = 916.0
-margin_bottom = 560.0
+margin_left = 50.0
+margin_top = 200.0
+margin_right = 406.0
+margin_bottom = 446.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="Panel" type="Panel" parent="ContainerButtons" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 4 )
+_sections_unfolded = [ "Size Flags", "Theme" ]
+
+[node name="TextureRect" type="TextureRect" parent="ContainerButtons/Panel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ContainerButtons/Panel" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = -15.0
+margin_bottom = -15.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContainerButtons/Panel/MarginContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_constants/separation = 20
+alignment = 1
+_sections_unfolded = [ "Size Flags", "custom_constants" ]
+
+[node name="Levels" type="Button" parent="ContainerButtons/Panel/MarginContainer/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 326.0
+margin_bottom = 41.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 6 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Levels"
+flat = false
+align = 1
+_sections_unfolded = [ "Size Flags", "custom_fonts" ]
+
+[node name="Options" type="Button" parent="ContainerButtons/Panel/MarginContainer/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 61.0
+margin_right = 326.0
+margin_bottom = 102.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 6 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Options"
+flat = false
+align = 1
+_sections_unfolded = [ "Size Flags", "custom_fonts" ]
+
+[node name="Credits" type="Button" parent="ContainerButtons/Panel/MarginContainer/VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 122.0
+margin_right = 326.0
+margin_bottom = 163.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 6 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Credits"
+flat = false
+align = 1
+_sections_unfolded = [ "Size Flags", "custom_fonts" ]
+
+[node name="Exit" type="Button" parent="ContainerButtons/Panel/MarginContainer/VBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 183.0
+margin_right = 326.0
+margin_bottom = 224.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 6 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Exit"
+flat = false
+align = 1
+_sections_unfolded = [ "Size Flags", "custom_fonts" ]
+
+[node name="ContainerContent" type="MarginContainer" parent="." index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 500.0
+margin_top = 200.0
+margin_right = -200.0
+margin_bottom = -50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 4 )
+_sections_unfolded = [ "Anchor", "Margin", "Theme" ]
+
+[node name="Panel" type="Panel" parent="ContainerContent" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 740.0
+margin_bottom = 650.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="TextureRect" type="TextureRect" parent="ContainerContent/Panel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 0
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="ContainerContent/Panel" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 456.0
-margin_bottom = 427.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = -30.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 20
-alignment = 0
-_sections_unfolded = [ "Margin", "Rect", "Size Flags", "custom_constants" ]
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
 
-[node name="Start" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="0" instance=ExtResource( 3 )]
-
-margin_top = 0.0
-margin_right = 456.0
-margin_bottom = 47.0
-_sections_unfolded = [ "Rect" ]
-LabelText = "Start"
-Scene = ExtResource( 4 )
-
-[node name="Options" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="1" instance=ExtResource( 3 )]
-
-margin_top = 67.0
-margin_right = 456.0
-margin_bottom = 114.0
-LabelText = "Options"
-Scene = ExtResource( 5 )
-
-[node name="Exit" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons" index="2" instance=ExtResource( 3 )]
-
-margin_top = 134.0
-margin_right = 456.0
-margin_bottom = 181.0
-LabelText = "Exit"
-Scene = ExtResource( 4 )
-
-[node name="LevelSelect" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource( 6 )]
+[node name="LevelSelect" parent="ContainerContent/Panel/MarginContainer" index="0" instance=ExtResource( 7 )]
 
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 460.0
-margin_right = 916.0
-margin_bottom = 427.0
+margin_left = 8.0
+margin_right = 672.0
+margin_bottom = 590.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="2"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ContainerContent/Panel/MarginContainer" index="1"]
 
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 606.0
-margin_right = 916.0
-margin_bottom = 427.0
+margin_left = 8.0
+margin_right = 672.0
+margin_bottom = 590.0
 rect_min_size = Vector2( 310, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
@@ -159,14 +360,14 @@ scroll_vertical = 0
 scroll_deadzone = 0
 _sections_unfolded = [ "Rect", "Scroll", "Size Flags" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ContainerContent/Panel/MarginContainer/ScrollContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 310.0
-margin_bottom = 500.0
+margin_right = 664.0
+margin_bottom = 590.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -176,26 +377,22 @@ size_flags_vertical = 3
 alignment = 0
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="KeyMap" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" index="0" instance=ExtResource( 7 )]
+[node name="KeyMap" parent="ContainerContent/Panel/MarginContainer/ScrollContainer/VBoxContainer" index="0" instance=ExtResource( 8 )]
 
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 298.0
-margin_bottom = 500.0
+margin_right = 664.0
+margin_bottom = 590.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 _sections_unfolded = [ "Rect", "Size Flags" ]
 
-[node name="FadeIn" parent="." index="1" instance=ExtResource( 8 )]
+[connection signal="pressed" from="ContainerButtons/Panel/MarginContainer/VBoxContainer/Levels" to="." method="OnLevelPressed"]
 
-visible = false
+[connection signal="pressed" from="ContainerButtons/Panel/MarginContainer/VBoxContainer/Options" to="." method="OnOptionsPressed"]
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/Start" to="." method="OnStartPressed"]
+[connection signal="pressed" from="ContainerButtons/Panel/MarginContainer/VBoxContainer/Credits" to="." method="OnCreditsPressed"]
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/Options" to="." method="OnOptionsPressed"]
-
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/Exit" to="." method="OnExitPressed"]
-
-[connection signal="FadeInFinished" from="FadeIn" to="." method="_on_FadeIn_FadeInFinished"]
+[connection signal="pressed" from="ContainerButtons/Panel/MarginContainer/VBoxContainer/Exit" to="." method="OnExitPressed"]
 
 
