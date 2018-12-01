@@ -4,7 +4,7 @@
 [ext_resource path="res://assests/themes/menu_theme.tres" type="Theme" id=2]
 [ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=3]
 
-[node name="LevelGameOverMessage" type="Control"]
+[node name="LevelGameOverMessage" type="Control" index="0"]
 
 pause_mode = 2
 anchor_left = 0.0
@@ -30,6 +30,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="Panel" type="Panel" parent="CanvasLayer" index="0"]
 
+visible = false
 self_modulate = Color( 1, 1, 1, 0.784314 )
 anchor_left = 0.5
 anchor_top = 0.5

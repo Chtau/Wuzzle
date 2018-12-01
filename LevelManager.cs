@@ -55,6 +55,21 @@ public class LevelManager : ISingletonHandler
             LevelTitle = "Level 1",
             LevelDescription = "Fast and easy level to start off"
         });
+        Levels.Add(new LevelItem
+        {
+            Id = new Guid("B71143C0-09AE-43EF-8033-7E5AC330478D"),
+            BronzeTime = TimeSpan.FromMinutes(3),
+            SilverTime = TimeSpan.FromMinutes(2),
+            GoldTime = TimeSpan.FromMinutes(1),
+            ScenePath = "res://levels/Level2.tscn",
+            Order = 2,
+            RequieredQuestions = 4,
+            TotalQuestionAvailable = 8,
+            FinishedCount = UserFinishedCountById(userRecords, new Guid("B71143C0-09AE-43EF-8033-7E5AC330478D")),
+            Record = UserRecordTimeSpanById(userRecords, new Guid("B71143C0-09AE-43EF-8033-7E5AC330478D")),
+            LevelTitle = "Level 2",
+            LevelDescription = "Get going with a little more"
+        });
     }
 
     private TimeSpan? UserRecordTimeSpanById(List<LevelUserItem> userRecords, Guid id)

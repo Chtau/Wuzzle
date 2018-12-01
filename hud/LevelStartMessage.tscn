@@ -3,7 +3,7 @@
 [ext_resource path="res://hud/LevelStartMessage.cs" type="Script" id=1]
 [ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=2]
 
-[node name="LevelStartMessage" type="Control"]
+[node name="LevelStartMessage" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -27,6 +27,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" index="0"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0

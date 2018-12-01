@@ -31,7 +31,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.196078 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="LevelFinishedMessage" type="Control"]
+[node name="LevelFinishedMessage" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -56,6 +56,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 [node name="Panel" type="Panel" parent="CanvasLayer" index="0"]
 
 pause_mode = 2
+visible = false
 self_modulate = Color( 1, 1, 1, 0.784314 )
 anchor_left = 0.5
 anchor_top = 0.5
