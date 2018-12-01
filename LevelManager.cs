@@ -115,6 +115,21 @@ public class LevelManager : ISingletonHandler
             LevelTitle = "Level 5",
             LevelDescription = "Fall of trust"
         });
+        Levels.Add(new LevelItem
+        {
+            Id = new Guid("1B398B84-F303-4251-9CFE-F4A0B40EC44D"),
+            BronzeTime = TimeSpan.FromMinutes(3),
+            SilverTime = TimeSpan.FromMinutes(2),
+            GoldTime = TimeSpan.FromMinutes(1),
+            ScenePath = "res://levels/Level6.tscn",
+            Order = 6,
+            RequieredQuestions = 9,
+            TotalQuestionAvailable = 10,
+            FinishedCount = UserFinishedCountById(userRecords, new Guid("1B398B84-F303-4251-9CFE-F4A0B40EC44D")),
+            Record = UserRecordTimeSpanById(userRecords, new Guid("1B398B84-F303-4251-9CFE-F4A0B40EC44D")),
+            LevelTitle = "Level 6",
+            LevelDescription = "Only one wrong answer"
+        });
     }
 
     private TimeSpan? UserRecordTimeSpanById(List<LevelUserItem> userRecords, Guid id)
