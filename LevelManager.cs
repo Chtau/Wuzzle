@@ -75,15 +75,45 @@ public class LevelManager : ISingletonHandler
             Id = new Guid("C2FB64C8-7201-48D8-9129-5149AB16031D"),
             BronzeTime = TimeSpan.FromMinutes(3),
             SilverTime = TimeSpan.FromMinutes(2),
-            GoldTime = TimeSpan.FromSeconds(1),
+            GoldTime = TimeSpan.FromMinutes(1),
             ScenePath = "res://levels/Level3.tscn",
-            Order = 2,
+            Order = 3,
             RequieredQuestions = 5,
             TotalQuestionAvailable = 7,
             FinishedCount = UserFinishedCountById(userRecords, new Guid("C2FB64C8-7201-48D8-9129-5149AB16031D")),
             Record = UserRecordTimeSpanById(userRecords, new Guid("C2FB64C8-7201-48D8-9129-5149AB16031D")),
             LevelTitle = "Level 3",
             LevelDescription = "Better get the Questions right"
+        });
+        Levels.Add(new LevelItem
+        {
+            Id = new Guid("E4F88F72-4344-4BDB-947C-DDAEAAA2112C"),
+            BronzeTime = TimeSpan.FromMinutes(1),
+            SilverTime = TimeSpan.FromSeconds(40),
+            GoldTime = TimeSpan.FromSeconds(30),
+            ScenePath = "res://levels/Level4.tscn",
+            Order = 4,
+            RequieredQuestions = 3,
+            TotalQuestionAvailable = 10,
+            FinishedCount = UserFinishedCountById(userRecords, new Guid("E4F88F72-4344-4BDB-947C-DDAEAAA2112C")),
+            Record = UserRecordTimeSpanById(userRecords, new Guid("E4F88F72-4344-4BDB-947C-DDAEAAA2112C")),
+            LevelTitle = "Level 4",
+            LevelDescription = "Don't fall down"
+        });
+        Levels.Add(new LevelItem
+        {
+            Id = new Guid("1C1FD23E-7C01-4478-8311-386A3BFBCEB2"),
+            BronzeTime = TimeSpan.FromMinutes(1),
+            SilverTime = TimeSpan.FromSeconds(40),
+            GoldTime = TimeSpan.FromSeconds(30),
+            ScenePath = "res://levels/Level5.tscn",
+            Order = 5,
+            RequieredQuestions = 4,
+            TotalQuestionAvailable = 7,
+            FinishedCount = UserFinishedCountById(userRecords, new Guid("1C1FD23E-7C01-4478-8311-386A3BFBCEB2")),
+            Record = UserRecordTimeSpanById(userRecords, new Guid("1C1FD23E-7C01-4478-8311-386A3BFBCEB2")),
+            LevelTitle = "Level 5",
+            LevelDescription = "Fall of trust"
         });
     }
 

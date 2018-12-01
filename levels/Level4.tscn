@@ -1,0 +1,354 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://levels/Level4.cs" type="Script" id=1]
+[ext_resource path="res://map/MapLVL4.tscn" type="PackedScene" id=2]
+[ext_resource path="res://pickups/QuestionStand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://items/Spikes.tscn" type="PackedScene" id=4]
+[ext_resource path="res://hud/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://hud/LevelFinishedMessage.tscn" type="PackedScene" id=6]
+[ext_resource path="res://hud/LevelGameOverMessage.tscn" type="PackedScene" id=7]
+[ext_resource path="res://hud/LevelMenu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://hud/LevelStartMessage.tscn" type="PackedScene" id=9]
+[ext_resource path="res://hud/Question.tscn" type="PackedScene" id=10]
+[ext_resource path="res://map/Spawn.tscn" type="PackedScene" id=11]
+[ext_resource path="res://character/Player.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Audio.tscn" type="PackedScene" id=13]
+[ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=14]
+[ext_resource path="res://enemy/Bullet.tscn" type="PackedScene" id=15]
+[ext_resource path="res://levels/ParallaxBackground.tscn" type="PackedScene" id=16]
+
+[node name="Level4" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="MapLVL4" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="Questions" type="Node" parent="." index="1"]
+
+editor/display_folded = true
+
+[node name="QuestionStand" parent="Questions" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 2071.94, 584.069 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand2" parent="Questions" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 3098.86, 584.804 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand3" parent="Questions" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 5051.27, 784.015 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand4" parent="Questions" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 6143.28, 784.015 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand5" parent="Questions" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 7322.28, 785.015 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand6" parent="Questions" index="5" instance=ExtResource( 3 )]
+
+position = Vector2( 7669.41, 2034.61 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand7" parent="Questions" index="6" instance=ExtResource( 3 )]
+
+position = Vector2( 6246.45, 2034.61 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand8" parent="Questions" index="7" instance=ExtResource( 3 )]
+
+position = Vector2( 4453.47, 2037.33 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand9" parent="Questions" index="8" instance=ExtResource( 3 )]
+
+position = Vector2( 3024.56, 2034.89 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="QuestionStand10" parent="Questions" index="9" instance=ExtResource( 3 )]
+
+position = Vector2( 1731.75, 2034.89 )
+scale = Vector2( 0.3, 0.3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="Traps" type="Node" parent="." index="2"]
+
+editor/display_folded = true
+
+[node name="Spikes" parent="Traps" index="0" instance=ExtResource( 4 )]
+
+position = Vector2( 1723.23, 2262.61 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes2" parent="Traps" index="1" instance=ExtResource( 4 )]
+
+position = Vector2( 1953.86, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes3" parent="Traps" index="2" instance=ExtResource( 4 )]
+
+position = Vector2( 2183.21, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes4" parent="Traps" index="3" instance=ExtResource( 4 )]
+
+position = Vector2( 2412.56, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes5" parent="Traps" index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 2641.17, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes6" parent="Traps" index="5" instance=ExtResource( 4 )]
+
+position = Vector2( 2866.84, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes7" parent="Traps" index="6" instance=ExtResource( 4 )]
+
+position = Vector2( 3093.25, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes8" parent="Traps" index="7" instance=ExtResource( 4 )]
+
+position = Vector2( 3321.13, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes9" parent="Traps" index="8" instance=ExtResource( 4 )]
+
+position = Vector2( 3550.48, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes10" parent="Traps" index="9" instance=ExtResource( 4 )]
+
+position = Vector2( 3777.63, 2262.39 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes11" parent="Traps" index="10" instance=ExtResource( 4 )]
+
+position = Vector2( 4006.24, 2262.39 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes12" parent="Traps" index="11" instance=ExtResource( 4 )]
+
+position = Vector2( 4233.38, 2262.39 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes13" parent="Traps" index="12" instance=ExtResource( 4 )]
+
+position = Vector2( 4461.26, 2262.39 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes14" parent="Traps" index="13" instance=ExtResource( 4 )]
+
+position = Vector2( 4693.55, 2262.39 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes15" parent="Traps" index="14" instance=ExtResource( 4 )]
+
+position = Vector2( 4922.9, 2262.39 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes16" parent="Traps" index="15" instance=ExtResource( 4 )]
+
+position = Vector2( 5152.25, 2262.39 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes17" parent="Traps" index="16" instance=ExtResource( 4 )]
+
+position = Vector2( 5378.66, 2262.39 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes18" parent="Traps" index="17" instance=ExtResource( 4 )]
+
+position = Vector2( 5605.81, 2262.39 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes19" parent="Traps" index="18" instance=ExtResource( 4 )]
+
+position = Vector2( 5832.95, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes20" parent="Traps" index="19" instance=ExtResource( 4 )]
+
+position = Vector2( 6062.3, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes21" parent="Traps" index="20" instance=ExtResource( 4 )]
+
+position = Vector2( 6290.91, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes22" parent="Traps" index="21" instance=ExtResource( 4 )]
+
+position = Vector2( 6517.32, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes23" parent="Traps" index="22" instance=ExtResource( 4 )]
+
+position = Vector2( 6744.47, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes24" parent="Traps" index="23" instance=ExtResource( 4 )]
+
+position = Vector2( 6973.82, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes25" parent="Traps" index="24" instance=ExtResource( 4 )]
+
+position = Vector2( 7200.23, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes26" parent="Traps" index="25" instance=ExtResource( 4 )]
+
+position = Vector2( 7429.58, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes27" parent="Traps" index="26" instance=ExtResource( 4 )]
+
+position = Vector2( 7653.04, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes28" parent="Traps" index="27" instance=ExtResource( 4 )]
+
+position = Vector2( 7878.72, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes29" parent="Traps" index="28" instance=ExtResource( 4 )]
+
+position = Vector2( 8106.6, 2263.12 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="Spikes30" parent="Traps" index="29" instance=ExtResource( 4 )]
+
+position = Vector2( 8325.66, 2261.65 )
+scale = Vector2( 1, 0.289467 )
+
+[node name="LevelNodes" type="Node" parent="." index="3"]
+
+[node name="HUD" parent="LevelNodes" index="0" instance=ExtResource( 5 )]
+
+[node name="LevelFinishedMessage" parent="LevelNodes" index="1" instance=ExtResource( 6 )]
+
+[node name="LevelGameOverMessage" parent="LevelNodes" index="2" instance=ExtResource( 7 )]
+
+[node name="LevelMenu" parent="LevelNodes" index="3" instance=ExtResource( 8 )]
+
+[node name="LevelStartMessage" parent="LevelNodes" index="4" instance=ExtResource( 9 )]
+
+[node name="Question" parent="LevelNodes" index="5" instance=ExtResource( 10 )]
+
+[node name="Spawn" parent="LevelNodes" index="6" instance=ExtResource( 11 )]
+
+position = Vector2( 243.566, 524.412 )
+
+[node name="Goal" parent="LevelNodes" index="7" instance=ExtResource( 11 )]
+
+position = Vector2( 8345.89, 2027.33 )
+
+[node name="Player" parent="LevelNodes" index="8" instance=ExtResource( 12 )]
+
+[node name="Audio" parent="LevelNodes" index="9" instance=ExtResource( 13 )]
+
+[node name="Enemies" type="Node" parent="." index="4"]
+
+[node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 14 )]
+
+position = Vector2( 1820.56, 583.427 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource( 14 )]
+
+position = Vector2( 2360.18, 583.427 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource( 14 )]
+
+position = Vector2( 2765.72, 582.319 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy4" parent="Enemies" index="3" instance=ExtResource( 14 )]
+
+position = Vector2( 3398.41, 582.319 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy5" parent="Enemies" index="4" instance=ExtResource( 14 )]
+
+position = Vector2( 3882.62, 682.043 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy6" parent="Enemies" index="5" instance=ExtResource( 14 )]
+
+position = Vector2( 4516.42, 733.012 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy7" parent="Enemies" index="6" instance=ExtResource( 14 )]
+
+position = Vector2( 5321.96, 782.874 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy8" parent="Enemies" index="7" instance=ExtResource( 14 )]
+
+position = Vector2( 4872.1, 782.874 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy9" parent="Enemies" index="8" instance=ExtResource( 14 )]
+
+position = Vector2( 5776.25, 781.766 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy10" parent="Enemies" index="9" instance=ExtResource( 14 )]
+
+position = Vector2( 6424.46, 782.874 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy11" parent="Enemies" index="10" instance=ExtResource( 14 )]
+
+position = Vector2( 6939.69, 782.874 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy12" parent="Enemies" index="11" instance=ExtResource( 14 )]
+
+position = Vector2( 7684.29, 782.874 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy13" parent="Enemies" index="12" instance=ExtResource( 14 )]
+
+position = Vector2( 6659.95, 2032.83 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy14" parent="Enemies" index="13" instance=ExtResource( 14 )]
+
+position = Vector2( 5514.75, 2032.02 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy15" parent="Enemies" index="14" instance=ExtResource( 14 )]
+
+position = Vector2( 3608.75, 2031.02 )
+Bullet = ExtResource( 15 )
+
+[node name="Enemy16" parent="Enemies" index="15" instance=ExtResource( 14 )]
+
+position = Vector2( 2522.19, 2031.02 )
+Bullet = ExtResource( 15 )
+
+[node name="ParallaxBackground" parent="." index="5" instance=ExtResource( 16 )]
+
+

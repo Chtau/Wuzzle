@@ -2,7 +2,7 @@
 
 [ext_resource path="res://levels/Background.tscn" type="PackedScene" id=1]
 
-[node name="ParallaxBackground" type="ParallaxBackground"]
+[node name="ParallaxBackground" type="ParallaxBackground" index="0"]
 
 layer = -1
 offset = Vector2( 0, 0 )
@@ -25,7 +25,7 @@ _sections_unfolded = [ "Motion" ]
 
 [node name="Background" parent="ParallaxLayer" index="0" instance=ExtResource( 1 )]
 
-position = Vector2( 1902.59, 76.2496 )
-scale = Vector2( 2.98454, 7.06625 )
+position = Vector2( 4022.1, -700.698 )
+scale = Vector2( 4.01946, 8.58373 )
 
 
