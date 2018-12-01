@@ -130,6 +130,21 @@ public class LevelManager : ISingletonHandler
             LevelTitle = "Level 6",
             LevelDescription = "Only one wrong answer"
         });
+        Levels.Add(new LevelItem
+        {
+            Id = new Guid("80CEDDF9-C10C-4137-B437-99DFBB55930B"),
+            BronzeTime = TimeSpan.FromMinutes(30),
+            SilverTime = TimeSpan.FromMinutes(25),
+            GoldTime = TimeSpan.FromSeconds(15),
+            ScenePath = "res://levels/Level7.tscn",
+            Order = 7,
+            RequieredQuestions = 1,
+            TotalQuestionAvailable = 3,
+            FinishedCount = UserFinishedCountById(userRecords, new Guid("80CEDDF9-C10C-4137-B437-99DFBB55930B")),
+            Record = UserRecordTimeSpanById(userRecords, new Guid("80CEDDF9-C10C-4137-B437-99DFBB55930B")),
+            LevelTitle = "Level 7",
+            LevelDescription = "Survive and go fast"
+        });
     }
 
     private TimeSpan? UserRecordTimeSpanById(List<LevelUserItem> userRecords, Guid id)

@@ -83,6 +83,7 @@
     <Compile Include="levels\Level4.cs" />
     <Compile Include="levels\Level5.cs" />
     <Compile Include="levels\Level6.cs" />
+    <Compile Include="levels\Level7.cs" />
     <Compile Include="LevelTest.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="map\interfaces\IID.cs" />
