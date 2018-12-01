@@ -12,7 +12,9 @@ config_version=3
 
 config/name="Wuzzle"
 run/main_scene="res://menu/StartMenu.tscn"
-config/icon="res://icon.png"
+boot_splash/image="res://sourceArt/Cover.png"
+boot_splash/fullsize=false
+config/icon="res://sourceArt/icon.png"
 
 [display]
 
@@ -53,4 +55,5 @@ strike=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":""
 
 [rendering]
 
+environment/default_clear_color=Color( 0.207843, 0.364706, 0.345098, 1 )
 environment/default_environment="res://default_env.tres"
