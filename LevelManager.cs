@@ -145,6 +145,21 @@ public class LevelManager : ISingletonHandler
             LevelTitle = "Level 7",
             LevelDescription = "Survive and go fast"
         });
+        Levels.Add(new LevelItem
+        {
+            Id = new Guid("8F732AC0-6178-4680-AAEB-59B6B1A93762"),
+            BronzeTime = TimeSpan.FromMinutes(20),
+            SilverTime = TimeSpan.FromMinutes(10),
+            GoldTime = TimeSpan.FromSeconds(5),
+            ScenePath = "res://levels/Level8.tscn",
+            Order = 8,
+            RequieredQuestions = 1,
+            TotalQuestionAvailable = 1,
+            FinishedCount = UserFinishedCountById(userRecords, new Guid("8F732AC0-6178-4680-AAEB-59B6B1A93762")),
+            Record = UserRecordTimeSpanById(userRecords, new Guid("8F732AC0-6178-4680-AAEB-59B6B1A93762")),
+            LevelTitle = "Level 8",
+            LevelDescription = "Leap of faith"
+        });
     }
 
     private TimeSpan? UserRecordTimeSpanById(List<LevelUserItem> userRecords, Guid id)
