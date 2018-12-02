@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://hud/LevelFinishedMessage.cs" type="Script" id=1]
 [ext_resource path="res://assests/themes/menu_theme.tres" type="Theme" id=2]
-[ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assests/fonts/Sunflower_m_24.tres" type="DynamicFont" id=4]
+[ext_resource path="res://menu/art/Panel_Border_Background.png" type="Texture" id=3]
+[ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assests/fonts/Sunflower_m_24.tres" type="DynamicFont" id=5]
+[ext_resource path="res://menu/art/Medaille_Gold_50.png" type="Texture" id=6]
+[ext_resource path="res://menu/art/Medaille_Silber_50.png" type="Texture" id=7]
+[ext_resource path="res://menu/art/Medaille_Bronze_50.png" type="Texture" id=8]
 
 [sub_resource type="Animation" id=1]
 
@@ -53,7 +57,7 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Panel" type="Panel" parent="CanvasLayer" index="0"]
+[node name="Panel" type="NinePatchRect" parent="CanvasLayer" index="0"]
 
 pause_mode = 2
 visible = false
@@ -62,18 +66,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -237.0
-margin_top = -218.0
-margin_right = 280.0
-margin_bottom = 163.0
+margin_left = -207.0
+margin_top = -177.0
+margin_right = 227.0
+margin_bottom = 169.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 theme = ExtResource( 2 )
-_sections_unfolded = [ "Anchor", "Pause", "Theme", "Visibility" ]
+texture = ExtResource( 3 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+_sections_unfolded = [ "Anchor", "Patch Margin", "Pause", "Theme", "Visibility" ]
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Panel" index="0"]
 
@@ -95,10 +104,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 124.0
-margin_top = 64.0
-margin_right = 392.0
-margin_bottom = 317.0
+margin_left = 27.0
+margin_top = 11.0
+margin_right = 407.0
+margin_bottom = 334.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -115,7 +124,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 268.0
+margin_right = 380.0
 margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -123,7 +132,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "Finished"
 align = 1
 valign = 1
@@ -139,7 +148,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 61.0
-margin_right = 268.0
+margin_right = 380.0
 margin_bottom = 86.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -155,8 +164,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 58.0
-margin_right = 115.0
+margin_left = 114.0
+margin_right = 171.0
 margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -164,7 +173,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Time:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -177,8 +186,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 119.0
-margin_right = 209.0
+margin_left = 175.0
+margin_right = 265.0
 margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -186,7 +195,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "00:00:00"
 percent_visible = 1.0
 lines_skipped = 0
@@ -200,7 +209,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 106.0
-margin_right = 268.0
+margin_right = 380.0
 margin_bottom = 131.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -216,7 +225,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 174.0
+margin_left = 56.0
+margin_right = 230.0
 margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -224,7 +234,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Previous Record:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -237,8 +247,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 178.0
-margin_right = 268.0
+margin_left = 234.0
+margin_right = 324.0
 margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -246,7 +256,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "00:00:00"
 percent_visible = 1.0
 lines_skipped = 0
@@ -260,8 +270,8 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 151.0
-margin_right = 268.0
-margin_bottom = 192.0
+margin_right = 380.0
+margin_bottom = 201.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -270,23 +280,77 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/NewRecordWrapper" index="0"]
+[node name="GoldRecord" type="TextureRect" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/NewRecordWrapper" index="0"]
 
-self_modulate = Color( 1, 1, 1, 0.392157 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 25.0
-margin_right = 243.0
-margin_bottom = 41.0
+margin_right = 50.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 6 )
+stretch_mode = 0
+
+[node name="SilberRecord" type="TextureRect" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/NewRecordWrapper" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 7 )
+stretch_mode = 0
+
+[node name="BronzeRecord" type="TextureRect" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/NewRecordWrapper" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 8 )
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/NewRecordWrapper" index="3"]
+
+self_modulate = Color( 1, 1, 1, 0.720935 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 162.0
+margin_top = 4.0
+margin_right = 380.0
+margin_bottom = 45.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "New Record!"
 align = 1
 valign = 1
@@ -301,9 +365,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 212.0
-margin_right = 268.0
-margin_bottom = 253.0
+margin_top = 221.0
+margin_right = 380.0
+margin_bottom = 262.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -312,14 +376,14 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/NextLevelWrapper" index="0"]
+[node name="NextLevel" type="Button" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/NextLevelWrapper" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 45.0
-margin_right = 223.0
+margin_left = 34.0
+margin_right = 230.0
 margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -328,18 +392,88 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Next Level"
+text = " Next Level "
+flat = false
+align = 1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="Retry" type="Button" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/NextLevelWrapper" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 234.0
+margin_right = 345.0
+margin_bottom = 41.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = " Retry "
+flat = false
+align = 1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="NextLevelWrapper2" type="HBoxContainer" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 282.0
+margin_right = 380.0
+margin_bottom = 323.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 1
+
+[node name="BackToMenu" type="Button" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer/NextLevelWrapper2" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_right = 315.0
+margin_bottom = 41.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = " Back to Menu "
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
+pause_mode = 2
 root_node = NodePath("..")
 autoplay = ""
 playback_process_mode = 1
@@ -348,7 +482,12 @@ playback_speed = 1.0
 anims/idle = SubResource( 1 )
 anims/new_record = SubResource( 2 )
 blend_times = [  ]
+_sections_unfolded = [ "Pause" ]
 
-[connection signal="pressed" from="CanvasLayer/Panel/CenterContainer/VBoxContainer/NextLevelWrapper/Button" to="." method="OnButtonPressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/CenterContainer/VBoxContainer/NextLevelWrapper/NextLevel" to="." method="OnButtonPressed"]
+
+[connection signal="pressed" from="CanvasLayer/Panel/CenterContainer/VBoxContainer/NextLevelWrapper/Retry" to="." method="OnRetryPressed"]
+
+[connection signal="pressed" from="CanvasLayer/Panel/CenterContainer/VBoxContainer/NextLevelWrapper2/BackToMenu" to="." method="OnBackPressed"]
 
 

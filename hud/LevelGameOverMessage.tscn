@@ -5,7 +5,7 @@
 [ext_resource path="res://menu/art/Panel_Border_Background.png" type="Texture" id=3]
 [ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=4]
 
-[node name="LevelGameOverMessage" type="Control" index="0"]
+[node name="LevelGameOverMessage" type="Control"]
 
 pause_mode = 2
 anchor_left = 0.0
