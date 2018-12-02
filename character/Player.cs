@@ -50,7 +50,7 @@ public class Player : KinematicBody2D
     float strikeTime = 0f;
     float gotHitTime = 0f;
 
-    CollisionShape2D CollisionShape2D;
+    private CollisionShape2D CollisionShape2D;
 
     private float dashTimeout = 0f;
 
@@ -351,7 +351,6 @@ public class Player : KinematicBody2D
             {
                 if (damager.HitDamage > 0)
                 {
-                    //GD.Print("Player got hit! Dmg:" + damager.HitDamage);
                     CurrentLife += -1 * damager.HitDamage;
                     SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
                     State = PlayerPhysicsState.GotHit;
@@ -363,10 +362,6 @@ public class Player : KinematicBody2D
                         OnLevelGameOver();
                     }
                 }
-            }
-            else
-            {
-                //GD.Print("Melee Body Enter: " + body);
             }
         }
     }
