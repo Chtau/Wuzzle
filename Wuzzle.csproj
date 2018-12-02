@@ -74,6 +74,7 @@
     <Compile Include="hud\LevelMenu.cs" />
     <Compile Include="hud\LevelStartMessage.cs" />
     <Compile Include="hud\Question.cs" />
+    <Compile Include="hud\UIManager.cs" />
     <Compile Include="ISingletonHandler.cs" />
     <Compile Include="items\Spikes.cs" />
     <Compile Include="LevelManager.cs" />

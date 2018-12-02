@@ -1,0 +1,27 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://hud/UIManager.cs" type="Script" id=1]
+[ext_resource path="res://hud/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://hud/LevelFinishedMessage.tscn" type="PackedScene" id=3]
+[ext_resource path="res://hud/LevelGameOverMessage.tscn" type="PackedScene" id=4]
+[ext_resource path="res://hud/LevelMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://hud/LevelStartMessage.tscn" type="PackedScene" id=6]
+[ext_resource path="res://hud/Question.tscn" type="PackedScene" id=7]
+
+[node name="UIManager" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="HUD" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="LevelFinishedMessage" parent="." index="1" instance=ExtResource( 3 )]
+
+[node name="LevelGameOverMessage" parent="." index="2" instance=ExtResource( 4 )]
+
+[node name="LevelMenu" parent="." index="3" instance=ExtResource( 5 )]
+
+[node name="LevelStartMessage" parent="." index="4" instance=ExtResource( 6 )]
+
+[node name="Question" parent="." index="5" instance=ExtResource( 7 )]
+
+

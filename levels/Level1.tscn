@@ -1,23 +1,18 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://levels/Level1.cs" type="Script" id=1]
 [ext_resource path="res://map/MapLVL1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://pickups/QuestionStand.tscn" type="PackedScene" id=3]
 [ext_resource path="res://items/Spikes.tscn" type="PackedScene" id=4]
-[ext_resource path="res://hud/HUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://hud/Question.tscn" type="PackedScene" id=6]
-[ext_resource path="res://hud/LevelStartMessage.tscn" type="PackedScene" id=7]
-[ext_resource path="res://hud/LevelFinishedMessage.tscn" type="PackedScene" id=8]
-[ext_resource path="res://hud/LevelGameOverMessage.tscn" type="PackedScene" id=9]
-[ext_resource path="res://hud/LevelMenu.tscn" type="PackedScene" id=10]
-[ext_resource path="res://map/Spawn.tscn" type="PackedScene" id=11]
-[ext_resource path="res://character/Player.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Audio.tscn" type="PackedScene" id=13]
-[ext_resource path="res://levels/ParallaxBackground.tscn" type="PackedScene" id=14]
-[ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=15]
-[ext_resource path="res://enemy/Bullet.tscn" type="PackedScene" id=16]
+[ext_resource path="res://hud/UIManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://map/Spawn.tscn" type="PackedScene" id=6]
+[ext_resource path="res://character/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Audio.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/ParallaxBackground.tscn" type="PackedScene" id=9]
+[ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=10]
+[ext_resource path="res://enemy/Bullet.tscn" type="PackedScene" id=11]
 
-[node name="Level1" type="Node"]
+[node name="Level1" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -71,59 +66,49 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="LevelNodes" type="Node" parent="." index="3"]
 
-[node name="HUD" parent="LevelNodes" index="0" instance=ExtResource( 5 )]
+[node name="UIManager" parent="LevelNodes" index="0" instance=ExtResource( 5 )]
 
-[node name="Question" parent="LevelNodes" index="1" instance=ExtResource( 6 )]
-
-[node name="LevelStartMessage" parent="LevelNodes" index="2" instance=ExtResource( 7 )]
-
-[node name="LevelFinishedMessage" parent="LevelNodes" index="3" instance=ExtResource( 8 )]
-
-[node name="LevelGameOverMessage" parent="LevelNodes" index="4" instance=ExtResource( 9 )]
-
-[node name="LevelMenu" parent="LevelNodes" index="5" instance=ExtResource( 10 )]
-
-[node name="Spawn" parent="LevelNodes" index="6" instance=ExtResource( 11 )]
+[node name="Spawn" parent="LevelNodes" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 113.855, 374.784 )
 
-[node name="Goal" parent="LevelNodes" index="7" instance=ExtResource( 11 )]
+[node name="Goal" parent="LevelNodes" index="2" instance=ExtResource( 6 )]
 
 position = Vector2( -180.107, -224.776 )
 
-[node name="Player" parent="LevelNodes" index="8" instance=ExtResource( 12 )]
+[node name="Player" parent="LevelNodes" index="3" instance=ExtResource( 7 )]
 
 position = Vector2( 362.001, 302.001 )
 
-[node name="Audio" parent="LevelNodes" index="9" instance=ExtResource( 13 )]
+[node name="Audio" parent="LevelNodes" index="4" instance=ExtResource( 8 )]
 
-[node name="ParallaxBackground" parent="." index="4" instance=ExtResource( 14 )]
+[node name="ParallaxBackground" parent="." index="4" instance=ExtResource( 9 )]
 
 [node name="Enemies" type="Node" parent="." index="5"]
 
-[node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 15 )]
+[node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 10 )]
 
 position = Vector2( 749.244, 377.463 )
-Bullet = ExtResource( 16 )
+Bullet = ExtResource( 11 )
 
-[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource( 15 )]
+[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource( 10 )]
 
 position = Vector2( 1064.91, -217.124 )
-Bullet = ExtResource( 16 )
+Bullet = ExtResource( 11 )
 
-[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource( 15 )]
+[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource( 10 )]
 
 position = Vector2( 4076.26, 227.146 )
-Bullet = ExtResource( 16 )
+Bullet = ExtResource( 11 )
 
-[node name="Enemy4" parent="Enemies" index="3" instance=ExtResource( 15 )]
+[node name="Enemy4" parent="Enemies" index="3" instance=ExtResource( 10 )]
 
 position = Vector2( 2978.95, 223.805 )
-Bullet = ExtResource( 16 )
+Bullet = ExtResource( 11 )
 
-[node name="Enemy5" parent="Enemies" index="4" instance=ExtResource( 15 )]
+[node name="Enemy5" parent="Enemies" index="4" instance=ExtResource( 10 )]
 
 position = Vector2( 4649.13, 80.1692 )
-Bullet = ExtResource( 16 )
+Bullet = ExtResource( 11 )
 
 

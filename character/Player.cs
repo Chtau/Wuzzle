@@ -51,22 +51,19 @@ public class Player : KinematicBody2D
     float gotHitTime = 0f;
 
     CollisionShape2D CollisionShape2D;
-    Question question;
 
     private float dashTimeout = 0f;
 
-    private LevelStartMessage levelStartMessage;
     private IID levelConfiguration;
     private Spawn spawn;
     private Spawn goal;
-    private LevelFinishedMessage levelFinishedMessage;
-    private LevelGameOverMessage levelGameOverMessage;
-    private LevelMenu levelMenu;
     private Area2D gotHitArea;
     private CollisionShape2D gotHitCollision;
     private Audio audio;
 
     private LevelItem levelItem;
+
+    private UIManager uiManager;
 
     public override void _Ready()
     {
@@ -78,27 +75,19 @@ public class Player : KinematicBody2D
         characterAnimationPlayer = (AnimationPlayer)characterSprite.GetNode("AnimationPlayer");
         characterAnimationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
         CollisionShape2D = (CollisionShape2D)GetNode("CollisionShape2D");
-        question = (Question)GetNode("../Question");
         levelConfiguration = (IID)GetParent().GetParent();
         levelItem = SharedFunctions.Instance.LevelManager.ById(levelConfiguration.Id);
-        levelStartMessage = (LevelStartMessage)GetNode("../LevelStartMessage");
         spawn = (Spawn)GetNode("../Spawn");
         spawn.SpawnType = Spawn.Type.Spawn;
         goal = (Spawn)GetNode("../Goal");
         goal.SpawnType = Spawn.Type.Goal;
         goal.Deactivated();
-        levelFinishedMessage = (LevelFinishedMessage)GetNode("../LevelFinishedMessage");
-        levelGameOverMessage = (LevelGameOverMessage)GetNode("../LevelGameOverMessage");
         gotHitArea = (Area2D)GetNode("Area2D");
         gotHitCollision = (CollisionShape2D)GetNode("Area2D/CollisionShape2D");
         audio = (Audio)GetNode("../Audio");
-        levelMenu = (LevelMenu)GetNode("../LevelMenu");
-
-        levelFinishedMessage.Visible = false;
-        levelGameOverMessage.Visible = false;
-        levelStartMessage.Visible = false;
-        question.Visible = false;
-
+        uiManager = (UIManager)GetNode("../UIManager");
+        uiManager.LevelItem = levelItem;
+        
         if (GetTree().IsPaused())
             GetTree().Paused = false;
 
@@ -117,7 +106,6 @@ public class Player : KinematicBody2D
     private void GameState_LevelAnsweredQuestionsWrongChanged(object sender, int e)
     {
         int maxFalseQuestions = (levelItem.TotalQuestionAvailable - levelItem.RequieredQuestions);
-        //GD.Print("Max False:" + maxFalseQuestions);
         if (maxFalseQuestions < SharedFunctions.Instance.GameState.LevelAnsweredQuestionsWrong)
         {
             OnLevelGameOver();
@@ -145,7 +133,8 @@ public class Player : KinematicBody2D
         {
             if (Input.IsActionJustPressed("ui_cancel"))
             {
-                levelMenu.Show(levelItem);
+                uiManager.ShowMenu();
+                //levelMenu.Show(levelItem);
             }
 
             LevelGameTime = DateTime.UtcNow - LevelStartTime;
@@ -389,7 +378,7 @@ public class Player : KinematicBody2D
             if (pickup.Interact())
             {
                 if (pickup.TargetTrigger == TargetTriggerType.Question)
-                    question.AddShowQuestion();
+                    uiManager.ShowQuestion();
             }
         }
     }
@@ -410,11 +399,11 @@ public class Player : KinematicBody2D
 
         spawn.Active();
 
-        levelStartMessage.Show(() =>
+        uiManager.ShowStartMessage(() =>
         {
             LevelGameTime = new TimeSpan();
             LevelStartTime = DateTime.UtcNow;
-            
+
             State = PlayerPhysicsState.Idle;
             spawn.Deactivated();
             audio.PlayBackground();
@@ -440,14 +429,14 @@ public class Player : KinematicBody2D
     private void OnLevelFinished()
     {
         State = PlayerPhysicsState.Waiting;
-        levelFinishedMessage.Show(levelItem, LevelGameTime);
+        uiManager.ShowFinishedMessage(LevelGameTime);
         GetTree().Paused = true;
     }
 
     private void OnLevelGameOver()
     {
         State = PlayerPhysicsState.Waiting;
-        levelGameOverMessage.Show(levelItem);
+        uiManager.ShowGameOverMessage();
         GetTree().Paused = true;
     }
 
