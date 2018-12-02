@@ -3,16 +3,17 @@
 [ext_resource path="res://items/Spikes.cs" type="Script" id=1]
 [ext_resource path="res://items/art/Spikes.png" type="Texture" id=2]
 
-[node name="Spikes" type="StaticBody2D"]
+[node name="Spikes" type="StaticBody2D" index="0"]
 
 input_pickable = false
-collision_layer = 1
+collision_layer = 2049
 collision_mask = 1
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
 
