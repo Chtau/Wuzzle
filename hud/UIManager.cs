@@ -46,11 +46,15 @@ public class UIManager : Node
 
     public void ShowFinishedMessage(TimeSpan gameTime)
     {
+        levelMenu.Clear();
+        question.ClearQuestions();
         levelFinishedMessage.Show(LevelItem, gameTime);
     }
 
     public void ShowGameOverMessage()
     {
+        levelMenu.Clear();
+        question.ClearQuestions();
         levelGameOverMessage.Show(LevelItem);
     }
 }

@@ -35,4 +35,9 @@ public class LevelMenu : Control
         this.Visible = true;
         panel.Visible = true;
     }
+
+    public void Clear()
+    {
+        this.OnClosePressed();
+    }
 }

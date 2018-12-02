@@ -12,7 +12,7 @@
 [ext_resource path="res://enemy/Bullet.tscn" type="PackedScene" id=10]
 [ext_resource path="res://levels/ParallaxBackground.tscn" type="PackedScene" id=11]
 
-[node name="Level7" type="Node" index="0"]
+[node name="Level7" type="Node"]
 
 script = ExtResource( 1 )
 

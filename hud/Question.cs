@@ -128,6 +128,13 @@ public class Question : Control
         OnShowQuestion();
     }
 
+    public void ClearQuestions()
+    {
+        currentQuestionId = Guid.Empty;
+        questionQueue.Clear();
+        ResetQuestion(false);
+    }
+
     private void OnShowQuestion()
     {
         var item = ActiveQuestion();
