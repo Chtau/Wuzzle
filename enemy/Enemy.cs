@@ -145,4 +145,9 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
     {
         Hit();
     }
+
+    public void AfterHit()
+    {
+        
+    }
 }

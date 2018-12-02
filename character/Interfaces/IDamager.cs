@@ -9,5 +9,6 @@ namespace Wuzzle.character.Interfaces
     public interface IDamager
     {
         float HitDamage { get; }
+        void AfterHit();
     }
 }

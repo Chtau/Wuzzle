@@ -27,9 +27,17 @@ public class Bullet : RigidBody2D, IDamager
         if (body is IDamageReceiver receiver)
         {
             receiver.ReceiveHit(HitDamage);
+            GD.Print("Receiver hit");
         } else if (body is Player)
         {
             GD.Print("Bullet hit player");
         }
+    }
+
+    public void AfterHit()
+    {
+        animationPlayer.Play("shutdown");
+        collision.Disabled = true;
+        this.Visible = false;
     }
 }

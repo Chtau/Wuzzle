@@ -361,6 +361,7 @@ public class Player : KinematicBody2D
                         SharedFunctions.Instance.GameState.CurrentLife = CurrentLife;
                         OnLevelGameOver();
                     }
+                    damager.AfterHit();
                 }
             }
         }

@@ -21,4 +21,9 @@ public class Sword : Sprite, IDamager
             }
         }
     }
+
+    public void AfterHit()
+    {
+        
+    }
 }
