@@ -124,8 +124,9 @@ public class Question : Control
             currentQuestionId = newQuestion.Id;
         else
             return;
-
-        OnShowQuestion();
+        //only call show when we are not in a waiting phase
+        if (!answerResult.Enabled)
+            OnShowQuestion();
     }
 
     public void ClearQuestions()
