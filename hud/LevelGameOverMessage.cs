@@ -3,12 +3,12 @@ using System;
 
 public class LevelGameOverMessage : Control
 {
-    private Panel panel;
+    private NinePatchRect panel;
     private LevelItem levelItem;
 
     public override void _Ready()
     {
-        panel = (Panel)GetNode("CanvasLayer/Panel");
+        panel = (NinePatchRect)GetNode("CanvasLayer/Panel");
         this.Visible = false;
         panel.Visible = false;
     }
