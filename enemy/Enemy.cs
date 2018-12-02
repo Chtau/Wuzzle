@@ -9,6 +9,7 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
 
     enum State
     {
+        Waiting,
         Walking,
         Killed
     }
@@ -22,7 +23,7 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
     private float direction = -1;
     private string anim = "";
 
-    private State state = State.Walking;
+    private State state = State.Waiting;
 
     private Sprite sprite;
     private RayCast2D detectFloorLeft;
@@ -78,8 +79,12 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
     {
         string newAnim = "idle";
         shootTimeout += delta;
-
-        if (state == State.Walking)
+        if (state == State.Waiting)
+        {
+            linear_velocity += GravityVec * delta;
+            linear_velocity = MoveAndSlide(linear_velocity, FloorNormal);
+        }
+        else if (state == State.Walking)
         {
 
             linear_velocity += GravityVec * delta;
@@ -149,5 +154,13 @@ public class Enemy : KinematicBody2D, IDamageReceiver, IDamager
     public void AfterHit()
     {
         
+    }
+
+    public void Activate()
+    {
+        if (state == State.Waiting)
+        {
+            state = State.Walking;
+        }
     }
 }

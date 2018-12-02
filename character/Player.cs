@@ -397,6 +397,8 @@ public class Player : KinematicBody2D
 
         uiManager.ShowStartMessage(() =>
         {
+            OnChangeEnemyState();
+
             LevelGameTime = new TimeSpan();
             LevelStartTime = DateTime.UtcNow;
 
@@ -404,6 +406,15 @@ public class Player : KinematicBody2D
             spawn.Deactivated();
             audio.PlayBackground();
         });
+    }
+
+    private void OnChangeEnemyState()
+    {
+        var enemies = GetNode("../../Enemies");//.FindNode("Enemies");
+        foreach (Enemy item in enemies.GetChildren())
+        {
+            item.Activate();
+        }
     }
 
     private void OnSetCharacterPosition()

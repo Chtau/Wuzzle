@@ -62,7 +62,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 position = Vector2( 1024, 523.002 )
 scale = Vector2( 0.6, 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="LevelNodes" type="Node" parent="." index="3"]
 

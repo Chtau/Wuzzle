@@ -3,7 +3,7 @@
 [ext_resource path="res://items/Spikes.cs" type="Script" id=1]
 [ext_resource path="res://items/art/Spikes.png" type="Texture" id=2]
 
-[node name="Spikes" type="StaticBody2D" index="0"]
+[node name="Spikes" type="StaticBody2D"]
 
 input_pickable = false
 collision_layer = 2049
