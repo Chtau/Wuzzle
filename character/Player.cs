@@ -133,8 +133,11 @@ public class Player : KinematicBody2D
         {
             if (Input.IsActionJustPressed("ui_cancel"))
             {
-                uiManager.ShowMenu();
-                //levelMenu.Show(levelItem);
+                if (uiManager.IsOpenMenu())
+                {
+                    uiManager.CloseMenu();
+                } else
+                    uiManager.ShowMenu();
             }
 
             LevelGameTime = DateTime.UtcNow - LevelStartTime;

@@ -3,7 +3,7 @@
 [ext_resource path="res://hud/LevelStartMessage.cs" type="Script" id=1]
 [ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=2]
 
-[node name="LevelStartMessage" type="Control" index="0"]
+[node name="LevelStartMessage" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0

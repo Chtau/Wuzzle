@@ -31,6 +31,16 @@ public class UIManager : Node
         levelMenu.Show(LevelItem);
     }
 
+    public bool IsOpenMenu()
+    {
+        return levelMenu.IsOpen();
+    }
+
+    public void CloseMenu()
+    {
+        levelMenu.Clear();
+    }
+
     public void ShowQuestion()
     {
         question.AddShowQuestion();

@@ -13,7 +13,7 @@ public class Question : Control
     private Answer answer1;
     private Answer answer2;
     private Answer answer3;
-    private Panel panel;
+    private NinePatchRect panel;
     private TextureProgress questionTimeout;
     private Label questionTimeoutText;
     private CenterContainer answerHandleMessage;
@@ -30,7 +30,7 @@ public class Question : Control
 
     public override void _Ready()
     {
-        panel = (Panel)GetNode("CanvasLayer/Panel");
+        panel = (NinePatchRect)GetNode("CanvasLayer/Panel");
         panel.Visible = false;
         this.Visible = false;
         question = (Label)panel.GetNode("VBoxContainer/QuestionLabel");

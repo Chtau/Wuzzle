@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assests/themes/menu_theme.tres" type="Theme" id=1]
 [ext_resource path="res://hud/LevelMenu.cs" type="Script" id=2]
-[ext_resource path="res://menu/Options.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=4]
+[ext_resource path="res://menu/art/Panel_Border_Background.png" type="Texture" id=3]
+[ext_resource path="res://menu/Options.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=5]
 
-[node name="LevelMenu" type="Control" index="0"]
+[node name="LevelMenu" type="Control"]
 
 self_modulate = Color( 1, 1, 1, 0.784314 )
 anchor_left = 0.0
@@ -30,7 +31,7 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Panel" type="Panel" parent="CanvasLayer" index="0"]
+[node name="Panel" type="NinePatchRect" parent="CanvasLayer" index="0"]
 
 visible = false
 anchor_left = 0.0
@@ -43,12 +44,17 @@ margin_right = 1171.0
 margin_bottom = 796.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 theme = ExtResource( 1 )
-_sections_unfolded = [ "Theme" ]
+texture = ExtResource( 3 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+_sections_unfolded = [ "Patch Margin", "Theme" ]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Panel" index="0"]
 
@@ -87,7 +93,7 @@ custom_constants/separation = 20
 alignment = 0
 _sections_unfolded = [ "custom_constants" ]
 
-[node name="Options" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer" index="0" instance=ExtResource( 3 )]
+[node name="Options" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer" index="0" instance=ExtResource( 4 )]
 
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -121,8 +127,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 150.0
-margin_right = 242.0
+margin_left = 123.0
+margin_right = 233.0
 margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -131,12 +137,12 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Close"
+text = " Close "
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
@@ -147,8 +153,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 262.0
-margin_right = 495.0
+margin_left = 253.0
+margin_right = 504.0
 margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -157,12 +163,12 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Back to Menu"
+text = " Back to Menu "
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
@@ -173,8 +179,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 515.0
-margin_right = 739.0
+margin_left = 524.0
+margin_right = 766.0
 margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -183,12 +189,12 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Restart Level"
+text = " Restart Level "
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]

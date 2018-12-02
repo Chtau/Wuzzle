@@ -4,11 +4,11 @@ using System;
 public class LevelMenu : Control
 {
     private LevelItem levelItem;
-    private Panel panel;
+    private NinePatchRect panel;
 
     public override void _Ready()
     {
-        panel = (Panel)GetNode("CanvasLayer/Panel");
+        panel = (NinePatchRect)GetNode("CanvasLayer/Panel");
         this.Visible = false;
         panel.Visible = false;
     }
@@ -39,5 +39,12 @@ public class LevelMenu : Control
     public void Clear()
     {
         this.OnClosePressed();
+    }
+
+    public bool IsOpen()
+    {
+        if (Visible && panel.Visible)
+            return true;
+        return false;
     }
 }
