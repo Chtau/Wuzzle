@@ -8,7 +8,7 @@
 [ext_resource path="res://assests/fonts/Sunflower_m_40.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assests/fonts/Sunflower_m_24.tres" type="DynamicFont" id=7]
 
-[node name="Question" type="Control" index="0"]
+[node name="Question" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -33,7 +33,6 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 [node name="Panel" type="Panel" parent="CanvasLayer" index="0"]
 
 editor/display_folded = true
-visible = false
 self_modulate = Color( 1, 1, 1, 0.784314 )
 anchor_left = 0.5
 anchor_top = 0.0
@@ -224,7 +223,6 @@ _sections_unfolded = [ "Margin", "Rect" ]
 
 [node name="AnswerHandleMessage" type="CenterContainer" parent="CanvasLayer" index="1"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -253,7 +251,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-alignment = 0
+alignment = 1
 
 [node name="CorrectAnswer" type="Label" parent="CanvasLayer/AnswerHandleMessage/VBoxContainer" index="0"]
 
@@ -275,6 +273,8 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
 text = "Your answer was correct!"
+align = 1
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -301,6 +301,8 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
 text = "Your answer was wrong!"
+align = 1
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -321,7 +323,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-alignment = 0
+alignment = 1
 
 [node name="Question" type="Label" parent="CanvasLayer/AnswerHandleMessage/VBoxContainer/WrongAnswerDetail" index="0"]
 
