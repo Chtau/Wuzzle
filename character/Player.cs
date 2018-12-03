@@ -114,9 +114,12 @@ public class Player : KinematicBody2D
 
     private void GameState_LevelAnsweredQuestionsChanged(object sender, int e)
     {
-        if (SharedFunctions.Instance.GameState.LevelAnsweredQuestions >= SharedFunctions.Instance.GameState.LevelRequieredQuestions)
+        if (SharedFunctions.Instance.GameState.LevelAnsweredQuestions > 0)
         {
-            goal.Active();
+            if (SharedFunctions.Instance.GameState.LevelAnsweredQuestions >= SharedFunctions.Instance.GameState.LevelRequieredQuestions)
+            {
+                goal.Active();
+            }
         }
     }
 
