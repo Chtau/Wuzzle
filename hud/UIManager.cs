@@ -67,5 +67,6 @@ public class UIManager : Node
         levelMenu.Clear();
         question.ClearQuestions();
         levelGameOverMessage.Show(LevelItem);
+        levelGameOverMessage.SetFocus();
     }
 }

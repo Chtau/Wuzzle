@@ -5,10 +5,12 @@ public class LevelGameOverMessage : Control
 {
     private NinePatchRect panel;
     private LevelItem levelItem;
+    private Button tryAgainButton;
 
     public override void _Ready()
     {
         panel = (NinePatchRect)GetNode("CanvasLayer/Panel");
+        tryAgainButton = (Button)panel.GetNode("CenterContainer/VBoxContainer/Buttons/TryAgain");
         this.Visible = false;
         panel.Visible = false;
     }
@@ -28,5 +30,10 @@ public class LevelGameOverMessage : Control
         this.levelItem = levelItem;
         panel.Visible = true;
         this.Visible = true;
+    }
+
+    public void SetFocus()
+    {
+        tryAgainButton.GrabFocus();
     }
 }
