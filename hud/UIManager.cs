@@ -29,6 +29,7 @@ public class UIManager : Node
     public void ShowMenu()
     {
         levelMenu.Show(LevelItem);
+        levelMenu.SetFocus();
     }
 
     public bool IsOpenMenu()

@@ -5,10 +5,12 @@ public class LevelMenu : Control
 {
     private LevelItem levelItem;
     private NinePatchRect panel;
+    private Button closeButton;
 
     public override void _Ready()
     {
         panel = (NinePatchRect)GetNode("CanvasLayer/Panel");
+        closeButton = (Button)panel.GetNode("MarginContainer/VBoxContainer/HBoxContainer/Close");
         this.Visible = false;
         panel.Visible = false;
     }
@@ -46,5 +48,10 @@ public class LevelMenu : Control
         if (Visible && panel.Visible)
             return true;
         return false;
+    }
+
+    public void SetFocus()
+    {
+        closeButton.GrabFocus();
     }
 }
