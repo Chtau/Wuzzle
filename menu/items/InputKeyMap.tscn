@@ -3,7 +3,7 @@
 [ext_resource path="res://menu/items/InputKeyMap.cs" type="Script" id=1]
 [ext_resource path="res://assests/fonts/Sunflower_m_24.tres" type="DynamicFont" id=2]
 
-[node name="InputKeyMap" type="HBoxContainer"]
+[node name="InputKeyMap" type="HBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
