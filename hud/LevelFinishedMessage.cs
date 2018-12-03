@@ -10,6 +10,7 @@ public class LevelFinishedMessage : Control
     private NinePatchRect container;
     private Button nextLevel;
     private Button back;
+    private Button retry;
     private AnimationPlayer animationPlayer;
     private TextureRect goldRecord;
     private TextureRect silberRecord;
@@ -29,6 +30,7 @@ public class LevelFinishedMessage : Control
         bronzeRecord = (TextureRect)container.GetNode("CenterContainer/VBoxContainer/NewRecordWrapper/BronzeRecord");
         nextLevel = (Button)container.GetNode("CenterContainer/VBoxContainer/NextLevelWrapper/NextLevel");
         back = (Button)container.GetNode("CenterContainer/VBoxContainer/NextLevelWrapper/BackToMenu");
+        retry = (Button)container.GetNode("CenterContainer/VBoxContainer/NextLevelWrapper/Retry");
         animationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
 
         goldRecord.Visible = false;
@@ -96,5 +98,16 @@ public class LevelFinishedMessage : Control
         {
             SharedFunctions.Instance.LevelManager.SaveLevelUserItem(levelValues.Id, timeSpan);
         });
+    }
+
+    public void SetFocus()
+    {
+        if (nextLevel.Visible)
+        {
+            nextLevel.GrabFocus();
+        } else
+        {
+            retry.GrabFocus();
+        }
     }
 }

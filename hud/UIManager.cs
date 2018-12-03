@@ -60,6 +60,7 @@ public class UIManager : Node
         levelMenu.Clear();
         question.ClearQuestions();
         levelFinishedMessage.Show(LevelItem, gameTime);
+        levelFinishedMessage.SetFocus();
     }
 
     public void ShowGameOverMessage()
