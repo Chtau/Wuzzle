@@ -11,6 +11,7 @@ public class LevelSelectItem : Control
     private TextureRect medailleGold;
     private TextureRect medailleSilber;
     private TextureRect medailleBronze;
+    private Button button;
 
     public override void _Ready()
     {
@@ -20,6 +21,7 @@ public class LevelSelectItem : Control
         medailleGold = (TextureRect)GetNode("Panel/HBoxContainer/VBoxContainer/RecordWrapper/MedailleGold");
         medailleSilber = (TextureRect)GetNode("Panel/HBoxContainer/VBoxContainer/RecordWrapper/MedailleSilber");
         medailleBronze = (TextureRect)GetNode("Panel/HBoxContainer/VBoxContainer/RecordWrapper/MedailleBronze");
+        button = (Button)GetNode("Panel/HBoxContainer/Button");
 
         medailleSilber.Visible = false;
         medailleGold.Visible = false;
@@ -63,5 +65,10 @@ public class LevelSelectItem : Control
             else
                 record.Text = "--:--:--";
         }
+    }
+
+    public void SetFocus()
+    {
+        button.GrabFocus();
     }
 }

@@ -71,6 +71,7 @@ public class StartMenu : Node
             levels.SetVisible(true);
             options.Visible = false;
             credits.Visible = false;
+            levels.SetFocus();
         } else
         {
             contentPanel.Visible = false;
