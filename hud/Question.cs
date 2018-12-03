@@ -163,8 +163,17 @@ public class Question : Control
     
     private string OnAnswerPrefix(string keyMap)
     {
-        InputEventKey inputEvent = (InputEventKey)InputMap.GetActionList(keyMap)[0];
-        return OS.GetScancodeString(inputEvent.Scancode) + ".) ";
+        var inputEvent = InputMap.GetActionList(keyMap)[0];
+        if (inputEvent is InputEventKey key)
+        {
+            return OS.GetScancodeString(key.Scancode) + ".) ";
+        } else if (inputEvent is InputEventJoypadButton joypadButton)
+        {
+            return ConfigHandler.GetJoyPadStringCode(joypadButton.ButtonIndex);
+        } else
+        {
+            return "";
+        }
     }
 
     private string QuestionTimeText(float time)

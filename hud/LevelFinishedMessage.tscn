@@ -35,7 +35,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.196078 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="LevelFinishedMessage" type="Control" index="0"]
+[node name="LevelFinishedMessage" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -143,6 +143,7 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="TimeWrapper" type="HBoxContainer" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -204,6 +205,7 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="PreviousRecordWrapper" type="HBoxContainer" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer" index="2"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -265,6 +267,7 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="NewRecordWrapper" type="HBoxContainer" parent="CanvasLayer/Panel/CenterContainer/VBoxContainer" index="3"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
