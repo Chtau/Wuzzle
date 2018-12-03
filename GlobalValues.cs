@@ -20,6 +20,7 @@ public static class GlobalValues
 
     public const string ConfigFilePath = "user://config.cfg";
     public const string ConfigSectionKeyInput = "input";
+    public const string ConfigSectionJoyPadInput = "joypad";
     public const string ConfigSectionAudio = "audio";
 
     public const int LevelStartCountdown = 5;

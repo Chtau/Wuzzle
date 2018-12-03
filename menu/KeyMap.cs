@@ -8,7 +8,6 @@ public class KeyMap : Node
 
     public override void _Ready()
     {
-        SharedFunctions.Instance.ConfigHandler.LoadConfig();
         inputHelpWrapper = (CenterContainer)GetNode("CenterContainer");
         inputHelper = (Label)inputHelpWrapper.GetNode("Panel/InputHelper");
         inputHelpWrapper.Visible = false;
@@ -26,9 +25,11 @@ public class KeyMap : Node
         }
     }
 
-    private void OnInputSave(string actionBinding, string scanCode)
+    private void OnInputSave(string actionBinding, string scanCode, bool joyPad)
     {
-        SharedFunctions.Instance.ConfigHandler.SaveValue(GlobalValues.ConfigSectionKeyInput, actionBinding, scanCode);
-        
+        if (joyPad)
+            SharedFunctions.Instance.ConfigHandler.SaveValue(GlobalValues.ConfigSectionJoyPadInput, actionBinding, scanCode);
+        else
+            SharedFunctions.Instance.ConfigHandler.SaveValue(GlobalValues.ConfigSectionKeyInput, actionBinding, scanCode);    
     }
 }

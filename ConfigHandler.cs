@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 public class ConfigHandler : ISingletonHandler
 {
+    public event EventHandler InputMappingChanged;
+
     public void LoadConfig()
     {
         GD.Print("LoadConfig");
@@ -16,16 +18,16 @@ public class ConfigHandler : ISingletonHandler
         if (err == Error.CantOpen)
         {
             // generate default config file
-            GetScanCodes(ref config, GlobalValues.Keymap_Move_Left);
-            GetScanCodes(ref config, GlobalValues.Keymap_Move_Right);
-            GetScanCodes(ref config, GlobalValues.Keymap_Move_Up);
-            GetScanCodes(ref config, GlobalValues.Keymap_Move_Down);
-            GetScanCodes(ref config, GlobalValues.Keymap_Move_Dash);
-            GetScanCodes(ref config, GlobalValues.Keymap_Move_Jump);
-            GetScanCodes(ref config, GlobalValues.Keymap_Move_Strike);
-            GetScanCodes(ref config, GlobalValues.Keymap_Answer_1);
-            GetScanCodes(ref config, GlobalValues.Keymap_Answer_2);
-            GetScanCodes(ref config, GlobalValues.Keymap_Answer_3);
+            CreateInput(ref config, GlobalValues.Keymap_Move_Left);
+            CreateInput(ref config, GlobalValues.Keymap_Move_Right);
+            CreateInput(ref config, GlobalValues.Keymap_Move_Up);
+            CreateInput(ref config, GlobalValues.Keymap_Move_Down);
+            CreateInput(ref config, GlobalValues.Keymap_Move_Dash);
+            CreateInput(ref config, GlobalValues.Keymap_Move_Jump);
+            CreateInput(ref config, GlobalValues.Keymap_Move_Strike);
+            CreateInput(ref config, GlobalValues.Keymap_Answer_1);
+            CreateInput(ref config, GlobalValues.Keymap_Answer_2);
+            CreateInput(ref config, GlobalValues.Keymap_Answer_3);
 
             config.Save(GlobalValues.ConfigFilePath);
         }
@@ -45,17 +47,43 @@ public class ConfigHandler : ISingletonHandler
                 }
                 InputMap.ActionAddEvent(actionName, actionEvent);
             }
+            foreach (var actionName in config.GetSectionKeys(GlobalValues.ConfigSectionJoyPadInput))
+            {
+                var scanCode = config.GetValue(GlobalValues.ConfigSectionJoyPadInput, actionName);
+                if (scanCode != null)
+                {
+                    var actionEvent = new InputEventJoypadButton
+                    {
+                        ButtonIndex = Convert.ToInt32(scanCode)
+                    };
+                    foreach (InputEvent oldActionEvent in InputMap.GetActionList(actionName))
+                    {
+                        
+                        if (oldActionEvent is InputEventJoypadButton)
+                        {
+                            InputMap.ActionEraseEvent(actionName, oldActionEvent);
+                        }
+                    }
+                    InputMap.ActionAddEvent(actionName, actionEvent);
+                }
+            }
+            InputMappingChanged?.Invoke(this, new EventArgs());
         }
     }
 
-    public void GetScanCodes(ref ConfigFile config, string action)
+    public void CreateInput(ref ConfigFile config, string action)
     {
         var actionList = InputMap.GetActionList(action);
         for (int i = 0; i < actionList.Count; i++)
         {
-            var inputE = (InputEventKey)actionList[i];
-            var scanCode = OS.GetScancodeString(inputE.Scancode);
-            config.SetValue(GlobalValues.ConfigSectionKeyInput, action, scanCode);
+            if (actionList[i] is InputEventKey key)
+            {
+                var scanCode = OS.GetScancodeString(key.Scancode);
+                config.SetValue(GlobalValues.ConfigSectionKeyInput, action, scanCode);
+            } else if (actionList[i] is InputEventJoypadButton joypadButton)
+            {
+                config.SetValue(GlobalValues.ConfigSectionJoyPadInput, action, joypadButton.ButtonIndex);
+            }
         }
     }
 
@@ -77,5 +105,46 @@ public class ConfigHandler : ISingletonHandler
     public void Init()
     {
         LoadConfig();
+    }
+
+    public static string GetJoyPadStringCode(int buttonCode)
+    {
+        switch (buttonCode)
+        {
+            case 0:
+                return "XBox A";
+            case 1:
+                return "XBox B";
+            case 2:
+                return "XBox X";
+            case 3:
+                return "XBox Y";
+            case 4:
+                return "L1";
+            case 5:
+                return "R1";
+            case 6:
+                return "L2";
+            case 7:
+                return "R2";
+            case 8:
+                return "L3";
+            case 9:
+                return "R3";
+            case 10:
+                return "Select";
+            case 11:
+                return "Start";
+            case 12:
+                return "D-Pad Up";
+            case 13:
+                return "D-Pad Down";
+            case 14:
+                return "D-Pad Left";
+            case 15:
+                return "D-Pad Right";
+            default:
+                return "";
+        }
     }
 }
