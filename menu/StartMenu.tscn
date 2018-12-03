@@ -11,7 +11,7 @@
 [ext_resource path="res://menu/Credits.tscn" type="PackedScene" id=9]
 [ext_resource path="res://menu/LevelSelect.tscn" type="PackedScene" id=10]
 
-[node name="StartMenu" type="Node"]
+[node name="StartMenu" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

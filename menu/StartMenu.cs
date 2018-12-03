@@ -15,6 +15,7 @@ public class StartMenu : Node
     private LevelSelect levels;
     private Panel contentPanel;
     private Control credits;
+    private Button levelSelect;
 
     public override void _Ready()
     {
@@ -24,6 +25,8 @@ public class StartMenu : Node
         levels = (LevelSelect)contentPanel.GetNode("MarginContainer/LevelSelect");
         options = (Control)contentPanel.GetNode("MarginContainer/Options");
         credits = (Control)contentPanel.GetNode("MarginContainer/Credits");
+        levelSelect = (Button)GetNode("ContainerButtons/Panel/MarginContainer/VBoxContainer/Levels");
+        levelSelect.GrabFocus();
 
         OnShowContent(ContentType.None);
     }
